@@ -5,8 +5,8 @@
     "description": "The \"Symfony Standard Edition\" distribution",
     "autoload": {
         "psr-0": { "": "src/" }
-    },
-    "require": {
+    },        
+    "require": {  
         "php": ">=5.3.3",
         "symfony/symfony": "2.7.*",
         "doctrine/orm": "~2.2,>=2.2.3",
