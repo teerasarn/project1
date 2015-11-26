@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Intl\DateFormatter\IntlDateFormatter;
 
 
-/**
+/** 
  * Blog controller.
  */
 class BlogController extends Controller
