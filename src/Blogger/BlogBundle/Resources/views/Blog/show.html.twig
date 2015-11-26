@@ -1,0 +1,183 @@
+{# src/Blogger/BlogBundle/Resouces/views/Blog/show.html.twig #}
+
+{% extends 'FiveCuisinesVerdunBundle::base.html.twig' %}
+
+{% block bodyTag %}
+
+  <body class="blog_detail {{ app.request.get( '_locale' ) }}{% if is_mobile()  %} mobile{% endif %}">
+
+{% endblock %}
+
+
+{% block content %}
+    {% block title %}{{ blog.title }}{% endblock %}
+
+    {% block body %}
+
+        <!--<section id="blog-article-intro" class="inner-shadow" style="background-image:url(http://vendur.com/bundles/fivecuisinesverdun/img/blog-detail.jpg);">-->
+        <section id="blog-article-intro" class="inner-shadow" style="background-image:url({{ asset([ blog.getImageURL(blog.image)] |join , absolute=true ) }} );">
+          <div class="container">
+              <div class="float-block">
+                <h2>{{ blog.title | raw  }}</h2>
+                <h5>{{ blog.introText(50) | raw }}</h5>
+              </div>
+
+          </div>
+        </section>
+        <section  class="blog_content"> 
+            <div class="container">
+
+                <div class="row intro_text">
+                    <div class="col-md-12">
+                        {{ blog.blog | raw }}
+                    </div>  
+                </div>
+
+    {#            {% if blog.image1  != '' and blog.image1 != null %} 
+                <div class="row first_content"> 
+                    <div class="col-md-6">
+                        <img src="{{ asset([ blog.getImageURL(blog.image1)]|join) }}" alt="{{ blog.title }} image not found" class="toleft"/>
+                    </div>
+                    <div class="col-md-6">
+                        {{ blog.ImageText1 | raw }}                    
+                    </div>
+                </div>
+                {% endif %} 
+                {% if blog.image2  != '' and blog.image2 != null %}  
+                <div class="row second_content">  
+                    <div class="col-md-5">
+                        {{ blog.ImageText2 | raw }}                    
+                    </div>
+                    <div class="col-md-7">                                           
+                        <img src="{{ asset([ blog.getImageURL(blog.image2)]|join) }}" alt="{{ blog.title  }} image not found" class="toright" />                    
+                    </div>                
+                </div>
+                {% endif %}    #}
+
+                <div class="row social">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="col-md-6 social_icon">                       
+                            <span href="" class="shared_btn"> {{ 'blog.blog_share' | trans({}, 'blog') | raw }} </span>
+                            <a href="https://www.facebook.com/" target="_blank" class="fb"></a>         
+                            <a href="https://plus.google.com" target="_blank" class="gplus"></a> 
+                            <a href="https://plus.google.com" target="_blank" class="pin"></a>  
+                            <a class="share" href="#">SHARE ME</a>
+                        </div>
+                        <div class="col-md-6 tag">
+
+                            <span>Tag :</span>
+
+                            {% for tag in blog.getTagsList() %}
+                                <a href="{{ path( 'header.menu.blog_link' | trans  , { 'blog_tag':tag["tag"]  } ) }}"> {{ tag["tag"] }} </a>
+                            {% endfor %}
+
+                        </div>
+                        <div class="col-md-6 by">
+                            <span class="v_icon"></span>
+                            <span>   {{ 'blog.blog_write_by' | trans({}, 'blog') | raw }} {{ blog.author }}</span>
+                        </div>
+                        <div class="col-md-6 date_like">              
+
+
+                            <div class="date"><time datetime="{{ blog.created|date('c') }}"> {{ blog.getDateLocale(blog.created,  app.request.locale  , '%e %B %Y' ) }}</time></div>
+                            <span name="like_span" class="like" id="like" style="cursor:pointer;"><span id="likenum">{{ blog.likeCount }}</span> likes</span>     
+                        </div>
+                    </div>
+                </div>            
+            </div>
+        </section>
+
+    <!--    
+        <section class="comments" id="comments">
+            <section class="previous-comments">
+                <h3>Comments</h3>
+                {#% include 'BloggerBlogBundle:Comment:index.html.twig' with { 'comments': comments } %#}
+            </section>
+        </section>    
+
+            <h3>Add Comment</h3>
+
+        {#% render controller('BloggerBlogBundle:Comment:new', {'blog_id' : blog.id}) %#}
+    --> 
+
+
+    <script src="/js/hideshare.min.js"></script>
+    <script src="/js/cookie.js"></script>
+    <script>
+
+    jQuery(".share").hideshare({
+       {# link: "{{ path( 'header.menu.blog_article_link' | trans  , { 'permalink': blog.getPermaLink()  } ) }}",#}
+        title: "{{ blog.title }}",          // Title for social post defaults to document.title
+        media: "{{ asset([ blog.getImageURL(blog.image)] |join , absolute=true ) }}",          // Link to image file defaults to null
+        decription: " {{blog.introText(50)}}",     // Description for Facebook summary
+        facebook: true,     // Turns on Facebook sharing   
+        twitter: false,     
+        googleplus: true,   
+        pinterest: true,   
+        linkedin: false,    
+    }); // Calls HIDESHARE on element with class "share"
+    jQuery("meta[property='og\\:title']").attr("content", "{{ blog.title}}");
+    </script>
+
+    <script>
+
+        var handleLikeBtnClick = function( event )
+        {
+
+            event.preventDefault();
+            var data  =  { 'data': {
+                'id': '{{ blog.id}}',
+            } };
+
+            if (  $.cookie('button-after-clicked-{{ blog.id}}' )  == 'yes' )
+            {
+                return false;            
+            }
+            $.cookie('button-after-clicked-{{ blog.id}}', 'yes', {expires: 30 });    
+
+            jQuery.ajax( {
+                type:     'POST',
+                url:      '/blog/like-click',
+                data:     data,
+                dataType: 'json',
+                cache:    false,             
+
+                error: function( result, txt )
+                {            
+                    console.log( result );
+                },
+
+                success: function( result )
+                {
+
+                    $("#likenum").text( result );
+                   
+                    //console.log(result);
+
+                }
+            } ); 
+
+        }   
+
+        $( '#like' ).one( 'click', handleLikeBtnClick  );
+
+{#        function setupCookie() {
+            document.cookie = "n=1";
+            setTimeout(function() {
+                document.cookie = "n=0";
+            }, 3600000); // 1 hour
+        }#}
+
+
+    </script>
+
+        {{ render(controller('BloggerBlogBundle:Page:latest', { 'limit' : 4 } )) }} 
+    
+    {% endblock %}
+{% endblock %}
+
+
+{% block og_description %}{{blog.introText(50)}}{% endblock %} 
+{% block og_title %}{{ blog.title }}{% endblock %}     
+{% block og_image %}{{ asset([ blog.getImageURL(blog.image)] |join , absolute=true ) }}{% endblock %}     
+{% block og_url %}{{ path( 'header.menu.blog_article_link' | trans  , { 'permalink': blog.getPermaLink()  } ) }}{% endblock %}    

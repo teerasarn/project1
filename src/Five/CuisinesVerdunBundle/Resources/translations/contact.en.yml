@@ -1,0 +1,85 @@
+page_title: Contact Us
+keywords:
+description:
+h1: Communicate <br>with us
+
+showrooms:
+  title: Showrooms
+
+regions:
+  1: Montreal Region
+  2: South Shore
+  3: North Shore
+
+branches:
+  3: Montreal
+  4: Montreal (Pointe-aux-Trembles)
+  2: Montreal (NDG)
+  5: Saint-Isidore-de-la-Prairie
+  7: Saint-Basile-le-Grand
+  6: Longueuil
+  1: Terrebonne
+  
+additional-text:
+  3: ''
+  4: ''
+  2: ''
+  5: ''
+  7: ''
+  6: ''
+  1: ''
+
+forms:
+  common:
+    dispo: "Availability to contact you:"
+    day: Day
+    evening: Night
+    weekend: Weekend
+    lastname: Last Name
+    firstname: First Name
+    phone: Phone
+    cp: Zip Code
+    email: E-mail
+    branch: Find a branch
+    submit: Submit
+    error: <strong>Warning!<br>Please verify the fields in red.
+  1:
+    formtype: Get a Quote
+    title: Send us a message
+    textarea: Write your message here
+    message: <strong>Thank you!</strong> Your message has been sent.
+  2:
+    formtype: Contact Me
+    title: Contact me
+    subtitle: Let a member of our team communicate with you to gather information about your dream project!
+    whowecall: Who should we call?
+    name: Name
+    whatproject: Which type of project would you like to discuss?
+    callnotice: We will contact you during the next 48 working hours.
+    textarea: Describe your dream project
+    message: <strong>Thank you!</strong> Your request of a quote has been received.<br>One representative will contact you soon.
+    product_types:
+      1: Kitchen Cabinets
+      2: Counter Surfaces
+      3: Headboard
+      4: Floor
+      5: Installation
+      6: Turnkey renovations
+  3:
+    formtype: Planning Guide
+    title: Planning Guide
+    textarea: Describe your dream project
+    linktitle: PDF for download and print
+    phrase: Get ready for your appointment with a Kitchen Verdun designer by filling in the planning guide available here.
+    pdf: PFV_guide-planification_corr_ang.pdf
+    message: <strong>Thank you!</strong> Your request of a quote has been received.<br>One representative will contact you soon.
+    product_types:
+      1: Windows
+      2: Shower
+      3: Toilet
+      4: Ceramic wall
+      5: Ceramic floor
+      6: Sink and faucet
+      7: Installation
+      8: Turnkey renovations
+

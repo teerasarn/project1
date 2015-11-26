@@ -1,0 +1,22 @@
+$menu-height-tall: 93px;
+$menu-height: 60px;
+
+$cvThin: 'Proxima N W01 Thin Reg';
+$cvReg: 'Proxima N W01 Reg';
+$cvBold:'Proxima N W01 Bold';
+$cvLight:'Proxima N W01 Light';
+$cvRegIt:'Proxima N W01 Reg It';
+$cvBoldIt:'Proxima N W01 Bold It';
+$cvSemiBold:'Proxima N W01 Smbd';
+$cvCondBold: 'Proxima N W01 Cd Bold';
+
+$imagesPath: '/bundles/fivecuisinesverdun/img/';
+
+@mixin blur($blur) {
+  -webkit-filter: blur($blur); 
+  -moz-filter: blur($blur); 
+  -o-filter: blur($blur); 
+  -ms-filter: blur($blur); 
+  filter: url(../img/blur.svg#blur);
+  filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='5');
+}

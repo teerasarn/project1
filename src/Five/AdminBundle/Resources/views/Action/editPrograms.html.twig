@@ -1,0 +1,58 @@
+{% extends 'FiveAdminBundle::layout.html.twig' %}
+
+{# {% form_theme form with 'FiveAdminBundle:Form:fields.html.twig' %} #}
+
+
+{% block content %}
+
+            {{ form_errors(form) }}
+            {{ form_start( form, { 'action' : path( form_action.path, form_action.parameters ) } ) }}
+    <div class="row">
+        <div class="col-md-6">
+
+            {% include 'FiveAdminBundle:Programs:costs.html.twig' with { 
+                title        : 'Costs',
+                class        : 'costs',
+                boxtype         : 'info',                        
+                entities     : form.costs,
+                form         : form,
+                boxPrototype : form.costs.vars.prototype,
+                id           : 'costs_collection'                   
+            } %}
+
+        </div>
+
+        <div class="col-md-6">
+
+            {% include 'FiveAdminBundle:Programs:procedures.html.twig' with { 
+                title        : 'Procedures',
+                class        : 'procedures',
+                boxtype         : 'info',                        
+                entities     : form.procedures,
+                form         : form,
+                boxPrototype : form.procedures.vars.prototype,
+                id           : 'procedures_collection'                        
+            } %}
+
+        </div>
+    </div>
+                
+{#                 <ul class="procedures" data-prototype="{{ form_widget(form.procedures.vars.prototype)|e }}">
+                    {% for procedure in form.procedures %}
+                        <li>{{ form_row(procedure) }}</li>
+                    {% endfor %}            
+                </ul>  #}       
+            <div>{{ form_end(form) }}</div>
+{% endblock %}
+
+{% block js %}
+{{ parent() }}
+<script>
+    jQuery( document ).ready( function()
+    {
+        var Costs      = new Five.FormCollection( $( '#costs_collection' ), 'Cost', 'div' );
+        var Procedures = new Five.FormCollection( $( '#procedures_collection' ), 'Procedures', 'div' );        
+    }
+</script>
+
+{% endblock %}

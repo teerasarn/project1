@@ -1,0 +1,10 @@
+Succursale: {{ branch }}
+Langue: {{ language }}
+Nom: {{ name }}
+Téléphone: {{ phone }}
+Code postal: {{ postal_code }}
+Disponibilité: {% for x in availability %}{{ x }}{% if not loop.last %},{% endif %} {% endfor %}
+
+Options: {% for x in options %}{{ x }}{% if not loop.last %},{% endif %} {% endfor %}
+
+Message: {{ message }}

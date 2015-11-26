@@ -1,0 +1,66 @@
+{% extends 'FiveAdminBundle::layout.html.twig' %}
+
+{% block page_head_title %}Dashboard{% endblock %}
+{% block page_head_icon %}<i class="glyphicon glyphicon-th"></i>{% endblock %}
+{% block page_head_subtitle %}{% endblock %}
+
+{% block content %}
+    <h1>Messages reçus</h1>
+    <div class="widget-content">
+        <div class="table-responsive">
+            <table id="datatables-1" class="datatables table table-striped table-bordered" cellspacing="0" width="100%">
+              <tr class="info">
+                <th>&nbsp;</th>
+                {% for b in branches %}
+                <th>{{ b['name'] }}</th>
+                {% endfor %}
+              </tr>
+              <tr>
+                  <td>Cette semaine</td>
+              {% for x in info[3] %}
+                  <td class="chiffre">{{ x }}</td>
+              {% endfor %}
+              </tr>
+              <tr>
+                  <td>Ce mois-ci</td>
+              {% for x in info[2] %}
+                  <td class="chiffre">{{ x }}</td>
+              {% endfor %}
+              </tr>
+              <tr>
+                <td>Cette année</td>
+            {% for x in info[1] %}
+                <td class="chiffre">{{ x }}</td>
+              {% endfor %}
+              </tr>
+              <tr>
+                <td>Total</td>
+            {% for x in info[0] %}
+                <td class="chiffre">{{ x }}</td>
+            {% endfor %}
+              </tr>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+    <!-- Page Specific JS Libraries -->
+    <script src="{{ asset( theme_path ~ 'assets/libs/d3/d3.v3.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/rickshaw/rickshaw.min.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/raphael/raphael-min.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/morrischart/morris.min.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/jquery-knob/jquery.knob.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/jquery-jvectormap/js/jquery-jvectormap-1.2.2.min.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/jquery-jvectormap/js/jquery-jvectormap-us-aea-en.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/jquery-clock/clock.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/jquery-easypiechart/jquery.easypiechart.min.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/jquery-weather/jquery.simpleWeather-2.6.min.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-xeditable/js/bootstrap-editable.min.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-calendar/js/bic_calendar.min.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/js/apps/calculator.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/js/apps/todo.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/js/pages/index.js' ) }}"></script>
+
+{% endblock %}

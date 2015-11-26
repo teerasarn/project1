@@ -1,0 +1,17 @@
+<section id="footer">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="footer-logo"><a href="/{{ app.request.get( '_locale' ) }}"><img src="{{ asset( assets_path ~ 'img/logo-menu.png' ) }}"></a></div>
+      <div class="footer-menu">
+        <ul>
+          <li{{ page=='services' ? ' class="active"' : '' }}><a href="{{ path( 'header.menu.services_link' | trans ) }}">{{ 'header.menu.services' | trans }}</a>
+          </li><li{{ page=='cuisine' ? ' class="active"' : '' }}><a href="{{ path( 'header.menu.kitchen_link' | trans ) }}">{{ 'header.menu.kitchen' | trans }}</a>
+          </li><li{{ page=='salledebain' ? ' class="active"' : '' }}><a href="{{ path( 'header.menu.bathroom_link' | trans ) }}">{{ 'header.menu.bathroom' | trans }}</a>
+          </li><li{{ page=='entreprise' ? ' class="active"' : '' }}><a href="{{ path( 'header.menu.company_link' | trans ) }}">{{ 'header.menu.company' | trans }}</a>
+          </li><li{{ page=='contact' ? ' class="active"' : '' }}><a href="{{ path( 'header.menu.contact_link' | trans ) }}">{{ 'header.menu.contact' | trans }}</a></li>
+          <li>2014 Cuisines Verdun. {{ 'general.rights' | trans }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

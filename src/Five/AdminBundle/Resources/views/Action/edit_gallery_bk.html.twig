@@ -1,0 +1,551 @@
+{% extends 'FiveAdminBundle::layout.html.twig' %}
+
+{% import "FiveAdminBundle:Form:macros.html.twig" as FiveForm %}
+{% form_theme form with [ 'FiveAdminBundle:Form:form_fields.html.twig' ] %}
+
+{% block page_head_title %}{{ entity.translate('en').getName()|default(options.page.title) }}{% endblock %}
+{% block page_head_icon %}<i class="fa fa-globe"></i>{% endblock %}
+{% block page_head_subtitle %}<h3>{{ entity.id is not empty ? options.page.title | default( '' ) }}{{ entity.id | default( '' ) }}</h3>{% endblock %}
+
+{% block content %}
+<link href="{{ asset( theme_path ~ 'assets/libs/jquery-nestable/jquery.nestable.css' ) }}" rel="stylesheet" type="text/css" />
+<style>
+/*body.dragging, body.dragging * {
+  cursor: move !important;
+}*/
+
+.pic-desc
+{
+    min-height: 50px;
+}
+
+.pic-title
+{
+    margin-bottom: 6px;
+}
+
+ol.vertical > li
+{
+    padding: 10px 10px 10px 10px;
+    background: #f9f9f9;
+    border: 1px solid #E4EAE6;
+    margin-bottom: 8px;
+}
+ol.vertical > li img
+{    
+    cursor: move;
+}
+
+ol.vertical li.placeholder:before {
+position: absolute;
+content: "";
+width: 0;
+height: 0;
+margin-top: -5px;
+left: -5px;
+top: -4px;
+border: 5px solid transparent;
+border-left-color: #68C39F;
+border-right: none;
+top: 1px;
+}
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+ol.vertical li.placeholder {
+position: relative;
+margin: 0;
+padding: 0;
+border-top: 1px dashed #68C39F;
+top: 1px;
+
+
+}
+ol.simple_with_drop li.placeholder {
+  position: relative;
+  /** More li styles **/
+}
+ol.simple_with_drop li.placeholder:before {
+  position: absolute;
+  /*margin-top: -5px;
+  top: -5px;*/
+  /** Define arrowhead **/
+}
+{#
+.dd-handle:before {
+content: '≡';
+display: block;
+
+width: 100%;
+text-align: center;
+text-indent: 0;
+color: #fff;
+font-size: 20px;
+font-weight: normal;
+}
+
+/* position: absolute; */
+.dd-handle
+{
+
+
+margin: 0;
+left: 0;
+top: 0;
+cursor: pointer;
+width: 30px;
+text-indent: 300%;
+white-space: nowrap;
+overflow: hidden;
+border: 0px solid #ddd;
+background: #909C9C;
+border-top-right-radius: 0;
+border-bottom-right-radius: 0;
+}
+#}
+.widget .nav-tabs.nav-simple > li.active > a, .widget .nav-tabs.nav-simple > li.active > a:hover, .widget .nav-tabs.nav-simple > li.active > a:focus
+{
+
+
+background: #ffffff; /*rgba(255,255,255,0.4)*/
+border-left: 4px solid #68C39F;
+color: #666;
+border-bottom: 1px solid #ddd;
+border-radius: 4px;
+}
+
+.widget .nav-tabs.nav-simple
+{
+border-bottom: none;    
+}
+
+.widget .tab-content
+{
+    padding-top: 0;
+}
+
+</style>
+    {{ block( 'ButtonAction' ) }}
+        {{ form_errors(form) }}
+    {{ form_start( form, { 'action' : path( form_action.path, form_action.parameters ) } ) }}
+
+    {{ form_end( form ) }}
+
+                                
+            
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="widget">
+                                            <div class="widget-content padding">
+                                                <h3>Picture Gallery</h3>
+                                                <hr />
+                                               <div class="row">
+                                                    <div class="col-md-6">
+                                                                                    <div class="col-sm-2">
+
+                                                                                      <ul id="imagedata-{{ '0' }}1" class="nav nav-tabs nav-simple nav-stacked">
+                                                                                        <li class="active">
+                                                                                            <a href="#imagedata-en-{{ '0' }}1" data-toggle="tab">English</a>
+                                                                                        </li>
+                                                                                        <li class="">
+                                                                                            <a href="#imagedata-fr-{{ '0' }}1" data-toggle="tab">French</a>
+                                                                                        </li>
+                                                                                    </ul> 
+
+                                                                                
+<!--                                                                                     <div class="list-group menu-message">
+                                                                                    <a href="inbox.html" class="list-group-item active"><i class="icon-inbox"></i> Inbox <span class="badge pull-right">4</span></a>
+                                                                                    <a href="#fakelink" class="list-group-item"><i class="icon-pencil"></i> Draft <span class="badge bg-green-1 pull-right">1</span></a>
+                                                                                    <a href="#fakelink" class="list-group-item"><i class="icon-star"></i> Important <span class="badge bg-red-1 pull-right">2</span></a>
+                                                                                    <a href="#fakelink" class="list-group-item"><i class="icon-export"></i> Sent</a>
+                                                                                    <a href="#fakelink" class="list-group-item"><i class="icon-cup"></i> Trash <span class="badge bg-lightblue-1 pull-right">1</span></a>
+                                                                                    </div>   -->                                                                              
+                                                                                </div>
+                                                                                <div class="col-sm-10">
+                                                                                
+                                                                                    <div class="tab-content">
+                                                                                        <div class="tab-pane fade active in" id="imagedata-en-{{ '0' }}1">
+                                                                                            <div class="form-group">
+                                                                                                <input name="titleEn" type="text" class="form-control input-small pic-title" placeholder="Title" value="" />
+                                                                                                <textarea name="descEn" class="form-control input-small pic-desc" placeholder="Description"></textarea>                                                                                                
+                                                                                            </div>
+                                                                                        </div> <!-- / .tab-pane -->
+                                                                                        <div class="tab-pane fade" id="imagedata-fr-{{ '0' }}1">
+                                                                                            <div class="form-group">
+                                                                                                <input name="titleFr" type="text" class="form-control input-small pic-title" placeholder="Title" value="" />
+                                                                                                <textarea name="descFr" class="form-control input-small pic-desc" placeholder="Description"></textarea>                                                                                            
+                                                                                                
+                                                                                            </div>
+                                                                                        </div> <!-- / .tab-pane -->                                                                                        
+                                                                                    </div>                                                                                
+                                                                                </div>
+
+
+                                                    </div>
+
+                                                    <div class="col-md-6">                                                    
+                                                        <input type="text">
+                                                    </div>
+                                               </div>                                                
+                                               <div class="row">
+                                                    <div class="col-md-12">
+                                                        <a class="btn btn-success add-images">+ Add images</a>
+                                                        <a class="btn btn-info upload-images">Upload</a>
+                                                        <div id="uploadzone" class="" style="width:100%;min-height:50px;"></div>
+                                                        <div id="upload_preview"></div>
+
+                                                        {# {{ FiveForm.dropzoneUploadWidget() }} #}
+
+
+                                                    </div>
+                                               </div>
+
+                                                <div class="row">                    
+                                                    <div class="col-md-12"><div class="divider"></div></div>
+                                                </div>                                
+                                              
+                                                <div class="row">                    
+                                                    <div class="col-md-12">
+
+                                                    <ol class="simple_with_drop vertical list-unstyled">
+                                                    {% for im in ['0b9e5b689c3f7a3fba866d90939cc6d7e7c535d4.jpg', '0c7732b4a0b5337d3be5fa90637a4671a5281b51.jpg', '0d4026c5e38b4c7b6f14b7f68352c89734c9af17.jpg' ] %}
+                                                        <li>
+                                                        
+                                                            <div class="row">
+                                                                    
+                                                                    <div class="col-sm-10">
+                                                                            <div class="row">
+                                                                                <div class="col-sm-1">
+                                                                                    <input type="checkbox" value="1" />
+                                                                                </div>
+                                                                                <div class="col-sm-2">
+                                                                                    <img src="/uploads/thumbs/{{ im }}" class="img-responsive img-thumbnail" />
+                                                                                </div>
+                                                                                <div class="col-sm-1">
+
+                                                                                      <ul id="imagedata-{{ loop.index0 }}" class="nav nav-tabs nav-simple nav-stacked">
+                                                                                        <li class="active">
+                                                                                            <a href="#imagedata-en-{{ loop.index0 }}" data-toggle="tab">English</a>
+                                                                                        </li>
+                                                                                        <li class="">
+                                                                                            <a href="#imagedata-fr-{{ loop.index0 }}" data-toggle="tab">French</a>
+                                                                                        </li>
+                                                                                    </ul> 
+
+                                                                                
+<!--                                                                                     <div class="list-group menu-message">
+                                                                                    <a href="inbox.html" class="list-group-item active"><i class="icon-inbox"></i> Inbox <span class="badge pull-right">4</span></a>
+                                                                                    <a href="#fakelink" class="list-group-item"><i class="icon-pencil"></i> Draft <span class="badge bg-green-1 pull-right">1</span></a>
+                                                                                    <a href="#fakelink" class="list-group-item"><i class="icon-star"></i> Important <span class="badge bg-red-1 pull-right">2</span></a>
+                                                                                    <a href="#fakelink" class="list-group-item"><i class="icon-export"></i> Sent</a>
+                                                                                    <a href="#fakelink" class="list-group-item"><i class="icon-cup"></i> Trash <span class="badge bg-lightblue-1 pull-right">1</span></a>
+                                                                                    </div>   -->                                                                              
+                                                                                </div>
+                                                                                <div class="col-sm-8">
+                                                                                
+                                                                                    <div class="tab-content">
+                                                                                        <div class="tab-pane fade active in" id="imagedata-en-{{ loop.index0 }}">
+                                                                                            <div class="input-group-sm">
+                                                                                                <input name="titleEn" type="text" class="form-control input-small pic-title" placeholder="Title" value="" />
+                                                                                                <textarea name="descEn" class="form-control input-small pic-desc" placeholder="Description"></textarea>                                                                                                
+                                                                                            </div>
+                                                                                        </div> <!-- / .tab-pane -->
+                                                                                        <div class="tab-pane fade" id="imagedata-fr-{{ loop.index0 }}">
+                                                                                            <div class="input-group-sm">
+                                                                                                <input name="titleFr" type="text" class="form-control input-small pic-title" placeholder="Title" value="" />
+                                                                                                <textarea name="descFr" class="form-control input-small pic-desc" placeholder="Description"></textarea>                                                                                            
+                                                                                                
+                                                                                            </div>
+                                                                                        </div> <!-- / .tab-pane -->                                                                                        
+                                                                                    </div>                                                                                
+                                                                                </div>
+                                                                                {#<div class="col-sm-5">
+                                                                                    <div class="input-group input-group-sm">
+                                                                                        <input name="titleFr" type="text" class="form-control input-small" placeholder="Title Fr" value="" />
+                                                                                        <textarea name="descFr" class="form-control input-small pic-desc" placeholder="Title Fr"></textarea>
+                                                                                    </div>
+<!--                                                                                     <div class="input-group input-group-sm">
+                                                                                        <span class="label label-info">Desc</span>
+                                                                                        <input name="descFr" type="text" class="form-control input-small" value="DESC Fr{{ loop.index0 }}" />
+                                                                                    </div>            -->                                                                         
+                                                                                </div>#}
+                                                                                {#<div class="col-sm-5">
+                                                                                    <div class="input-group input-group-sm">
+                                                                                        <!-- <span class="label label-info">Title</span> -->
+                                                                                        <input name="titleEn" type="text" placeholder="Description" class="form-control input-small" value="" />
+                                                                                        <textarea name="descEn" class="form-control input-small" placeholder="Title Fr"></textarea>
+                                                                                    </div>
+<!--                                                                                     <div class="input-group input-group-sm">
+                                                                                        <span class="label label-info">Desc</span>
+                                                                                        <input name="descEn" type="text" class="form-control input-small" value="Desc En{{ loop.index0 }}" />
+                                                                                    </div>   -->                                                                                  
+                                                                                </div> #}                                                                               
+                                                                            </div>
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        <button class="btn btn-danger btn-small">Delete</button>
+                                                                    </div>
+                                                            </div>
+                                                        </li>
+                                                    {% endfor %}
+
+                                                    </ol>      
+
+                                                        {#<div class="dd" id="nestable2">
+                                                            <ol class="dd-list">
+                                                            {% for im in ['0b9e5b689c3f7a3fba866d90939cc6d7e7c535d4.jpg', '0c7732b4a0b5337d3be5fa90637a4671a5281b51.jpg', '0d4026c5e38b4c7b6f14b7f68352c89734c9af17.jpg' ] %}
+                                                                <li class="dd-item" 
+                                                                    data-id=""
+                                                                    data-src="0b9e5b689c3f7a3fba866d90939cc6d7e7c535d4.jpg"
+                                                                    data-title-fr="title fr"
+                                                                    data-title-en="title en"
+                                                                    data-description-fr="desc fr"
+                                                                    data-description-en="desc en">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-10">
+                                                                            <div class="row">
+                                                                                <div class="col-sm-4">
+                                                                                    <img src="/uploads/thumbs/{{ im }}" class="img-responsive dd-handle" />
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                    <div class="form-group">
+                                                                                        <label>Title Fr</label>
+                                                                                        <input type="text" class="form-control" value="" />
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label>Desc Fr</label>
+                                                                                        <input type="text" class="form-control" value="" />
+                                                                                    </div>                                                                                    
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                    <div class="form-group">
+                                                                                        <label>Title En</label>
+                                                                                        <input type="text" class="form-control" value="" />
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label>Desc En</label>
+                                                                                        <input type="text" class="form-control" value="" />
+                                                                                    </div>                                                                                    
+                                                                                </div>                                                                                
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-2">
+                                                                            <button class="btn btn-danger btn-small">Delete</button>
+                                                                        </div>
+                                                                    </div>                                                                    
+                                                                </li>
+                                                            {% endfor %}
+<!--                                                                 <li class="dd-item dd3-item" data-src="0c7732b4a0b5337d3be5fa90637a4671a5281b51.jpg"  data-title-fr="title fr">
+                                                                    <div class="dd-handle dd3-handle">Drag</div><div class="dd3-content" data-title-en="title">Item 14</div>
+                                                                </li>
+                                                                <li class="dd-item dd3-item" data-src="0d4026c5e38b4c7b6f14b7f68352c89734c9af17.jpg"  data-title-fr="title fr">
+                                                                    <div class="dd-handle dd3-handle">Drag</div><div class="dd3-content" data-title-en="title">Item 14</div>
+                                                                </li>      -->                                                           
+                                                            </ol>
+                                                        </div>     #}                                               
+                                                        <!-- {{ form_widget( form.gallery ) }} -->
+
+
+                                        
+                                                    </div>
+                                                </div>
+                                                <div class="row">                    
+                                                    <div class="col-md-12">
+                                                        <button class="btn btn-default add-button">+ Add Image</button>
+                                                                                
+                                                    </div>
+                        </div>                                                                
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    
+
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+    <!-- Page Specific JS Libraries -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-select/bootstrap-select.min.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-inputmask/inputmask.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-xeditable/js/bootstrap-editable.min.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-xeditable/demo/jquery.mockjax.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-xeditable/demo/demo-mock.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-select2/select2.min.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/jquery-clndr/moment-2.5.1.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-typeahead/bootstrap3-typeahead.min.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/ckeditor/ckeditor.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/ckeditor/adapters/jquery.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/js/pages/advanced-forms.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/dropzone/dropzone.min.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/jquery-nestable/jquery.nestable.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/js/jquery-sortable.js' ) }}"></script>
+
+
+    <script>
+    var config = {};
+    var uploadedImages = [];
+    var uploadConfig = {
+        url: "{{ path( 'five_admin_upload_pictures' ) }}",
+        thumbnailWidth: 80,
+        thumbnailHeight: 80,
+        parallelUploads: 20,
+        clickable: 'a.add-images',
+        previewTemplate: '<div style="display:none"></div>',
+        autoQueue: false,
+        success : function(evt, resp)
+        {
+            //console.log( evt, 'hereeeee!', resp );
+            uploadedImages.push( { picture: resp.picture, element: null } );
+        }
+
+    };
+
+    function cloneRow( imgSrc )
+    {
+        var li = $("ol.simple_with_drop li:first");
+        var liClone = li.clone();
+        liClone.find( 'img' ).attr( 'src', imgSrc );
+        liClone.find( 'input[name="titleFr"]' ).val( '' );
+        liClone.find( 'input[name="titleEn"]' ).val( '' );
+        liClone.find( 'input[name="descFr"]' ).val( '' );
+        liClone.find( 'input[name="descEn"]' ).val( '' );
+
+        liClone.insertBefore( li );
+
+        return liClone;
+    }
+
+var output;
+$(document).ready(function(){
+
+
+
+    var updateOutput = function(e)
+    {
+        var list   = e.length ? e : $(e.target),
+            output = list.data('output');
+            console.log( 'list', list );
+        if (window.JSON) {
+            output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
+        } else {
+            output.val('JSON browser support required for this demo.');
+        }
+    };
+
+$("ol.simple_with_drop").sortable({
+  group: 'ol.simple_with_drop',
+  handle: 'img.img-responsive',
+  nested : false,
+  vertical : true,
+/*  onDrop: function (item, container, _super) {
+    $('#nestable2-output').text( $("ol.simple_with_drop").sortable( "serialize" ).get().join("\n") )
+    _super(item, container)
+  },*/
+  serialize: function (parent, children, isContainer) {
+    console.log( children, parent, isContainer )
+    if( isContainer ) 
+    {
+        return children.join(); 
+    }
+    else
+    {
+        var obj     = {};
+        obj.src     = parent.find( 'img' ).attr( 'src' );
+        obj.titleFr = parent.find( 'input[name="titleFr"]' ).val();
+        obj.descFr  = parent.find( 'input[name="descFr"]' ).val();
+        obj.titleEn = parent.find( 'input[name="titleEn"]' ).val();
+        obj.descEn  = parent.find( 'input[name="descEn"]' ).val();
+
+        return obj;
+    }
+    
+  },
+  onDrop: function( $item, container, _super )
+  {
+    $item.find('ol.simple_with_drop').sortable( 'enable' );
+    $('#nestable2-output').text( $("ol.simple_with_drop").sortable( "serialize" ).get().join("\n") )
+    _super($item, container)
+  },
+  onDragStart: function ($item, container, _super) {
+    // Duplicate items of the no drop area
+    $item.find('ol.simple_with_drop').sortable('disable')
+    _super($item, container)
+/*    if(!container.options.drop)
+      item.clone().insertAfter(item)
+    _super(item)*/
+  }
+})    
+
+    // activate Nestable for list 1
+
+
+    //$('#nestable2').nestable().on('change', updateOutput);
+/*    
+    updateOutput($('#nestable2').data('output', $('#nestable2-output')));*/
+})
+        $( document ).ready( function()
+        {
+//config.extraAllowedContent = 'span[class] h1 h2 h3';
+            //$("#dropzone").dropzone();
+            config.allowedContent = true;
+            config.extraPlugins = 'autogrow';
+            config.autoGrow_onStartup = true;
+            config.autoGrow_minHeight = 75;
+            config.toolbarCanCollapse = true;
+            config.toolbar = [
+                [ 'Source', '-', 'Link','Unlink', 'Anchor', '-','JustifyLeft', 'JustifyCenter', 'JustifyRight', '-', 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat','Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ]
+            ];            
+            $( '.editor-basic' ).ckeditor(config);
+var dropzoneMain = new Dropzone(document.querySelector( '#uploadzone' ),uploadConfig);
+/*dropzoneMain.on("addedfile", function(file) {
+  // Hookup the start button
+  file.previewElement.querySelector(".start").onclick = function() { myDropzone.enqueueFile(file); };
+});*/
+$( '[data-collection="five_country_gallery"]' ).css('visibility', 'hidden');
+document.querySelector(".upload-images").onclick = function() {
+    uploadedImages = [];
+  dropzoneMain.enqueueFiles(dropzoneMain.getFilesWithStatus(Dropzone.ADDED));
+};
+
+function addUploadedImages( obj )
+{        
+/*    $( '#five_country_gallery li:eq('+obj.element+')' ).find( '.gallery_name:first' ).parent().append( '<img src="/uploads/media/' + obj.picture + '" class="img-responsive" width="80" />' );
+
+    $( '#five_country_gallery li:eq('+obj.element+')' ).find( '.gallery_name:first' ).val(obj.picture);*/
+
+                //}, 200 );    
+}
+
+dropzoneMain.on("queuecomplete", function(progress) {
+   console.log( 'complete', progress );
+    _.forEach( uploadedImages, function( obj, i )
+    {
+        var row = window.cloneRow( '/uploads/thumbs/' + obj.picture );
+        console.log( 'Added row', row );
+/*        var pos = $( '#five_country_gallery li:last' ).index();
+        obj.element = pos + 1;
+        $( '[data-collection="five_country_gallery"]' ).trigger( 'click' );*/
+        //_.delay(function(){ addUploadedImages( obj );}, 200);
+         
+    } );  
+});
+
+var onSuccess = function(evt, resp)
+{
+    console.log( evt, 'hereeeee!', resp );
+};
+
+        });
+
+    </script>
+    <script>
+
+    </script>        
+{% endblock %}

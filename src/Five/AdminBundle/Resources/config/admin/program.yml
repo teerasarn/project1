@@ -1,0 +1,66 @@
+parameters:
+    five_admin.crud.program_edit:
+        page:
+            title: "Edit Program ID#"
+        entity: 'AurayCapital\SiteBundle\Entity\Program'
+        template: 'FiveAdminBundle:Action:edit_program.html.twig'
+        form: 'five.form.program'
+        form_action:
+            path: 'five_admin_program_edit'
+            parameters: { 'id': null }
+        success_action:
+            path: 'five_admin_program_list'
+            parameters: {}
+
+    five_admin.crud.program_delete:
+        page:
+            title: "Edit User ID#"
+        entity: 'AurayCapitalSiteBundle:Program'
+        template: 'FiveAdminBundle:Action:delete-modal.html.twig'
+        form: 'five.form.delete'
+        form_action: 
+            path: 'five_admin_program_delete'
+            parameters: { 'id': null }
+        success_action: 
+            path: 'five_admin_program_list'
+            parameters: {}
+
+    five_admin.crud.program_list:
+        page:
+            title: "All Programs"
+        entities: 'AurayCapital\SiteBundle\Entity\Program'
+        template: 'FiveAdminBundle:Action:list.html.twig'
+        edit_action:
+            path: 'five_admin_program_edit'
+            parameters: { 'id': null }
+        form_action: 
+            path: 'five_admin_program_delete'
+            parameters: { 'id': null }
+        create_action:
+            path: 'five_admin_program_create'
+            parameters: {}
+        delete_action:
+            path: 'five_admin_program_delete'
+            parameters: { 'id': null }
+        expose:
+            - { label: 'ID', call: 'id' }
+            - { label: 'Country', call: 'getCountry', property: 'name' }
+            - { label: 'Title', call: 'title' }
+            - { label: 'Slug', call: 'slug' }
+            - { label: 'Type', call: 'type' }
+            #- { label: 'Created At', call: 'createdAt', type: 'date', format: 'Y-m-d' }
+            - { label: 'Edit', action: 'edit_action' }
+            - { label: 'Delete', action: 'delete_action' }
+
+    five_admin.crud.program_create:
+        page:
+            title: "Create a new Program"
+        entity: 'AurayCapital\SiteBundle\Entity\Program'
+        template: 'FiveAdminBundle:Action:edit_program.html.twig'
+        form: 'five.form.program'
+        form_action:
+            path: 'five_admin_program_create'
+            parameters: {}
+        success_action:
+            path: 'five_admin_program_list'
+            parameters: {}

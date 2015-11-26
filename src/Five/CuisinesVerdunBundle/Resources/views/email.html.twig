@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{ app.request.get( '_locale' ) }}" lang="{{ app.request.get( '_locale' ) }}">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Cuisines Verdun</title>
+
+        <style type="text/css">
+            html, body, a, p, span{
+                font-family: Arial;
+                color: #333333;
+                font-size: 15px;
+                background-color: #ffffff;
+                font-weight: normal;
+            }
+        </style>
+
+    </head>
+    <body style="margin : 0 auto; padding : 0px; font: 15px Arial; background-color:#ffffff; color:#333333; width:690px;">
+        <!-- Table -->
+        <table cellpadding="0" cellspacing="0" border="0" width="690" style="margin:0 auto;">
+            <!-- Entête -->
+            <tr>
+                <td width="690" height="66" colspan="3"><img src="http://{{ app.request.host }}/bundles/fivecuisinesverdun/img/email/header.jpg" /></td>
+            </tr>
+            <!-- corps -->
+            <tr>
+                <td width="25" height="100%">&nbsp;</td>
+                <td width="640" height="100%">
+                <table border="0" cellspacing="0" cellpadding="0" width="640" height="100%">
+                    <tbody>
+                        <tr>
+                            <td colspan="2" height="40">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" height="40">
+                                <font style="color:#000;font-weight:bold;font-size:22px;">Succursale</font>&nbsp;&nbsp;<font style="font-weight:bold;font-size:22px;">{{ branch }}</font>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="background:none; border:solid 1px #333333; border-width:1px 0 0 0; height:1px; width:100%; margin:0px 0px 0px 0px; padding: 0 0 0 0;">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" height="40">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" height="40"> <font style="color:#000;font-weight:bold;font-size:22px;">Informations personnelles</font>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="background:none; border:solid 1px #333333; border-width:1px 0 0 0; height:1px; width:100%; margin:0px 0px 0px 0px; padding: 0 0 0 0;">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td height="30" width="20%"><strong>
+                                Nom :
+                                </strong>
+                            </td>
+                            <td>
+                                {{ name | title }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="30" width="20%"><strong>Langue :</strong></td>
+                            <td>{{ language | title }}</td>
+                        </tr>
+                        <tr>
+                            <td height="30" width="20%"><strong>Téléphone :</strong></td>
+                            <td>
+                                <a href="tel:{{ phone }}" value="+1{{ phone }}" target="_blank">{{ phone }}</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="30" width="20%"><strong>Courriel :</strong></td>
+                            <td>
+                                <a href="mailto:{{ email }}" target="_blank">{{ email }}</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" height="40">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" height="40">
+                                <font style="color:#000;font-weight:bold;font-size:22px;">Informations additionnelles</font>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="background:none; border:solid 1px #333333; border-width:1px 0 0 0; height:1px; width:100%; margin:0px 0px 0px 0px; padding: 0 0 0 0;">&nbsp;</td>
+                        </tr>
+                        {% if availability is not empty %}
+                            <tr>
+                                <td height="30" width="20%"><strong>
+                                    Disponibilité :</strong>
+                                </td>
+                                <td>
+                                    {% for x in availability %}
+                                        {% if x is not empty %}
+                                        {{ x | capitalize }}{% if not loop.last %},{% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                        {% endif %}
+
+                        {% if options is not empty %}
+                            {% for x in options %}
+                                {% if x is not empty %}
+                                    <tr>
+                                        <td height="30" width="20%"><strong>{{ x | title }}</strong></td>
+                                        <td>Oui</td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        <tr>
+                            <td height="150" valign="top"  width="20%"><strong><br />Commentaires&nbsp;:</strong></td>
+                            <td style="white-space: pre-line;" height="150" valign="top"><br />{{ message }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                </td>
+                <td width="25" height="100%">&nbsp;</td>
+            </tr>
+        </table>
+        <!-- fin de table -->
+    </body>
+</html>

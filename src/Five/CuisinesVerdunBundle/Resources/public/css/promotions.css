@@ -1,0 +1,112 @@
+#promos-ribbon-btn:hover
+{
+    right                              : -2px;
+    box-sizing                         : border-box;
+    -webkit-transition-timing-function : cubic-bezier( 0.47, 0, 0.745, 0.715 );
+    transition-timing-function         : cubic-bezier( 0.47, 0, 0.745, 0.715 );
+    -webkit-transition                 : 0.5s all;
+    transition                         : 0.5s all; 
+    -moz-box-shadow                    : 0 1px 10px rgba(0,0,0,.45);
+    -webkit-box-shadow                 : 0 1px 10px rgba(0,0,0,.45);
+    -box-shadow                        : 0 1px 10px rgba(0,0,0,.45);       
+}
+
+#promos-ribbon-btn
+{
+    -webkit-transition-timing-function : cubic-bezier(0.47, 0, 0.745, 0.715);
+    transition-timing-function         : cubic-bezier(0.47, 0, 0.745, 0.715);
+    -webkit-transition                 : 0.5s all;
+    transition                         : 0.5s all;           
+    position                           : fixed;
+    top                                : 50%;
+    right                              : -10px;
+    width                              : 38px;
+    height                             : 256px;
+    margin-top                         : -128px;     
+    color                              : #ffffff;
+    background                         : #ffef00 url( /bundles/fivecuisinesverdun/img/promotions/btn-promotion-label.png ) no-repeat top left;
+    -moz-box-shadow                    : 0 1px 7px rgba(0,0,0,.2);
+    -webkit-box-shadow                 : 0 1px 7px rgba(0,0,0,.2);
+    -box-shadow                        : 0 1px 7px rgba(0,0,0,.2);
+    display                            : block;
+    visibility                         : visible;
+}
+
+.promotion-modal
+{
+/*    width    : 834px;
+    height   : 494px;*/    
+    overflow : hidden;
+/*  -webkit-transition-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  */
+    -webkit-transition-timing-function : cubic-bezier(0.86, 0, 0.07, 1);
+    transition-timing-function         : cubic-bezier(0.86, 0, 0.07, 1);  
+    animation-duration                 : .8s;
+    -webkit-animation-duration         : .8s;
+    z-index          : 1240;
+    top : 50%;
+}
+
+.promotion-modal .close
+{
+    width               : 43px;
+    height              : 43px;
+    background          : url(/bundles/fivecuisinesverdun/img/promotions/btn-close.png) no-repeat top left;
+    float               : none;
+    position            : absolute;
+    top                 : 0px;
+    right               : 0px;
+    text-shadow         : none; 
+    -webkit-text-shadow : none;
+    opacity             : 1;
+    filter              : alpha(opacity=50);
+    text-shadow         : none;
+}
+
+.promotion-modal .close:hover,
+.promotion-modal .close:focus
+{
+    text-decoration : none;
+    cursor          : pointer;
+    opacity         : 0.5;
+    filter          : alpha(opacity=50);
+}
+
+.promotion-modal .modal-body
+{
+    padding : 0;
+}
+
+.promotion-modal .modal-content
+{
+    border-radius : 0;
+    border        : none;
+}
+
+.promotion-modal .promo
+{
+    width: 100%;
+}
+
+.promotion-modal .modal-dialog
+{
+    outline : 6px solid #ffffff;
+}
+
+.modal-backdrop
+{
+    position         : fixed;
+    top              : 0;
+    right            : 0;
+    bottom           : 0;
+    left             : 0;
+    z-index          : 1040;
+    background : rgba(0,0,0,0.5);
+}
+
+.mobile #promos-ribbon-btn
+{
+    display    : none;
+    visibility : hidden;
+}

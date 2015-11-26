@@ -1,0 +1,148 @@
+SELECT
+C.*, I.* FROM cv_gallery__category as C
+LEFT JOIN cv_gallery__image_category as IC ON IC.gallery_category_id = C.ID AND C.name IN ('bathroom')
+LEFT JOIN cv_gallery__image as I ON IC.gallery_image_id = I.id
+WHERE I.id is not null
+GROUP BY I.id;
+WHERE C.name = 'bathroom';
+SELECT
+C.*, I.* FROM cv_gallery__category as C
+LEFT JOIN cv_gallery__image_category as IC ON IC.gallery_category_id = C.ID
+LEFT JOIN cv_gallery__image as I ON IC.gallery_image_id = I.id
+WHERE I.id is not null
+GROUP BY I.id
+WHERE C.name = 'bathroom';
+SELECT
+C.*, I.* FROM cv_gallery__category as C
+LEFT JOIN cv_gallery__image_category as IC ON IC.gallery_category_id = C.ID
+LEFT JOIN cv_gallery__image as I ON IC.gallery_image_id = I.id
+WHERE I.id is not null
+GROUP BY I.id
+WHERE C.name =;
+SELECT
+C.*, I.* FROM cv_gallery__category as C
+LEFT JOIN cv_gallery__image_category as IC ON IC.gallery_category_id = C.ID
+LEFT JOIN cv_gallery__image as I ON IC.gallery_image_id = I.id
+WHERE I.id is not null
+GROUP BY I.id;
+SELECT
+C.*, I.* FROM cv_gallery__category as C
+LEFT JOIN cv_gallery__image_category as IC ON IC.gallery_category_id = C.ID
+LEFT JOIN cv_gallery__image as I ON IC.gallery_image_id = I.id
+WHERE I.id is not null;
+SELECT
+C.*, IC.* FROM cv_gallery__category as C
+LEFT JOIN cv_gallery__image_category as IC ON IC.gallery_category_id = C.ID
+LEFT JOIN cv_gallery__image as I ON IC.gallery_image_id = I.id
+WHERE I.id is not null;
+SELECT
+C.*, IC.* FROM cv_gallery__category as C
+LEFT JOIN cv_gallery__image_category as IC ON IC.gallery_category_id = C.ID
+LEFT JOIN cv_gallery__image as I ON IC.gallery_image_id = I.id
+WHERE IC.id is not null;
+SELECT
+C.*, IC.* FROM cv_gallery__category as C
+LEFT JOIN cv_gallery__image_category as IC ON IC.gallery_category_id = C.ID
+LEFT JOIN cv_gallery__image as I ON IC.gallery_image_id = I.id;
+SELECT
+C.* FROM cv_gallery__category as C
+LEFT JOIN cv_gallery__image_category as IC ON IC.gallery_category_id = C.ID
+LEFT JOIN cv_gallery__image as I ON IC.gallery_image_id = I.id;
+SELECT * FROM bnq_user WHERE id IN (43456, 13033)
+-- SELECT * FROM bnq_user WHERE id IN ( 27031, 1791, 2314, 74763, 91813 ) 
+
+-- SELECT * FROM draw where clues>=5 ORDER BY RAND() LIMIT 2
+
+-- SELECT * FROM bnq_user__clues where clue_id = 5 and created_at >= '2014-11-10'
+
+
+-- INSERT INTO draw
+-- SELECT user_id, @cnt:=count(*) as cnt FROM bnq_user__clues group by user_id
+
+
+-- 56903, 94159;
+-- SELECT * FROM bnq_user WHERE id IN (88084, 78359)
+-- SELECT * FROM bnq_user WHERE id IN ( 27031, 1791, 2314, 74763, 91813 ) 
+
+SELECT * FROM draw where clues>=5 ORDER BY RAND() LIMIT 2
+
+-- SELECT * FROM bnq_user__clues where clue_id = 5 and created_at >= '2014-11-10'
+
+
+-- INSERT INTO draw
+-- SELECT user_id, @cnt:=count(*) as cnt FROM bnq_user__clues group by user_id
+
+
+-- 56903, 94159;
+SELECT * FROM bnq_user WHERE id IN (88084, 78359)
+-- SELECT * FROM bnq_user WHERE id IN ( 27031, 1791, 2314, 74763, 91813 ) 
+
+-- SELECT * FROM draw where clues>=5 ORDER BY RAND() LIMIT 2
+
+-- SELECT * FROM bnq_user__clues where clue_id = 5 and created_at >= '2014-11-10'
+
+
+-- INSERT INTO draw
+-- SELECT user_id, @cnt:=count(*) as cnt FROM bnq_user__clues group by user_id
+
+
+-- 56903, 94159;
+-- SELECT * FROM bnq_user WHERE id IN (56903, 94159)
+-- SELECT * FROM bnq_user WHERE id IN ( 27031, 1791, 2314, 74763, 91813 ) 
+
+SELECT * FROM draw where clues>=5 ORDER BY RAND() LIMIT 2
+
+-- SELECT * FROM bnq_user__clues where clue_id = 5 and created_at >= '2014-11-10'
+
+
+-- INSERT INTO draw
+-- SELECT user_id, @cnt:=count(*) as cnt FROM bnq_user__clues group by user_id
+
+
+-- 56903, 94159;
+SELECT * FROM bnq_user WHERE id IN (56903, 94159)
+-- SELECT * FROM bnq_user WHERE id IN ( 27031, 1791, 2314, 74763, 91813 ) 
+
+-- SELECT * FROM draw where clues>=5 ORDER BY RAND() LIMIT 2
+
+-- SELECT * FROM bnq_user__clues where clue_id = 5 and created_at >= '2014-11-10'
+
+
+-- INSERT INTO draw
+-- SELECT user_id, @cnt:=count(*) as cnt FROM bnq_user__clues group by user_id
+
+
+-- 56903, 94159;
+SELECT * FROM bnq_user WHERE id IN (56903, 94159)
+-- SELECT * FROM bnq_user WHERE id IN ( 27031, 1791, 2314, 74763, 91813 ) 
+
+-- SELECT * FROM draw where clues>=5 ORDER BY RAND() LIMIT 2
+
+-- SELECT * FROM bnq_user__clues where clue_id = 5 and created_at >= '2014-11-10'
+
+
+-- INSERT INTO draw
+-- SELECT user_id, @cnt:=count(*) as cnt FROM bnq_user__clues group by user_id
+
+
+56903, 94159;
+SELECT * FROM draw where clues>=5 ORDER BY RAND() LIMIT 2;
+-- SELECT * FROM bnq_user WHERE id IN (20739,84834,60631,59037,12266)
+-- SELECT * FROM bnq_user WHERE id IN ( 27031, 1791, 2314, 74763, 91813 ) 
+
+-- SELECT * FROM bnq_user__clues where clue_id = 8 ORDER BY RAND() LIMIT 5
+
+-- SELECT * FROM bnq_user__clues where clue_id = 5 and created_at >= '2014-11-10'
+
+
+INSERT INTO draw
+SELECT user_id, @cnt:=count(*) as cnt FROM bnq_user__clues group by user_id;
+-- SELECT * FROM bnq_user WHERE id IN (20739,84834,60631,59037,12266)
+-- SELECT * FROM bnq_user WHERE id IN ( 27031, 1791, 2314, 74763, 91813 ) 
+
+-- SELECT * FROM bnq_user__clues where clue_id = 8 ORDER BY RAND() LIMIT 5
+
+-- SELECT * FROM bnq_user__clues where clue_id = 5 and created_at >= '2014-11-10'
+
+SELECT user_id, @cnt:=count(*) as cnt FROM bnq_user__clues group by user_id;
+SELECT @cnt:=count(*) as cnt FROM bnq_user__clues group by user_id

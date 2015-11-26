@@ -1,0 +1,109 @@
+{% block gender_widget %}
+    {% spaceless %}
+        {% if expanded %}
+            <ul {{ block('widget_container_attributes') }}>
+            {% for child in form %}
+                <li>
+                    {{ form_widget(child) }}
+                    {{ form_label(child) }}
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            {# just let the choice widget render the select tag #}
+            {{ block('choice_widget') }}
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}
+
+{% block form_row %}
+{% spaceless %}
+    {% set type = type|default('text') %}
+
+    {% if type == 'hidden' %}
+ 
+        {{ block( 'hidden_widget' ) }}
+    {% else %}
+
+        {{ form_label(form) }}
+        <div class="form-group">
+            {{ form_errors(form) }}
+            {{ form_widget(form, { attr : { class : 'form-control' } }) }}
+        </div> 
+    
+    {% endif %}
+{% endspaceless %}
+{% endblock form_row %}
+
+{% block form_widget_simple %}
+{% spaceless %}
+    {% set type = type|default('text') %}
+
+    {% if type == 'hidden' %}
+        {% if name == 'testData' %}
+            {% set data = value | raw | json_encode() %}
+            {{ data | raw }}
+            {% for row in data %}
+                {% for key,val in row %}
+                {{ key }} : {{ val }}<br />
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+        <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    {% else %}    
+        {% set classType = {
+                'email' : 'fa-envelope',
+                'telephone' : 'fa-phone'
+            } 
+        %}
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa {{ name == 'email' or name == 'telephone' ? classType[ name ] : 'fa-edit'}}"></i></span>
+            <input type="{{ type }}" class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        </div>
+    {% endif %}
+    
+{% endspaceless %}
+{% endblock form_widget_simple %}
+
+{% block choice_widget_collapsed %}
+{% spaceless %}
+    {% if required and empty_value is none and not empty_value_in_choices and not multiple %}
+        {% set required = false %}
+    {% endif %}
+    
+    {% if id in [ 'date_of_birth_year', 'date_of_birth_month', 'date_of_birth_day' ] %}
+
+    <div class="col-lg-4">
+
+    {% endif %}
+
+    <select class="form-control" {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+        {% if empty_value is not none %}
+            <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ empty_value|trans({}, translation_domain) }}</option>
+        {% endif %}
+        {% if preferred_choices|length > 0 %}
+            {% set options = preferred_choices %}
+            {{ block('choice_widget_options') }}
+            {% if choices|length > 0 and separator is not none %}
+                <option disabled="disabled">{{ separator }}</option>
+            {% endif %}
+        {% endif %}
+        {% set options = choices %}
+        {{ block('choice_widget_options') }}
+    </select>
+
+    {% if id in [ 'date_of_birth_year', 'date_of_birth_month', 'date_of_birth_day' ] %}
+
+    </div>
+
+    {% endif %}    
+{% endspaceless %}
+{% endblock choice_widget_collapsed %}
+
+{% block textarea_widget %}
+    {% if attr.class is defined %}
+        {# {% set attr.class = attr.class ~ ( ' form-control' ) %} #}
+
+    {% endif %}
+    <textarea class="form-control" {{ block('widget_attributes') }}>{{ value }}</textarea>
+{% endblock textarea_widget %}

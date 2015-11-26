@@ -1,0 +1,47 @@
+Five\AdminBundle\Entity\WebTest:
+    type: entity
+    table: admin_webtest
+    repositoryClass: Five\AdminBundle\Entity\WebTestRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        url:
+            type: string
+            length: 255
+        route:
+            type: string
+            length: 255
+        routeParams:
+            type: json_array
+            column: route_params
+        testData:
+            type: json_array
+            column: test_data
+        databaseData:
+            type: json_array
+            column: database_data
+        receivedData:
+            type: json_array
+            column: received_data
+        screenshot:
+            type: string
+            length: 255
+        driver:
+            type: string
+            length: 255
+        updatedAt:
+            type: datetime
+            column: updated_at
+        createdAt:
+            type: datetime
+            column: created_at
+        enabled:
+            type: boolean
+    lifecycleCallbacks: {  }

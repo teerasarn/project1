@@ -1,0 +1,10 @@
+services:
+#    blogger_blog.example:
+#        class: Blogger\BlogBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+    blogger_blog.listener:
+        class: Blogger\BlogBundle\Listener\EntityLocaleInjector
+        arguments: [ @service_container ]
+        tags:
+            - { name: doctrine.event_listener, event: postLoad }

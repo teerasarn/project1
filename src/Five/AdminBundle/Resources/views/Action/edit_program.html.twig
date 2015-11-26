@@ -1,0 +1,142 @@
+{% extends 'FiveAdminBundle::layout.html.twig' %}
+
+{% import "FiveAdminBundle:Form:macros.html.twig" as FiveForm %}
+{% form_theme form with [ 'FiveAdminBundle:Form:form_fields.html.twig' ] %}
+
+{% block page_head_title %}{{ entity.translate('en').getTitle()|default(options.page.title) }}{% endblock %}
+{% block page_head_icon %}<i class="{{ options.page.icon|default( 'glyphicon glyphicon-list-alt' ) }}"></i>{% endblock %}
+{% block page_head_subtitle %}<h3>{{ entity.id is not empty ? options.page.title | default( '' ) }}{{ entity.id | default( '' ) }}</h3>{% endblock %}
+
+{% block content %}
+
+    {{ form_errors(form) }}
+    {{ form_start( form, { 'action' : path( form_action.path, form_action.parameters ) } ) }}
+    
+    {{ block( 'ButtonAction' ) }}
+    <div class="row">
+        <div class="col-md-12">
+            {% set generalTab %}
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="widget">
+                            <div class="widget-content padding">
+                                {# <h2>col-sm-12</h2> #}
+                                <div class="row">                    
+                                        <div class="col-md-6">{{ form_row(form.country ) }}</div>
+                                        <div class="col-md-6">{{ form_row(form.type ) }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="widget">
+                            <div class="widget-content padding">
+                                {# <h2>col-sm-12</h2> #}
+                                <div class="row">                    
+                                    <div class="col-md-12">{{ FiveForm.localesTab( form.translations, [ 'title', 'subtitle', 'description', 'benefitsText'] ) }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+                
+            {% endset %}
+
+            {% set costsTab %} 
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="widget">
+                            <div class="widget-content padding">                   
+                                <div class="row">
+                                    <div class="col-md-12">{{ FiveForm.localesTab( form.translations, [ 'costProcedure', 'costsList'] ) }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>   
+                
+            {% endset %}
+
+            {% set criteriasTab %} 
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="widget">
+                            <div class="widget-content padding"> 
+                                <div class="row">                  
+                                    <div class="col-md-12">{{ FiveForm.localesTab( form.translations, [ 'criteriasText', 'criteriasList'] ) }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>   
+                
+            {% endset %}
+
+            {% set proceduresTab %} 
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="widget">
+                            <div class="widget-content padding">
+                                <div class="row">                   
+                                    <div class="col-md-12">{{ FiveForm.localesTab( form.translations, [ 'proceduresList' ] ) }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>   
+                
+            {% endset %}            
+
+            {% set tabs = { 'General' : generalTab, 'Costs' : costsTab, 'Criterias' : criteriasTab, 'Procedures' : proceduresTab } %}          
+            {{ FiveForm.tabsWidget( tabs ) }}
+        </div>
+
+    </div>
+
+    {{ form_end( form ) }}
+{#           </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box --> #}
+{#     </div>
+</div>     #}
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>    
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+    <!-- Page Specific JS Libraries -->
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-select/bootstrap-select.min.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-inputmask/inputmask.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-xeditable/js/bootstrap-editable.min.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-xeditable/demo/jquery.mockjax.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-xeditable/demo/demo-mock.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-select2/select2.min.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/jquery-clndr/moment-2.5.1.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-typeahead/bootstrap3-typeahead.min.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/ckeditor/ckeditor.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/ckeditor/adapters/jquery.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/js/pages/advanced-forms.js' ) }}"></script>
+
+    <script>
+    var config = {};
+        $( document ).ready( function()
+        {
+//config.extraAllowedContent = 'span[class] h1 h2 h3';
+            config.allowedContent = true;
+            config.extraPlugins = 'autogrow';
+            config.autoGrow_onStartup = true;
+            config.autoGrow_minHeight = 75;
+            config.toolbarCanCollapse = true;
+            config.toolbar = [
+                [ 'Source', '-', 'Link','Unlink', 'Anchor', '-','JustifyLeft', 'JustifyCenter', 'JustifyRight', '-', 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat','Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ]
+            ];            
+            $( '.editor-basic' ).ckeditor(config);
+        });
+    </script>    
+{% endblock %}

@@ -1,0 +1,62 @@
+  <div class="navbar navbar-inverse navbar-fixed-top navbar-hidden tall-menu" role="navigation">
+    <a class="navbar-brand" href="/{{ app.request.get( '_locale' ) }}"><img src="{{ asset( assets_path ~ 'img/logo-menu.png' ) }}"></a>
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="btn-wrapper">
+            <li>
+              <a href="#message-forms" class="yellow-bg pencil">{{ 'header.menu.submission' | trans | raw }}</a>
+            </li>
+            <li>
+              <a href="#message-forms" class="yellow-bg phone">{{ 'header.menu.callus' | trans }}</a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav">
+            <li{{ page=='services' ? ' class="active"' : '' }}>
+              <a href="{{ path( 'header.menu.services_link' | trans ) }}">{{ 'header.menu.services' | trans }}</a>
+            </li>
+            <li{{ page=='cuisine' ? ' class="active"' : '' }}>
+              <a href="{{ path( 'header.menu.kitchen_link' | trans ) }}">{{ 'header.menu.kitchen' | trans }}</a>
+            </li>
+            <li{{ page=='salledebain' ? ' class="active"' : '' }}>
+              <a href="{{ path( 'header.menu.bathroom_link' | trans ) }}">{{ 'header.menu.bathroom' | trans }}</a>
+            </li>
+            <li{{ page=='realisations' ? ' class="active"' : '' }}>
+              <a href="{{ path( 'header.menu.realisations_link' | trans ) }}">{{ 'header.menu.realisations' | trans }}</a>
+            </li>
+            <li{{ page=='entreprise' ? ' class="active"' : '' }}>
+              <a href="{{ path( 'header.menu.company_link' | trans ) }}">{{ 'header.menu.company' | trans }}</a>
+            </li>
+            {% if is_mobile is sameas( true ) %}            
+            <li>
+              <a href="#" class="promos-ribbon-btn">Promotion</a>
+            </li>            
+            {% endif %}
+
+             <!-- blog -->
+	         <li{{ page=='blog' or page=='blog_article' ? ' class="active"' : '' }}>
+              <a href="{{ path( 'header.menu.blog_link' | trans ) }}">{{ 'header.menu.blog' | trans }}</a>
+            </li>
+             <!-- blog -->           
+            
+            <li{{ page=='contact' ? ' class="active"' : '' }}>
+              <a href="{{ path( 'header.menu.contact_link' | trans ) }}">{{ 'header.menu.contact' | trans }}</a>
+            </li>
+          </ul>
+        </div><!--/.navbar-collapse -->
+      </div>
+      <div class="icon-wrapper">
+        <div class="icon-button quote-btn"><a href="#message-forms"  data-toggle="tooltip" data-placement="bottom" title="{{ 'header.menu.submission_icon' | trans }}">{{ 'header.menu.submission_icon' | trans }}</a></div>
+        <div class="icon-button contact-btn"><a href="#message-forms"  data-toggle="tooltip" data-placement="bottom" title="{{ 'header.menu.callus_icon' | trans }}">{{ 'header.menu.callus_icon' | trans }}</a></div>
+        <div class="icon-button facebook-btn"><a href="{{ 'header.menu.facebook_link' | trans }}"  data-toggle="tooltip" data-placement="bottom" title="{{ 'header.menu.facebook' | trans }}" target="_blank">{{ 'header.menu.facebook' | trans }}</a></div>
+      </div>
+      <div class="toggle-lang"><a href="{{ path(reverseRoute, {"_locale": reverseLocale}) }}">{{ reverseLocale=='en'?'en':'fr'}}</a></div>
+    </div> <!-- fin de menu principal -->

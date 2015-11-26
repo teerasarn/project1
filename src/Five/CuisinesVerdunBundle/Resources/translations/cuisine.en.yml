@@ -1,0 +1,97 @@
+page_title: Kitchen renovation and installation
+keywords: kitchen renovation and installation
+description: Discover all our kitchens in one of our eight Cuisines Verdun stores
+h1: Kitchen<br> renovation <br>and installation
+
+body_class: cuisine
+
+header_section:
+  title: An exceptional choice
+  subtitle: Renovating your kitchen, what a great project!
+  text: Materials, colours, textures, appliances, finishing and decorative touches are what give its character to this room which is the centrepiece of your home. Since technologies and styles evolve rapidly, our experts are here to help you make the best decisions, according to your tastes, your requirements, and your budget. You can quickly see the breadth of our products in our showroom; ask for a consultation and discover the latest innovations!
+  title_2: Quality
+  subtitle_2: No compromises on quality
+  text_2: "Well-known and well-established, Cuisines Verdun's reputation is built upon three elements: expertise, choice, quality, to which we add exceptional service and unbeatable prices. Live the Cuisines Verdun experience, ask one of our kitchen designers for advice in store and change your decor in full confidence."
+  
+materials_section:
+  title: Materials
+  subtitle: As many choices as there are projects
+  text: Whether for cupboards, cabinets, or hardware, there exists an unimaginable variety of materials! You will find those that will give your future kitchen the style you are looking for right here. Let our kitchen designers guide your choices. Come see them in our showroom.
+  button: Venez les consulter >
+  1:
+    title: Kitchen Countertops
+    image: img/cuisine-mat-2.jpg
+    big-image: img/gallery-cuisine/gcm-2.jpg
+    text: <h4>Kitchen Countertops</h4><p>Before choosing the right type of surface for your countertop, have a look at the multitude of choices available to you. Quartz, granite, marble, wood, concrete, laminated, Corian®, stainless steel, etc. – each material has its advantages, as well as its disadvantages.  Your kitchen designer has practical advice to help you choose the countertop surface that’s right for you… and your budget.</p>
+  
+  2:
+    title: Cupboards/Cabinets
+    image: img/cuisine-mat-1.jpg
+    big-image: img/gallery-cuisine/gcm-1.jpg
+    text: <h4>Cupboards/Cabinets</h4><p>Wood, European laminate, melamine, MDF, polyester, acrylic, wood veneer, opaque lacquer finishing, etc. - the type of cabinets you choose will set the tone of your kitchen or bathroom. Whether you prefer the earthy character of wood or the contemporary charm of European laminate, you’ll be pleasantly surprised by all the different choices available on the market today. Do you lean towards a more classic look, or are you in love with the latest style trends from Europe? You’ll find all that and more at Cuisines Verdun.</p>
+
+  3:
+    title: Pipework, Fittings & Hardware
+    image: img/cuisine-mat-3.jpg
+    big-image: img/gallery-cuisine/gcm-3.jpg
+    text: "<h4>Pipework & Fittings</h4><p>One aspect of your kitchen that’s impossible to ignore is the pipework and fittings; these are the final touches that make all the difference to your kitchen or bathroom. In today’s world of renovation, modern fittings like integrated retractable shower heads and sensor faucets are gaining in popularity because they make life just a little easier. You’ll be fascinated by how pipework and fittings can turn your kitchen from boring to brilliant!</p><h4>Hardware</h4><p>Small as they can be, handles are nevertheless extremely important. When it comes time to choose which kind of handles to adorn your cabinets with, you’ll find that they exist for every style and budget: round, flat, small, long, made of porcelain or stainless steel - making the right choice can get exhausting pretty quickly. Because it’s the little things such as these that can make such a huge difference in your interior design, don’t hesitate in seeking advice from one of our professionals to find the ones best suited to the style of cabinets you’ve chosen.</p>"
+
+  4:
+    title: Ceramics
+    image: img/cuisine-mat-4.jpg
+    big-image: img/gallery-cuisine/gcm-4.jpg
+    text: <h4>Ceramics</h4><p>Ceramic will always be a popular material both in the bathroom as well as in the kitchen. Whether we’re talking headboards or countertops, we’re talking about a staggering list of styles and colors to choose from. If you think the ceramic look is outdated, think again – it’s been a mainstay for ages precisely because of the many ways it’s been adapted and integrated by the renovation industry.</p>
+        
+  5:
+    title: Sink
+    image: img/cuisine-mat-5.jpg
+    big-image: img/gallery-cuisine/gcm-5.jpg
+    text: <h4>Sink</h4><p>Often mistreated, a kitchen sink must be sturdy, stain and scratch resistant, and made of a material that matches your countertop and faucet. Stainless steel, granite, natural stone, waxed concrete, ceramic and glass (used mostly in bathrooms); you are once again spoilt for choice. Do not hesitate to ask our kitchen designer about the technical characteristics of each material.</p>
+
+  6:
+    title: Storage
+    image: img/cuisine-mat-6.jpg
+    big-image: img/gallery-cuisine/gcm-6.jpg
+    text: <h4>Storage</h4><p>Built-in waste and recycling bins, spice racks, integrated buffers for cabinets, cutlery trays, etc… In the modern world, practical storage is without a doubt one of the most essential elements of a high-functioning kitchen. So why not go the extra mile and upgrade your storage capabilities to make everyday tasks easier? Today, there exists an endless array of storage ideas designed to organize your kitchen more efficiently.</p> 
+      
+styles_section:
+  products_title: Cuisines Verdun offers you a wide selection of products that will suit the style of your new kitchen. From ergonomic cabinet systems to ceramic finishes for floors and walls, to ambient and accent lighting, you will find everything you ever dreamed of—and more—in one of our 8 showrooms.
+  title: Styles
+  subtitle: To each house its kitchen
+  text: Classic, modern, contemporary, or rustic, each kitchen defines its style, which also needs to match your living space. Which will you choose? Let us take on your project, we have all the necessary tradespeople available and at your disposal. Do not hesitate to share your ideas with our kitchen designers, creativity is their speciality. Make an appointment today!
+  gallery:
+    1:
+      text: “Rough Chic” style
+      description: <h4>“Rough Chic” style</h4><p>Combination of rustic and contemporary appearance – contrast of materials/style.<br>Cabinets made of knotted ash & acrylic, slab-type.<br>Natural color variations due to wood.</p>
+      big-image: img/gallery-cuisine/gc-1.jpg
+    2:
+      text: Classic style
+      description: "<h4>Classic style with a rustic touch</h4><p>Quartzite countertops Bianca Vena Verde.<br>Maple cabinets, brushed / wiped lacquer glaze.<br>Ceramic backsplash by Daltile.<br>Franke sink, Farmhouse series.<br>Island range hood.</p>"
+      big-image: img/gallery-cuisine/gc-2.jpg
+    3:
+      text: Contemporary style
+      description: <h4>Contemporary, European-inspired style</h4><p>Polymer cabinets.<br>Warm, modern wood tone.<br>Hidden dishwasher.<br>Contrast color toekick board with non-standard height – the cabinets appear to be floating.<br>Integrated light fixtures under cabinets.</p>
+      big-image: img/gallery-cuisine/gc-5.jpg
+    4:
+      text: Rustic style
+      description: <h4>Rustic style</h4><p>Rustic style with contemporary touch due to sink, faucet and handles.<br>Quartz countertop.</p>
+      big-image: img/gallery-cuisine/gc-7.jpg
+
+ideas_section:
+  title: Clever ideas
+  subtitle: A head full of possibilities
+  text: Are you unsure about a material ? Are you facing a lack of space ? Does your budget require certain compromises ? Our years of experience make us qualified advisers and specialists on custom-made projects. At Cuisines Verdun, there is always a solution.<br />Come see us in store to discuss your project.
+  
+partners_section:
+  image: img/partners-icons.jpg
+  title: Our Suppliers 
+  subtitle: Trusted Partners
+  text: Cuisines Verdun works hand in hand with the best manufacturers and distributors in North America. At Cuisines Verdun, you will find reputable brands that are a testimony to the quality of our products.
+  
+guarantee_section:
+  title: Warranty
+  subtitle: We have been at your service for over 40 years,
+  text: and we would like to thank you once more for your renewed trust. By choosing Cuisines Verdun in making your dream kitchen a reality, you can also count on our unparalleled <em>VERDUN Warranty</em>.
+  details_link_text: All the details
+  details_link: http://www.portesetfenetresverdun.com/en/Warranty/CabinetsAndVanites/
+  

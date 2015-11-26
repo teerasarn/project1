@@ -1,0 +1,85 @@
+page_title: Contactez-nous
+keywords:
+description:
+h1: Communiquez <br>avec nous
+
+showrooms:
+  title: Salles de montre
+
+regions:
+  1: Île de Montréal
+  2: Rive-Sud
+  3: Rive-Nord
+
+branches:
+  3: Montréal
+  4: Montréal (Pointe-aux-Trembles)
+  2: Montréal (NDG)
+  5: Saint-Isidore-de-la-Prairie
+  7: Saint-Basile-le-Grand
+  6: Longueuil
+  1: Terrebonne
+
+additional-text:
+  3: ''
+  4: ''
+  2: ''
+  5: ''
+  7: ''
+  6: ''
+  1: ''
+
+forms:
+  common:
+    dispo: "Disponibilité pour vous rejoindre :"
+    day: Jour
+    evening: Soir
+    weekend: Fin de semaine
+    lastname: Nom
+    firstname: Prénom
+    phone: Téléphone
+    cp: Code postal
+    email: Courriel
+    branch: Trouver votre succursale
+    submit: Soumettre
+    error: <strong>Attention !<br>SVP, vérifiez les champs en rouge.
+  1:
+    formtype: Demande de soumission
+    title: Envoyez-nous un message
+    textarea: Écrivez votre message ici
+    message: <strong>Merci !</strong> Votre message à été envoyé.
+  2:
+    formtype: Appelez-moi
+    title: Appelez-moi
+    subtitle: Laissez un des membre de notre équipe communiquer avec vous afin de prendre de l'information sur le projet de vos rêves!
+    whowecall: Qui appelons-nous?
+    name: Nom
+    whatproject: De quel projet souhaitez vous discuter?
+    callnotice: Nous communiquerons avec vous dans les prochaines 48 heures ouvrables.
+    textarea: Décrivez-nous votre projet de rêve
+    message: <strong>Merci !</strong> Votre demande de une soumission à été reçue.<br> Bientôt nous allons vous contacter.
+    product_types:
+      1: Armoires de cuisine
+      2: Surface de comptoir
+      3: Dosseret
+      4: Plancher
+      5: Installation
+      6: Rénovation clé en main
+  3:
+    formtype: Guide de planification
+    title: Guide de planification
+    textarea: Décrivez-nous votre projet de rêve
+    linktitle: PDF pour téléchargement et impression
+    pdf: PFV_guide-planification_corr_final.pdf
+    phrase: Préparez-vous à votre rencontre avec un designer-cuisiniste de Cuisines Verdun en remplissant le guide de planification disponible ici.
+    message: <strong>Merci !</strong> Votre demande de une soumission à été reçue.<br> Bientôt nous allons vous contacter.
+    product_types:
+      1: Vanité
+      2: Douche
+      3: Toilette
+      4: Céramique au mur
+      5: Céramique au plancher
+      6: Robinetterie et lavabo
+      7: Installation
+      8: Rénovation clé en main
+

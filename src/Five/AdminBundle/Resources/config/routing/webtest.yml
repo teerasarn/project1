@@ -1,0 +1,11 @@
+five_admin_webtest_list:
+    path:     /
+    defaults: { _controller: FiveAdminBundle:WebTest:list, options: 'five_admin.crud.webtest_list' }
+
+five_admin_webtest_edit:
+    path:     /{id}/edit
+    defaults: { _controller: FiveAdminBundle:WebTest:edit, options: 'five_admin.crud.webtest_edit' }
+
+five_admin_webtest_create:
+    path:     /create
+    defaults: { _controller: FiveAdminBundle:WebTest:create, options: 'five_admin.crud.webtest_create' }

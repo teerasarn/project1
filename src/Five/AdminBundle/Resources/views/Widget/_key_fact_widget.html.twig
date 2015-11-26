@@ -1,0 +1,84 @@
+{% extends 'form_div_layout.html.twig' %}
+{% block key_fact_row -%}
+<div class="collection-row">
+    <div class="row clearfix">
+        <div class="col-md-6">          
+            <div class="form-group">
+{#                 {% for key,val in form.vars.block_prefixes %}
+                {{ key }} -> {{ val }}<br/>
+                {% endfor %} #}
+                {{ form_label( form.key ) }}
+                {{ form_widget( form.key, { attr: { class : 'form-control' } } ) }}
+            </div>
+        </div>
+        <div class="col-md-6">             
+            <div class="form-group" >
+                {{ form_label( form.value ) }}
+                {{ form_widget( form.value, { attr: { class : 'form-control' } } ) }}
+            </div>            
+        </div>
+        {{- form_errors(form) -}}        
+        
+
+
+    </div>        
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-danger btn-sm" onclick="$( this ).parents( '.collection-row:first' ).remove()">
+                <i class="fa fa-trash-o"></i>
+                Delete Row
+            </button>
+        </div>
+    </div>    
+    <div class="row">
+        <div class="col-md-12">
+            <div class=" divider"></div>
+        </div>
+    </div>
+ </div>       
+            
+{#         {% set currentAttr = form.attr|default({}) %}
+        {% if form.attr[data-last-row %<div style="border-bottom:1px solid #cccccc;height:0;line-height:1px;padding:15px 0;"></div> #}
+    {# </div> #}
+    
+{#     {% if form.options is defined %}
+        {{ form.options.loopCnt }}
+    {% endif %} #}
+
+{%- endblock key_fact_row %}
+
+{% block key_fact_widget_simple -%}
+
+    {% set type = type|default('text') -%}
+
+    <input type="{{ type }}" {{ block( 'widget_attributes' ) }} {% if value is not empty %}value="{{ value }}"{% endif %} />
+
+{%- endblock key_fact_widget_simple %}
+
+{% block key_fact_widget_compound %}
+
+    {% set attr = form.attr|default( { attr : { class : 'keysFact_collection' } } ) %}
+    {% set attr = attr|merge( { attr : { class : 'keysFact_collection' } } ) %}
+    
+    <div class="{{ attr.class }} clearfix" {{ block('widget_container_attributes') }}>
+
+        {%- if form.parent is empty -%}
+            {{ form_errors(form) }}
+        {%- endif -%}
+
+        {{- block('form_rows') -}}
+        {{- form_rest(form) -}}
+    </div>
+
+{% endblock %}
+
+{% block key_fact_rows -%}
+<div class="row">
+    <p>Country key facts</p>
+</div>
+<div class="row">    
+    {% for child in form %}
+        {{- form_row(child) -}}
+    {% endfor %}
+</div>
+{%- endblock key_fact_rows %}

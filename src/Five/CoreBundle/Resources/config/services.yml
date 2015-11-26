@@ -1,0 +1,7 @@
+parameters:
+#    five_core.example.class: Five\CoreBundle\Example
+
+services:
+#    five_core.example:
+#        class: %five_core.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

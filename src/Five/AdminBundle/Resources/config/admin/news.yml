@@ -1,0 +1,53 @@
+parameters:
+    five_admin.crud.branch_edit:
+        page:
+            title: "Edit Branch ID#"
+        entity: 'Five\CuisinesVerdunBundle\Entity\Branch'
+        template: 'FiveAdminBundle:Action:edit.html.twig'
+        form: 'five.form.branch'
+        form_action:
+            path: 'five_admin_branch_edit'
+            parameters: { 'id': null }
+        success_action:
+            path: 'five_admin_branch_list'
+            parameters: {}
+
+    five_admin.crud.branch_list:
+        page:
+            title: "All Branches"
+        entities: 'Five\CuisinesVerdunBundle\Entity\Branch'
+        template: 'FiveAdminBundle:Action:list.html.twig'
+        edit_action:
+            path: 'five_admin_branch_edit'
+            parameters: { 'id': null }
+        create_action:
+            path: 'five_admin_branch_create'
+            parameters: {}
+        delete_action:
+            path: 'five_admin_branch_delete'
+            parameters: { 'id': null }
+        expose:
+            - { label: 'ID', call: 'id' }
+            - { label: 'Name', call: 'name' }
+            - { label: 'Email', call: 'contactEmail' }
+            - { label: 'Address', call: 'streetEn' }
+            - { label: 'City/Prov.', call: 'cityEn' }
+            - { label: 'Phone', call: 'phone' }
+            - { label: 'Fax', call: 'fax' }
+            # - { label: 'Slug', call: 'slug' }
+            # - { label: 'Published At', call: 'publishedAt', type: 'date', format: 'Y-m-d' }
+            - { label: 'Edit', action: 'edit_action' }
+            - { label: 'Delete', action: 'delete_action' }
+
+    five_admin.crud.branch_create:
+        page:
+            title: "Create a Branch"
+        entity: 'Five\CuisinesVerdunBundle\Entity\Branch'
+        template: 'FiveAdminBundle:Action:edit.html.twig'
+        form: 'five.form.branch'
+        form_action:
+            path: 'five_admin_branch_create'
+            parameters: {}
+        success_action:
+            path: 'five_admin_branch_list'
+            parameters: {}

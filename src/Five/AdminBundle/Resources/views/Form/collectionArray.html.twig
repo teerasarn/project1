@@ -1,0 +1,56 @@
+{% extends 'FiveAdminBundle:Helpers:five-box.html.twig' %}
+
+{# {% form_theme form _self %}
+
+{% block form_row %}
+{% spaceless %}
+    {% set type = type|default('text') %}
+
+    {% if type == 'hidden' %}
+ 
+        {{ block( 'hidden_widget' ) }}
+    {% else %}
+
+        <div class="form-group col-md-6">
+            
+            {{ form_label( form ) }}
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="fa fa-list-ol"></i>
+                </div>
+                {{ form_widget(form, { attr : { class : 'form-control'  } }) }}
+                <div>{{ form_errors(form) }}</div>
+            </div><!-- /.input group -->
+        </div>
+    {% endif %}
+{% endspaceless %}
+{% endblock form_row %} #}
+
+{% block boxBody %}
+
+    <div class="{{ class }}" id="{{ id is defined ? id : '' }}" data-prototype="{{ form_widget( boxPrototype )| e }}">
+        {# {{ form.procedures | length }} #}
+        {% block boxForm %}
+        {% endblock %}
+        {{form_widget(entities)}}
+        {% for entity in entities %}
+            {# {{ form_row( entity ) }} #}
+            {# {{ form_widget( procedure.procedure ) }} #}
+{#                     <div class="form-group">
+
+                        {{ form_label( procedure ) }}
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            {{ form_widget(procedure, { attr : { class : 'form-control'  } }) }}                            
+                        </div><!-- /.input group -->
+                    </div>        
+                    <div class="{{ colClass }}">
+                        <div class="input-group">
+                            {{ form_row(procedure) }}
+                        </div>
+                    </div> #}
+        {% endfor %}            
+    </div>      
+{% endblock %}

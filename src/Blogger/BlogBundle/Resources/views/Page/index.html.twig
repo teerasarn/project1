@@ -1,0 +1,95 @@
+{# src/Blogger/BlogBundle/Resources/views/Page/index.html.twig #}
+
+{% block body %}
+
+    <section id="blog-intro" class="inner-shadow" >
+      <div class="container">
+          <div class="float-block">
+            <h2>{{ 'blog.blog_title' | trans({}, 'blog') | raw }}</h2>
+          </div>
+      </div>
+    </section>
+   
+   <section class="blog-view"> 
+    <div class="nav_bar"></div>
+{% set current_row = 0 %}
+{% set current_col = 0 %}
+
+    <div class="container">
+        <ul class="blog-list" id="blog-list">
+            {% for blog in blogs %}
+            <li> 
+              {% if blog.isImageExist(blog.image) == true %}   
+                <div class="blog-item">
+                    <div class="blog-image">
+                        <a href="{{ path( 'header.menu.blog_article_link' | trans  ,  { 'permalink': blog.getPermaLink() } ) }}">
+                            <img src="{{ asset([ blog.getImageURL(blog.image)]|join) }}" alt="" />
+                            <div class="overlay">
+                                <span>{{ blog.title(50) }}</span>
+                            </div>
+                        </a>
+                      
+                    </div>                                        
+                    <a href="{{ path( 'header.menu.blog_article_link' | trans  , { 'permalink': blog.getPermaLink()  } ) }}">    {{ blog.title(50) }}</a>
+                   
+                    <p>{{ blog.introText(50) }}</p>
+                    <a href="{{ path( 'header.menu.blog_article_link' | trans  ,  { 'permalink': blog.getPermaLink()  } ) }}" class="readmore_btn">{{ 'blog.blog_readmore' | trans({}, 'blog') }}</a>
+                    {#<span class="datetime"><time datetime="{{ blog.created|date('c') }}">{{ blog.created|date('F j, Y') }}</time></span>#}
+                    <span class="datetime"><time datetime="{{ blog.created|date('c') }}"> {{ blog.getDateLocale(blog.created,  app.request.locale  , '%B %e, %Y' ) }}</time></span>
+                  </div>
+              {% else %} 
+                   <div class="blog-item no-prev">
+                    <div class="blog-image">
+                        <a href="{{ path( 'header.menu.blog_article_link' | trans  ,  { 'permalink': blog.getPermaLink() } ) }}">
+                            <!--<img src="{{ asset([ blog.getImageURL(blog.image)]|join) }}" alt="" />-->
+                            <div class="overlay">
+                                <span>{{ blog.title(50) }}</span>
+                            </div>
+                        </a>
+                      
+                    </div>                                        
+                    <a href="{{ path( 'header.menu.blog_article_link' | trans  , { 'permalink': blog.getPermaLink()  } ) }}">    {{ blog.title(50) }}</a>
+                   
+                    <p>{{ blog.introText(50) }}</p>
+                    <a href="{{ path( 'header.menu.blog_article_link' | trans  ,  { 'permalink': blog.getPermaLink()  } ) }}" class="readmore_btn">{{ 'blog.blog_readmore' | trans({}, 'blog') }}</a>
+                   {# <span class="datetime"><time datetime="{{ blog.created|date('c') }}">{{ blog.created|date('F j, Y') }}</time></span>#}
+                   <span class="datetime"><time datetime="{{ blog.created|date('c') }}"> {{ blog.getDateLocale(blog.created,  app.request.locale  , '%B %e, %Y' ) }}</time></span>
+                   
+                  </div> 
+                    
+              {% endif %}      
+                
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="pagination">
+            
+            <!-- <a href="{{ path( 'header.menu.blog_link' | trans , { 'blog_page': 1 }  ) }}">  </a>   -->
+             
+            {% if 1 != blog_page %}
+                <a href="{{ path( 'header.menu.blog_link' | trans , { 'blog_page': 1 , 'blog_tag' : blog_tag }  ) }}"> < </a>  	
+            {% endif %}
+            
+            {% set blog_page_count = 1 %}
+            {% for blog_page_count in 1..total_page %}
+               {% if blog_page_count == blog_page %}
+                  <a href="{{ path( 'header.menu.blog_link' | trans , { 'blog_page': blog_page_count , 'blog_tag' : blog_tag }  ) }}" class="active" > {{blog_page_count }} </a>  
+               {% else %}
+                  <a href="{{ path( 'header.menu.blog_link' | trans , { 'blog_page': blog_page_count , 'blog_tag' : blog_tag }  ) }}"> {{blog_page_count }} </a>  
+               {% endif %} 
+            {% endfor %}	 		
+            
+            {% if total_page != blog_page %}
+            <a href="{{ path( 'header.menu.blog_link' | trans , { 'blog_page': total_page , 'blog_tag' : blog_tag }  ) }}">  > </a>  	
+            {% endif %}
+            <div class="social_icon">   
+                <a href="https://www.facebook.com/" target="_blank" class="fb"></a>         
+                <a href="https://plus.google.com" target="_blank" class="gplus"></a>                       
+            </div>        
+        </div>
+    </div>
+		 
+    
+</section>
+    
+{% endblock %}

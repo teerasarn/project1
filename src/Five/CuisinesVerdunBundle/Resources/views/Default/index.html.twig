@@ -1,0 +1,154 @@
+{% extends 'FiveCuisinesVerdunBundle::base.html.twig' %}
+
+{% block bodyTag %}
+
+  <body class="home {{ app.request.get( '_locale' ) }}{% if is_mobile()  %} mobile{% endif %}">
+
+{% endblock %}
+
+{% block content %}
+    <section id="home-intro">
+      <img src="{{ asset( assets_path ~ 'img/home_backup_video.png' ) }}" class="video-placeholder">
+      {% if is_mobile() == false %}
+      <video autoplay loop preload="auto" poster="{{ asset( assets_path ~ 'img/home_backup_video.png' ) }}">
+       <source src="{{ asset( assets_path ~ 'assets/cuisineverdun-intro.mp4' ) }}" type='video/mp4' />
+       <source src="{{ asset( assets_path ~ 'assets/cuisineverdun-intro.ogv' ) }}" type='video/ogv' />
+       <source src="{{ asset( assets_path ~ 'assets/cuisineverdun-intro.webm' ) }}" type='video/webm' />
+      </video>
+      {% endif %}
+      <div class="home-logo"><a href="/{{ app.request.get( '_locale' ) }}"><img src="{{ asset( assets_path ~ 'img/logo.png' ) }}" alt=""/></a></div>
+      <div class="container">
+        <h2 data-ux="fade-down" class="dummy-class">{{ 'intro.title' | trans({}, 'home') | raw }}</h2>
+        <h1 data-ux="fade-down-2">{{ 'intro.subtitle' | trans({}, 'home') }}</h1>
+        <ul class="menu-video hidden-xs" data-ux="fade-down-2">
+          <li><a href="{{ path( 'header.menu.services_link' | trans ) }}">{{ 'header.menu.services' | trans }}</a>
+          </li><li><a href="{{ path( 'header.menu.kitchen_link' | trans ) }}">{{ 'header.menu.kitchen' | trans }}</a>
+          </li><li><a href="{{ path( 'header.menu.bathroom_link' | trans ) }}">{{ 'header.menu.bathroom' | trans }}</a>
+          </li><li><a href="{{ path( 'header.menu.realisations_link' | trans ) }}">{{ 'header.menu.realisations' | trans }}</a>
+          </li><li><a href="{{ path( 'header.menu.company_link' | trans ) }}">{{ 'header.menu.company' | trans }}</a>
+          </li><li><a href="{{ path( 'header.menu.contact_link' | trans ) }}">{{ 'header.menu.contact' | trans }}</a></li>
+<!-- blog -->			 
+			 </li><li><a href="{{ path( 'header.menu.blog_link' | trans ) }}">{{ 'header.menu.blog' | trans }}</a></li>        
+<!-- blog -->			 
+        </ul>
+      </div>
+      <div class="scroll-down">
+        <a href="#"><div class="img-placeholder"></div><span>{{ 'intro.scroll_down' | trans({}, 'home') }}</span></a>
+      </div>
+      <div class="toggle-lang"><a href="{{ path(reverseRoute, {"_locale": reverseLocale}) }}">{{ reverseLocale=='en'?'en':'fr'}}</a></div>
+    </section> <!-- fin section intro (video) -->
+
+    <section id="home-entreprise" class="first-section block">
+      <div class="container">
+        <h2>{{ 'company.title' | trans({}, 'home') | raw }}</h2>
+        <p class="sous-titre">{{ 'company.subtitle' | trans({}, 'home') | raw }}</p>
+        <div class="row">
+          <div class="col-md-12 entreprise-stats">
+            <img class="stat-1" src="{{ asset( assets_path ~ 'img/experience-' ~ app.request.get( '_locale' ) ~ '.png' ) }}" title="{{ 'company.stats1' | trans({}, 'home') | raw }}" />
+            <img class="stat-2" src="{{ asset( assets_path ~ 'img/projects-' ~ app.request.get( '_locale' ) ~ '.png' ) }}" title="{{ 'company.stats2' | trans({}, 'home') | raw }}" />
+            <img class="stat-3" src="{{ asset( assets_path ~ 'img/succursales-' ~ app.request.get( '_locale' ) ~ '.png' ) }}" title="{{ 'company.stats3' | trans({}, 'home') | raw }}" />
+          </div>
+        </div>
+        <p class="more-link-wrapper"><a href="{{ path( 'header.menu.company_link' | trans ) }}" class="more-link">{{ 'general.know_more' | trans }}</a></p>
+        
+      </div>
+    </section> <!-- fin de section de l'entreprise -->
+
+    <section id="home-services" class="block">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-12 col-md-offset-0">
+            <ul class="services-menu">
+              <li>
+                <a href="{{ path( 'header.menu.services_link' | trans ) }}#{{ 'services.anchor1' | trans({}, 'home') }}" class="idea">
+                  <div class="img-placeholder"></div><span>{{ 'services.button1' | trans({}, 'home') }}</span>
+                </a>
+              </li><li>
+                <a href="{{ path( 'header.menu.services_link' | trans ) }}#{{ 'services.anchor2' | trans({}, 'home') }}" class="concept">
+                  <div class="img-placeholder"></div><span>{{ 'services.button2' | trans({}, 'home') }}</span>
+                </a>
+              </li><li>
+                <a href="{{ path( 'header.menu.services_link' | trans ) }}#{{ 'services.anchor3' | trans({}, 'home') }}" class="product">
+                  <div class="img-placeholder"></div><span>{{ 'services.button3' | trans({}, 'home') }}</span>
+                </a>
+              </li><li>
+                <a href="{{ path( 'header.menu.services_link' | trans ) }}#{{ 'services.anchor4' | trans({}, 'home') }}" class="renovation">
+                  <div class="img-placeholder"></div><span>{{ 'services.button4' | trans({}, 'home') }}</span>
+                </a>
+              </li><li>
+                <a href="{{ path( 'header.menu.services_link' | trans ) }}#{{ 'services.anchor5' | trans({}, 'home') }}" class="install">
+                  <div class="img-placeholder"></div><span>{{ 'services.button5' | trans({}, 'home') }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-12 col-md-offset-0">
+            <h2>{{ 'services.title' | trans({}, 'home') | raw }}</h2>
+            <p>{{ 'services.text' | trans({}, 'home') | raw }}</p>
+            <p><a href="{{ path( 'header.menu.services_link' | trans ) }}" class="more-link">{{ 'services.more_button' | trans({}, 'home') | raw }}</a></p>
+          </div>
+        </div>
+      </div>
+    </section> <!-- fin de section des services -->
+
+    <section id="home-products" class="block">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h3>{{ 'products.title' | trans({}, 'home') | raw }}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="full-width">
+        <div class="col-md-6 products prod-cuisine">
+          <div class="product-wrapper">
+            <img class="products-cuisine inner-shadow" src="{{ asset( assets_path ~ 'img/prod-cuisine.jpg' ) }}"/>
+            <div class="gallery-link"></div>
+            <div class="prod-text-wrapper">
+              <h4>{{ 'header.menu.kitchen' | trans }}</h4>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 products prod-bain">
+          <div class="product-wrapper">
+            <img class="products-bain inner-shadow" src="{{ asset( assets_path ~ 'img/prod-bain.jpg' ) }}"/>
+            <div class="gallery-link">
+
+            </div>
+            <div class="prod-text-wrapper">
+              <h4>{{ 'header.menu.bathroom' | trans }}</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> <!-- fin de la section cuisine/salle de bain -->
+    {#
+    <section id="home-garantie" class="block">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-7">
+            <div class="bottomed-lined">
+              <h4>{{ 'warranty.title_warranty' | trans({}, 'home') | raw }}</h4>
+              <p>{{ 'warranty.text_warranty' | trans({}, 'home') | raw }}</p>
+              <p><a target="_blank" href="{{ 'warranty.link_warranty' | trans({}, 'home') | raw }}" class="more-link-gray">{{ 'warranty.more_link_text' | trans({}, 'home') | raw }}</a></p>
+            </div>
+            <div class="bottomed-lined">
+              <h4>{{ 'warranty.title_financing' | trans({}, 'home') | raw }}</h4>
+              <ul class="green-bulleted">
+                <li>{{ 'warranty.text_1' | trans({}, 'home') | raw }}</li>
+                <li>{{ 'warranty.text_2' | trans({}, 'home') | raw }}</li>
+                <li>{{ 'warranty.text_3' | trans({}, 'home') | raw }}</li>
+              </ul>
+              <p><a href="#" class="more-link-gray">{{ 'warranty.more_link_text' | trans({}, 'home') | raw }}</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> <!-- fin de la section garantie / financement -->
+    #}
+{% endblock %}
+
+
+

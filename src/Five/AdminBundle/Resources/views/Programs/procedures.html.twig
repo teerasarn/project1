@@ -1,0 +1,79 @@
+{% extends 'FiveAdminBundle:Form:collectionArray.html.twig' %}
+
+{% form_theme form.procedures _self %}
+
+{% block form_row %}
+{% spaceless %}
+    
+    {% set type = type|default('text') %}
+        {% if name == 'procedure' %}
+        <div class="form-group col-md-{{ name == 'procedure' ? '8' : '4' }}">
+            {{ form_label( form ) }}
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="fa  fa-text-width"></i>
+                </div>
+                {{ form_widget(form, { attr : { class : 'form-control'  } }) }}
+                <div>{{ form_errors(form) }}</div>
+            </div><!-- /.input group -->
+        </div>
+        <div class="form-group col-md-12">
+            delete
+        </div>
+        <div class="form-group col-md-12" style="border-bottom:1px solid #eee;margin-top:15px;clear:both;"></div>
+        {% elseif name == 'procedure' %}
+        <div class="form-group col-md-{{ name == 'procedure' ? '8' : '4' }}">
+            {{ form_label( form ) }}
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="fa fa-list-ol"></i>
+                </div>
+                {{ form_widget(form, { attr : { class : 'form-control'  } }) }}
+                <div>{{ form_errors(form) }}</div>
+            </div><!-- /.input group -->
+        </div>
+{#         {% elseif name == 'description' %}
+        <div class="form-group col-md-{{ name == 'description' ? '8' : '4' }}">
+            {{ form_label( form ) }}
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="fa  fa-text-width"></i>
+                </div>
+                {{ form_widget(form, { attr : { class : 'form-control'  } }) }}
+                <div>{{ form_errors(form) }}</div>
+            </div><!-- /.input group -->
+        </div>
+        <div class="form-group col-md-12">
+            delete
+        </div> #}
+        
+        {% elseif name == 'cost' or name == 'description' %}
+
+        <div class="form-group col-md-{{ name == 'cost' ? '8' : '4' }}">
+            {{ form_label( form.cost ) }}
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="fa fa-list-ol"></i>
+                </div>
+                {{ form_widget(form.cost, { attr : { class : 'form-control'  } }) }}
+                <div>{{ form_errors(form.cost) }}</div>
+            </div><!-- /.input group -->
+        </div>
+        <div class="form-group col-md-{{ name == 'description' ? '8' : '4' }}">
+            {{ form_label( form.description ) }}
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="fa  fa-text-width"></i>
+                </div>
+                {{ form_widget(form.description, { attr : { class : 'form-control'  } }) }}
+                <div>{{ form_errors(form.description) }}</div>
+            </div><!-- /.input group -->
+        </div>
+        <div class="form-group col-md-12">
+            delete
+        </div>        
+        <div class="form-group col-md-12" style="border-bottom:1px solid #eee;margin-top:15px;clear:both;"></div>
+        {% endif %}
+{% endspaceless %}
+{% endblock form_row %}
+

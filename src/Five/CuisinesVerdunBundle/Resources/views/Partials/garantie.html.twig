@@ -1,0 +1,30 @@
+<section id="garantie-section">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-4 garantie">
+        <div class="garantie-wrapper inner-shadow">
+          <img class="bg-garantie" src="{{ asset( assets_path ~ 'img/garantie-' ~ currentLocale ~ '.jpg' ) }}">
+          <div class="garantie-over">
+            <img src="{{ asset( assets_path ~ 'img/garantie_over_' ~ currentLocale ~ '.jpg' ) }}">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 logirenov">
+        <div class="garantie-wrapper inner-shadow">
+          <img class="bg-garantie" src="{{ asset( assets_path ~ 'img/logirenov.jpg' ) }}">
+{#           
+          <div class="logirenov-over">
+            <img src="{{ asset( assets_path ~ 'img/logirenov_over_' ~ currentLocale ~ '.jpg' ) }}">
+            <a target="_blank" href="{{ 'logirenov.link-url' | trans({}) | raw }}"></a>
+          </div>
+ #}
+        </div>
+      </div>
+      <div class="col-sm-4 financing">
+        <div class="garantie-wrapper inner-shadow">
+          <img class="bg-garantie" src="{{ asset( assets_path ~ 'img/financing-' ~ currentLocale ~ '.jpg' ) }}">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

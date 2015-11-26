@@ -1,0 +1,16 @@
+{#{% extends 'FiveCuisinesVerdunBundle::base.html.twig' %}
+
+{% block bodyTag %}
+
+  <body class="blog_detail {{ app.request.get( '_locale' ) }}{% if is_mobile()  %} mobile{% endif %}">
+
+{% endblock %}
+
+{% block content %}
+
+
+    {{ render(controller('BloggerBlogBundle:Blog:show', {'blog_id': blog_id} )) }}    
+    {{ render(controller('BloggerBlogBundle:Page:latest', { 'limit' : 4 } )) }} 
+
+	
+{% endblock %}#}

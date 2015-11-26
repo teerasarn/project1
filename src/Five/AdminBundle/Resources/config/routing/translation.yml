@@ -1,0 +1,27 @@
+five_admin_translation_list:
+    path:     /
+    defaults: { _controller: FiveAdminBundle:Crud:render, options: 'five_admin.crud.trans_list' }
+
+five_admin_translation_edit:
+    path:     /{id}/edit
+    defaults: { _controller: FiveAdminBundle:Crud:edit, options: 'five_admin.crud.trans_edit' }
+    requirements:
+        id: "[0-9]+"
+
+five_admin_translation_delete:
+    path:     /{id}/delete
+    defaults: { _controller: FiveAdminBundle:Crud:delete, options: 'five_admin.crud.trans_delete' }
+    requirements:
+        id: "[0-9]+"
+
+five_admin_translation_create:
+    path:     /create
+    defaults: { _controller: FiveAdminBundle:Crud:create, options: 'five_admin.crud.trans_create' }
+
+five_admin_translation_domain_list:
+    path:     /domain/{domain}
+    defaults: { _controller: FiveAdminBundle:Translation:domainList, options: 'five_admin.crud.trans_domain_list' }
+
+five_admin_translation_domain_edit:
+    path:     /domain/{domain}/edit
+    defaults: { _controller: FiveAdminBundle:Translation:domainEdit, options: 'five_admin.crud.trans_domain_edit' }

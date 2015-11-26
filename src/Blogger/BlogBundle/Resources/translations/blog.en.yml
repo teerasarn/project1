@@ -1,0 +1,9 @@
+blog:
+  blog_title: BLOG
+  blog_recent : Recent Articles
+  blog_share : Share
+  blog_write_by: Written by
+  blog_article:
+    latest_blog: Recent Articles
+  blog_readmore: Read More..
+page_title: Blog

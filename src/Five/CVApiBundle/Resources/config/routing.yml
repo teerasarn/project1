@@ -1,0 +1,15 @@
+message_submit:
+    pattern:  /message_submit
+    defaults: { _controller: FiveCVApiBundle:Message:message }
+
+appeler_submit:
+    pattern:  /appeler_submit
+    defaults: { _controller: FiveCVApiBundle:Message:appeler }
+
+fetch_branch:
+    pattern:  /fetch_branch/{pc}
+    defaults: { _controller: FiveCVApiBundle:Message:branch }
+
+gallery_realisations:
+    pattern:  /gallery/realisations
+    defaults: { _controller: FiveCVApiBundle:Realisation:gallery }

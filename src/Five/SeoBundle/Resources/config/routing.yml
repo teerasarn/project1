@@ -1,0 +1,7 @@
+five_seo_seo:
+    resource: "@FiveSeoBundle/Resources/config/routing/seo.yml"
+    prefix:   /admin/seo
+
+five_seo_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: FiveSeoBundle:Default:index }

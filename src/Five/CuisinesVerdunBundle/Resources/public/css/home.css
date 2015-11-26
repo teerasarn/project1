@@ -1,0 +1,450 @@
+/* 
+    Created on : 15-May-2014, 11:49:04 AM
+    Author     : enrique
+*/
+/*
+font-family:'Proxima N W01 Reg';
+font-family:'Proxima N W01 Bold';
+font-family:'Proxima N W01 Light';
+font-family:'Proxima N W01 Reg It';
+font-family:'Proxima N W01 Bold It';
+*/
+.home {
+  display: none; }
+  .home h1, .home h2, .home h3, .home h4, .home h5, .home p {
+    text-align: center; }
+  .home .navbar-fixed-top {
+    height: 60px;
+    margin-top: -60px;
+    z-index: -1;
+    overflow: hidden; }
+    .home .navbar-fixed-top .navbar-brand {
+      height: 60px; }
+      .home .navbar-fixed-top .navbar-brand img {
+        height: 60px; }
+    .home .navbar-fixed-top.navbar-visible {
+      margin-top: 0;
+      z-index: 10;
+      overflow: visible; }
+
+#home-intro {
+  position: relative;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%; }
+  #home-intro .container {
+    position: relative;
+    height: 100%;
+    min-width: 100%; }
+  #home-intro .video-placeholder {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1000;
+    overflow: hidden;
+    display: none; }
+  #home-intro video {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1000;
+    overflow: hidden; }
+  #home-intro .home-logo {
+    position: absolute;
+    top: 0;
+    left: 0; }
+    #home-intro .home-logo a {
+      display: block;
+      width: 100%;
+      height: 100%; }
+  #home-intro h2 {
+    font-family: "Proxima N W01 Thin Reg";
+    font-size: 66px;
+    text-transform: uppercase;
+    margin: 10% 0 0;
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -webkit-transition-property: opacity, margin-top;
+    transition-property: opacity, margin-top;
+    -webkit-transition-duration: 1000ms, 1000ms;
+    transition-duration: 1000ms, 1000ms;
+    -webkit-transition-delay: 0ms 0ms;
+    transition-delay: 0ms 0ms; }
+    #home-intro h2.ready {
+      opacity: 1;
+      filter: alpha(opacity=100);
+      margin-top: 20%; }
+  #home-intro h1 {
+    font-family: 'Times New Roman';
+    font-size: 30px;
+    margin: -10px 0 0;
+    width: 100%;
+    text-align: center;
+    font-style: italic;
+    font-weight: normal;
+    color: #ffef00;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -webkit-transition-property: opacity;
+    transition-property: opacity;
+    -webkit-transition-duration: 1000ms;
+    transition-duration: 1000ms;
+    -webkit-transition-delay: 500ms;
+    transition-delay: 500ms; }
+    #home-intro h1.ready {
+      opacity: 1;
+      filter: alpha(opacity=100); }
+  #home-intro .menu-video {
+    position: absolute;
+    list-style: none;
+    top: 50%;
+    width: 100%;
+    left: 0;
+    height: 60px;
+    padding: 0;
+    margin: 0 auto;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -webkit-transition-property: opacity, top;
+    transition-property: opacity, top;
+    -webkit-transition-duration: 1000ms, 1000ms;
+    transition-duration: 1000ms, 1000ms;
+    -webkit-transition-delay: 500ms 500ms;
+    transition-delay: 500ms 500ms; }
+    #home-intro .menu-video.ready {
+      opacity: 1;
+      filter: alpha(opacity=100);
+      top: 60%; }
+    @media screen and (min-width: 1170px) {
+      #home-intro .menu-video {
+        width: 80%;
+        left: 10%; } }
+    #home-intro .menu-video li {
+      float: left;
+      width: 16%;
+      display: block;
+      height: 60px;
+      overflow: visible;
+      text-align: center; }
+      #home-intro .menu-video li a {
+        font-family: "Proxima N W01 Thin Reg";
+        font-size: 22px;
+        color: #ffffff;
+        height: 50px;
+        padding-bottom: 25px;
+        border-bottom: 2px solid #ffef00;
+        -webkit-transition: all, 100ms;
+        transition: all, 100ms; }
+        #home-intro .menu-video li a:hover {
+          padding-bottom: 20px;
+          border-bottom: 7px solid #ffef00; }
+  #home-intro .scroll-down {
+    text-align: center;
+    width: 150px;
+    height: 110px;
+    position: absolute;
+    left: 50%;
+    margin-left: -75px;
+    bottom: 5%; }
+    #home-intro .scroll-down a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      color: #ffffff; }
+      #home-intro .scroll-down a .img-placeholder {
+        position: absolute;
+        width: 100%;
+        height: 75px;
+        background-image: url("/bundles/fivecuisinesverdun/img/go-down.png");
+        background-repeat: no-repeat;
+        background-position: center top;
+        top: 10px;
+        -webkit-transition-property: top;
+        transition-property: top;
+        -webkit-transition-duration: 500ms;
+        transition-duration: 500ms;
+        -webkit-transition-delay: 0ms;
+        transition-delay: 0ms; }
+      #home-intro .scroll-down a span {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        bottom: 0; }
+      #home-intro .scroll-down a:hover {
+        color: #ffef00; }
+        #home-intro .scroll-down a:hover .img-placeholder {
+          top: 25px; }
+  #home-intro .toggle-lang {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    z-index: 200; }
+    #home-intro .toggle-lang a {
+      color: #ffffff;
+      font-size: 1em;
+      text-transform: uppercase; }
+      #home-intro .toggle-lang a:hover {
+        border-bottom: 1px solid #ffef00; }
+
+#home-entreprise {
+  padding-bottom: 0px;
+  padding-top: 0px; }
+  #home-entreprise h2 {
+    margin-top: 40px;
+    margin-bottom: 20px; }
+    #home-entreprise h2.bounce-down {
+      -webkit-transition-delay: 1250ms;
+      transition-delay: 1250ms; }
+  #home-entreprise .sous-titre {
+    margin-bottom: 25px; }
+    #home-entreprise .sous-titre.bounce-down {
+      -webkit-transition-delay: 1000ms;
+      transition-delay: 1000ms; }
+  #home-entreprise .more-link-wrapper {
+    margin-top: 50px;
+    margin-bottom: 54px; }
+    #home-entreprise .more-link-wrapper.bounce-down {
+      -webkit-transition-delay: 750ms;
+      transition-delay: 750ms; }
+  #home-entreprise .entreprise-stats {
+    text-align: center; }
+    #home-entreprise .entreprise-stats img {
+      margin-right: 45px;
+      -webkit-transition-delay: 1000ms;
+      transition-delay: 1000ms; }
+      #home-entreprise .entreprise-stats img.bounce-down {
+        -webkit-transition-delay: 250ms;
+        transition-delay: 250ms; }
+      #home-entreprise .entreprise-stats img:first-child {
+        -webkit-transition-delay: 750ms;
+        transition-delay: 750ms; }
+        #home-entreprise .entreprise-stats img:first-child.bounce-down {
+          -webkit-transition-delay: 500ms;
+          transition-delay: 500ms; }
+      #home-entreprise .entreprise-stats img:last-child {
+        margin-right: 0;
+        -webkit-transition-delay: 1250ms;
+        transition-delay: 1250ms; }
+        #home-entreprise .entreprise-stats img:last-child.bounce-down {
+          -webkit-transition-delay: 0ms;
+          transition-delay: 0ms; }
+
+#home-services {
+  background-color: #f4f4f4;
+  overflow: hidden;
+  padding: 60px 0; }
+  #home-services .services-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    -webkit-transition: all 1s;
+    transition: all 1s; }
+    #home-services .services-menu li {
+      display: inline-block;
+      width: 20%;
+      height: 156px;
+      text-align: center; }
+      #home-services .services-menu li a {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center; }
+        #home-services .services-menu li a .img-placeholder {
+          position: absolute;
+          width: 120px;
+          height: 120px;
+          left: 50%;
+          margin-left: -60px;
+          background-image: url("/bundles/fivecuisinesverdun/img/services.png");
+          background-repeat: no-repeat; }
+        #home-services .services-menu li a.idea .img-placeholder {
+          background-position: 0 -2px; }
+        #home-services .services-menu li a.concept .img-placeholder {
+          background-position: 25% -2px; }
+        #home-services .services-menu li a.product .img-placeholder {
+          background-position: 50% -2px; }
+        #home-services .services-menu li a.renovation .img-placeholder {
+          background-position: 75% -2px; }
+        #home-services .services-menu li a.install .img-placeholder {
+          background-position: 100% -2px; }
+        #home-services .services-menu li a span {
+          position: absolute;
+          width: 100%;
+          bottom: 0;
+          left: 0;
+          color: #000000; }
+  #home-services .more-link {
+    margin-top: 30px; }
+
+#home-products {
+  overflow-x: hidden;
+  padding: 60px 0 15px; }
+  #home-products h3 {
+    margin-top: 0;
+    margin-bottom: 60px; }
+  #home-products .full-width .products {
+    overflow: hidden;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -webkit-transition: all 1s;
+    transition: all 1s; }
+    #home-products .full-width .products.prod-cuisine {
+      padding-left: 0;
+      padding-right: 10px;
+      -webkit-transform: translate(-100%, 0px);
+      -ms-transform: translate(-100%, 0px);
+      transform: translate(-100%, 0px);
+      cursor: pointer; }
+    #home-products .full-width .products.prod-bain {
+      padding-left: 10px;
+      padding-right: 0;
+      -webkit-transform: translate(100%, 0px);
+      -ms-transform: translate(100%, 0px);
+      transform: translate(100%, 0px);
+      cursor: pointer; }
+    #home-products .full-width .products.prod-in {
+      opacity: 1;
+      filter: alpha(opacity=100);
+      -webkit-transform: translate(0px, 0px);
+      -ms-transform: translate(0px, 0px);
+      transform: translate(0px, 0px); }
+    #home-products .full-width .products img {
+      width: 100%;
+      height: auto; }
+    #home-products .full-width .products .product-wrapper {
+      position: relative; }
+    #home-products .full-width .products .prod-text-wrapper {
+      position: absolute;
+      width: 215px;
+      height: 56px;
+      left: 50%;
+      top: 50%;
+      margin-left: -107px;
+      margin-top: -28px;
+      background-image: url("/bundles/fivecuisinesverdun/img/white-trans-bg.png"); }
+      #home-products .full-width .products .prod-text-wrapper h4 {
+        line-height: 56px;
+        margin: 0;
+        padding: 0; }
+    #home-products .full-width .products .gallery-link {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      opacity: 0;
+      filter: alpha(opacity=0);
+      background-image: url("/bundles/fivecuisinesverdun/img/gallery-link-bg.png");
+      background-repeat: repeat;
+      -webkit-transition: all 500ms;
+      transition: all 500ms; }
+    #home-products .full-width .products:hover .gallery-link {
+      opacity: 1;
+      filter: alpha(opacity=100); }
+    #home-products .full-width .products:hover .prod-text-wrapper {
+      -webkit-box-shadow: 0px 0px 35px 0 rgba(50, 50, 50, 0.75);
+      box-shadow: 0px 0px 35px 0 rgba(50, 50, 50, 0.75); }
+
+#home-garantie {
+  background-color: #f4f4f4;
+  background-image: url("/bundles/fivecuisinesverdun/img/home-garantie-bg.jpg");
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: center center;
+  padding: 120px 0; }
+  #home-garantie h4, #home-garantie p {
+    text-align: left; }
+  #home-garantie .bottomed-lined {
+    margin-left: -200%;
+    width: 100%; }
+
+@media (min-width: 768px) and (max-width: 991px) {
+  #home-products .full-width .products.prod-cuisine {
+    padding-right: 0;
+    margin-bottom: 20px; }
+  #home-products .full-width .products.prod-bain {
+    padding-left: 0; }
+
+  #home-garantie {
+    background-image: none; } }
+@media (max-width: 767px) {
+  #home-intro .home-logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 33%; }
+    #home-intro .home-logo img {
+      width: 100%;
+      height: auto; }
+  #home-intro h1 {
+    font-size: 16px; }
+    #home-intro h1.ready {
+      margin-top: 0; }
+  #home-intro h2 {
+    font-size: 30px;
+    margin: 50px 0 0; }
+    #home-intro h2.ready {
+      margin-top: 80px; }
+  #home-intro h3 {
+    font-size: 16px; }
+  #home-intro .menu-video {
+    display: none; }
+
+  #home-entreprise .entreprise-stats img {
+    width: 30%;
+    height: auto;
+    margin-right: 2%; }
+    #home-entreprise .entreprise-stats img:last-child {
+      margin-right: 0; }
+
+  #home-services .services-menu li {
+    width: 18%;
+    margin-right: 2%; }
+    #home-services .services-menu li:last-child {
+      margin-right: 0; }
+    #home-services .services-menu li a .img-placeholder {
+      width: 100%;
+      left: 0;
+      margin-left: 0;
+      background-size: 500% auto; }
+    #home-services .services-menu li a span {
+      font-size: 10px; }
+
+  #home-products .full-width .products.prod-cuisine {
+    padding-right: 0;
+    margin-bottom: 20px; }
+  #home-products .full-width .products.prod-bain {
+    padding-left: 0; }
+
+  #home-garantie {
+    background-image: none; } }
+.mobile #home-intro .video-placeholder {
+  display: block; }
+.mobile #home-intro video {
+  display: none; }
+
+.lt-ie9 #home-intro .video-placeholder {
+  display: block; }
+.lt-ie9 #home-intro video {
+  display: none; }
+.lt-ie9 #home-intro h2 {
+  margin-top: 20%;
+  opacity: 1;
+  filter: alpha(opacity=100); }
+.lt-ie9 #home-intro h1 {
+  margin-top: 0; }
+.lt-ie9 #home-intro .menu-video {
+  top: 60%; }

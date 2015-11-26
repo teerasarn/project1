@@ -1,0 +1,237 @@
+{% extends 'BraincraftedBootstrapBundle:Form:bootstrap.html.twig' %}
+{#                 {% if 'picture' in field.vars.block_prefixes %}
+                  {% if entity.getPicture() is defined and entity.getPicture() != null %}
+                      <img src="/uploads/{{ entity.getPicture().getName() }}" />
+                  {% endif %}                
+                {% endif %} #}
+
+{# {% block file_widget %}
+    {% spaceless %}
+
+    {{ block('form_widget') }}
+    {% if image_url is not null %}
+        <img src="{{ asset(image_url) }}"/>
+    {% endif %}
+
+    {% endspaceless %}
+{% endblock %} #}
+
+
+{% block form_row %}
+    {% spaceless %}
+        {% set style = style|default(bootstrap_get_style()) %}
+        {% set col_size = col_size|default(bootstrap_get_col_size()) %}
+
+        {% if attr.label_col is defined and attr.label_col is not empty %}
+            {% set label_col = attr.label_col %}
+        {% endif %}
+        {% if attr.widget_col is defined and attr.widget_col is not empty %}
+            {% set widget_col = attr.widget_col %}
+            {% if label is sameas(false) and label_col is defined %}
+                {% set widget_col = widget_col + label_col %}
+            {% endif %}
+        {% endif %}
+        {% if attr.col_size is defined and attr.col_size is not empty %}
+            {% set col_size = attr.col_size %}
+        {% endif %}
+        {% if attr.style is defined and attr.style is not empty %}
+            {% set style = attr.style %}
+        {% endif %}
+
+        {% set label_col = label_col|default(bootstrap_get_label_col()) %}
+        {% set widget_col = widget_col|default(bootstrap_get_widget_col()) %}
+
+        {% if attr.nobsclass is defined and attr.nobsclass is sameas(true) %}
+            {# <div class="{% if form.vars.errors|length > 0 %} has-error{% endif %}"> #}
+        {% else %}
+        <div class="form-group{% if form.vars.errors|length > 0 %} has-error{% endif %}">
+        {% endif %}
+            {% if style == 'horizontal' %}
+                {{ form_label(form) }}
+                <div class="col-{{ col_size }}-{{ widget_col }}">
+                    {{ block('form_input_group') }}
+                    {{ block('form_help') }}
+                    {{ form_errors(form) }}
+                </div>
+            {% else %}
+                {{ form_label(form) }}
+                {{ block('form_input_group') }}
+                {{ block('form_help') }}
+                {{ form_errors(form) }}
+            {% endif %}
+        {% if attr.nobsclass is defined and attr.nobsclass is sameas(true) %}
+            
+        {% else %}            
+        </div>
+        {% endif %}
+        {% if style == 'inline' %}&nbsp;{% endif %}
+    {% endspaceless %}
+{% endblock form_row %}
+
+{% block file_widget %}
+{% spaceless %}
+    {% set col_size = col_size|default(bootstrap_get_col_size()) %}
+
+    {% if attr.simple_col is defined and attr.simple_col is not empty %}
+        {% set simple_col = attr.simple_col %}
+    {% endif  %}
+
+    {% if attr.col_size is defined and attr.col_size is not empty %}
+        {% set col_size = attr.col_size %}
+    {% endif %}
+
+    {% if simple_col is defined %}
+        <div class="col-{{ col_size }}-{{ simple_col }}">
+    {% endif %}
+{#     {{value}}
+{% for key,val in attr %}
+    {{ key }} - {{val}}<br/>
+{% endfor %} #}
+    <input type="file" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}>
+{#     {% if image_path is defined and image_path is not null %}
+            <div class="col-lg-12">
+                <img src="{{ asset( image_path|default('') ) }}" />
+            </div>
+    {% endif %} #}
+    
+{#     {% if image_url is not null %}
+        <img src="{{ asset(image_url) }}"/>
+    {% endif %}     #}
+    {% if simple_col is defined %}
+        </div>
+    {% endif %}
+{% endspaceless %}
+{% endblock file_widget %}
+
+{% block bootstrap_collection_widget %}
+{% spaceless %}
+    {% if prototype is defined %}
+        {% set prototype_vars = {} %}
+        {% if style is defined %}
+            {% set prototype_vars = prototype_vars|merge({'style': style}) %}
+        {% endif %}
+        {% set prototype_html = '<div class="col-xs-' ~ form.vars.sub_widget_col ~ '">' ~ form_widget(prototype, prototype_vars) ~ '</div>' %}
+        {# {% set prototype_html = '<div class="col-xs-10">' ~ form_widget(prototype, prototype_vars) ~ '</div>' %} #}
+        {% if form.vars.allow_delete %}
+            {% set prototype_html = prototype_html ~ '<div class="col-xs-' ~ form.vars.button_col ~ '"><a href="javascript:void(0);" class="btn btn-danger btn-small" data-removefield="collection" data-field="__id__">' ~ form.vars.delete_button_text|trans({}, translation_domain) ~ '</a></div>' %}
+        {% endif %}
+        {% set prototype_html = '<div class="row">' ~ prototype_html ~ '</div><hr style="margin-top:0;margin-bottom:8px;" />' %}
+        {% set galleryReplace = '<input type="hidden" id="five_country_gallery___name___image" name="five_country[gallery][__name__][image]" placeholder="Image name" nobsclass="1" simple_col="6" class="gallery_name form-control" >' %}
+        {% set galleryAdd = '<a class="btn btn-success add-images dz-clickable">+ Add image</a>' ~ galleryReplace %}
+        {% set prototype_html = prototype_html | replace( { galleryReplace : galleryAdd } ) %}
+        {% set attr = attr|merge({'data-prototype': prototype_html }) %}
+        {% set attr = attr|merge({'data-prototype-name': prototype_name }) %}
+    {% endif %}
+
+    <div {{ block('widget_container_attributes') }}>
+        <ul class="bc-collection list-unstyled dd-list">
+            {% for field in form %}
+                <li class="dd-item dd3-item" data-id="{{loop.index0}}">
+                    <div class="row">
+                        <div class="col-xs-10">
+                        <div class="dd-handle dd3-handle">Drag</div>
+                            {# {{ field.vars.compound ~ ' -- ' ~ field.vars.unique_block_prefix }} #}
+{#                             {{ field.vars.original_type }} #}
+                            {{ form_widget(field, { attr : { class : 'dd3-content' } }) }}
+                            {{ form_errors(field) }}
+                        </div>
+                        {% if form.vars.allow_delete %}
+                            <div class="col-xs-{{ form.vars.button_col }}">
+                                <a class="btn btn-danger btn-small" data-removefield="collection" data-field="{{ field.vars.id }}">{{ form.vars.delete_button_text|trans({}, translation_domain) }}</a>
+                            </div>
+                        {% endif %}
+
+                    </div>
+                    <hr style="margin-top:0;margin-bottom:8px;" />
+                    
+
+                </li>
+            {% endfor %}
+        </ul>
+        {% if form.vars.allow_add %}
+            <a href="#" class="btn btn-primary btn-small" data-addfield="collection" data-collection="{{ form.vars.id }}" data-prototype-name="{{ prototype_name }}">{{ form.vars.add_button_text|trans({}, translation_domain) }}</a>
+        {% endif %}
+        {# <div class="divider"></div> #}
+    </div>
+{% endspaceless %}
+{% endblock bootstrap_collection_widget %}
+
+{% block form_rows %}
+    {% spaceless %}
+        {% for child in form %}
+        
+{#             {% if child.vars.value is iterable %}
+                {{ block('collection_widget') }}
+            {% else %} #}
+            {% set childAttr = {} %}
+            {% if attr.col_size is defined %}
+                {% set childAttr = childAttr|merge({ 'col_size': attr.col_size }) %}
+            {% endif %}
+            {% if attr.widget_col is defined %}
+                {# {% set childAttr = childAttr|merge({ 'widget_col': attr.widget_col }) %} #}
+                {% set childAttr = childAttr|merge({ 'widget_col': 10 }) %}
+            {% endif %}
+            {% if attr.label_col is defined %}
+                {% set childAttr = childAttr|merge({ 'label_col': attr.label_col }) %}
+            {% endif %}
+            {% if attr.simple_col is defined %}
+                {% set childAttr = childAttr|merge({ 'simple_col': attr.simple_col }) %}
+            {% endif %}
+            {% if attr.style is defined %}
+                {% set childAttr = childAttr|merge({ 'style': attr.style }) %}
+            {% endif %}
+
+            {{ form_row(child, childAttr) }}
+            {# {% endif %} #}
+        {% endfor %}
+    {% endspaceless %}
+{% endblock form_rows %}
+
+{% block form_widget_simple %}
+    {% spaceless %}
+        {% set style = style|default(bootstrap_get_style()) %}
+        {% set col_size = col_size|default(bootstrap_get_col_size()) %}
+
+        {% if simple_col is not defined and bootstrap_get_simple_col() %}
+            {% set simple_col = bootstrap_get_simple_col() %}
+        {% endif %}
+        {% if attr.simple_col is defined and attr.simple_col is not empty %}
+            {% set simple_col = attr.simple_col %}
+        {% endif  %}
+        {% if attr.col_size is defined and attr.col_size is not empty %}
+            {% set col_size = attr.col_size %}
+        {% endif %}
+        {% if attr.style is defined and attr.style is not empty %}
+            {% set style = attr.style %}
+        {% endif %}
+
+        {% if simple_col is defined and simple_col %}
+            <div class="col-{{ col_size }}-{{ simple_col }}">
+        {% endif %}
+
+        {% set type = type|default('text') %}
+
+        {% if style == 'inline' and (attr.placeholder is not defined or attr.placeholder is empty)  and label != false %}
+            {% if label is empty %}
+                {% set attr = attr|merge({ 'placeholder': name|humanize }) %}
+            {% else %}
+                {% set attr = attr|merge({ 'placeholder': label}) %}
+            {% endif %}
+        {% endif %}
+
+        {% if static_control is defined and static_control == true %}
+            {% set attr = attr|merge({ 'class': (attr.class|default('') ~ ' form-control-static')|trim }) %}
+            <p id="{{ id }}" {%- for attrname, attrvalue in attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ value }}</p>
+        {# {% elseif attr.nobsclass is defined and attr.nobsclass == true %} #}
+{#             <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}>
+ #}        {%- else -%}
+
+            {% set attr = attr|merge({ 'class': (attr.class|default('') ~ ' form-control')|trim }) %}
+            <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}>
+        {%- endif %}
+
+        {% if simple_col is defined %}
+            </div>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_widget_simple %}

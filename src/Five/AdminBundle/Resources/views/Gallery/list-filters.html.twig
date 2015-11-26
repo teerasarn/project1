@@ -1,0 +1,40 @@
+
+        {% if options.filters|default(false) is sameas(true) %}
+
+            {% set queryCat     = app.request.query.get( 'category', null )  %}
+            {% set queryParent  = app.request.query.get( 'parent', null ) %}
+            {% set queryContext = app.request.get('_route_params').context is defined ? app.request.get('_route_params').context: null %}
+            <div class="row">
+
+                {% set curParent = null %}
+                {% set curCatCnt = 0 %}
+                {% set filtersCnt = 0 %}
+                {% for cat in options.categories %}
+                    {% if ( queryContext != 'realisation' and queryParent == cat.getParent() ) or queryContext == 'realisation' %}
+                        {% if curParent != cat.getParent() %}
+                            {% set curParent = cat.getParent() %}
+                            {% set curCatCnt = 0 %}
+                            {% if loop.first is sameas(false) %}</select></div>{% endif %}
+                            <div class="col-sm-3 form-group">
+                                <label>{{ curParent | title }}s Filter</label>
+                                <select class="form-control list-filter" name="{{curParent}}s_filter" id="{{curParent}}s_filter" data-parent="{{curParent}}">
+                                    <option value="">-- All {{curParent}}s --</option>
+                        {% endif %}                            
+                                <option value="{{ cat.getName() }}" {{ cat.getName() == queryCat and queryParent == cat.getParent()  ? 'selected' : '' }}>{{cat.getTitleEn()|title}} ({{cat.getGalleries().count()}})</option>
+                        {% if loop.last %}                        
+
+                        {% endif %}
+                        {% set filtersCnt = filtersCnt + 1 %}
+                    {% endif %}
+                {% endfor %}
+                                </select>
+                            </div>
+                {% if filtersCnt > 0 %}                               
+                <div class="col-sm-2">
+                    <label>&nbsp;</label>
+                    <br/><button class="btn btn-default" id="updateFilter">Update Filter</button>
+                </div>                                
+                {% endif %}
+            </div>
+
+        {% endif %}

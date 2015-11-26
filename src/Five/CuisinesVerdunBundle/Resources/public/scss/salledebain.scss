@@ -1,0 +1,135 @@
+/* 
+    Created on : 15-May-2014, 2:17:47 PM
+    Author     : enrique
+*/
+
+@import "cuisine.scss";
+
+
+.salledebain {
+  #header-section {
+    .header-1 {
+      background-image: url('../img/salledebain-1.jpg');
+    }
+    .header-2 {
+      .image-holder {
+        background-image: url('../img/salledebain-2.jpg');
+      }
+    }
+    .header-3 {
+      .image-holder {
+        background-image: url('../img/salledebain-3.jpg');
+      }
+      @media screen and (max-width: $screen-phone) {
+        h2 {
+          margin-top: 20px;
+        }
+      }
+    }
+  }
+  #styles-section {
+    .styles-grid {
+      .style-1 {
+        background-image: url('../img/sb-style-1.jpg');
+        background-size: auto 120%;
+        background-position: 27% 31%;
+      }
+      .style-2 {
+        background-image: url('../img/sb-style-2.jpg');
+        background-size: auto 130%;
+        background-position: 27% 57%;
+      }
+      .style-3 {
+        background-image: url('../img/rustique3.jpg');
+        background-size: auto 120%;
+        background-position: 72% 10%;
+      }
+      .style-4 {
+        background-image: url('../img/sb-style-4.jpg');
+        background-size: auto 120%;
+        background-position: 40% 48%;
+        &:hover {
+          background-size: auto 100%;
+        }
+      }
+      .style-5 {
+        background-image: url('../img/sb-style-5.jpg');
+        background-size: 120% auto;
+        background-position: 27% 86%;
+        &:hover {
+          background-size: 100% auto;
+        }
+      }
+      .style-6 {
+        background-image: url('../img/sb-style-6.jpg');
+        background-size: auto 120%;
+        background-position: 38% 31%;
+        &:hover {
+          background-size: auto 100%;
+        }
+      }
+      .style-7 {
+        background-image: url('../img/sb-style-7.jpg');
+        background-size: auto 120% ;
+        background-position: 22% 5%;
+        &:hover {
+          background-size: auto 100%;
+        }
+      }
+      .style-8 {
+        background-image: url('../img/sb-style-8.jpg');
+        background-size: auto 120%;
+        background-position: 22% 5%;
+        &:hover {
+          background-size: auto 100%;
+        }
+      }      
+    }
+  }
+  #ideas-section {
+    .ideas {
+      .image-holder {
+        left: 59.5%;
+        width: 40.5%;
+        background-size: cover;
+        background-image: url('../img/sb-ideas.jpg');
+      } 
+    }
+  }
+  #warranty-section {
+    .warranty {
+      .image-holder {
+        background-image: url('../img/sb-garantie-en.jpg');
+      }
+    }
+  }
+  &.fr {
+    #warranty-section {
+      .warranty {
+        .image-holder {
+          background-image: url('../img/sb-garantie-fr.jpg');
+        }
+      }
+    }
+  }
+  
+}
+@media (max-width: $screen-xs-max) {
+  .salledebain {
+    #ideas-section {
+      .ideas {
+        .image-holder {
+          left: 0;
+          width: 100%;
+        }
+      }
+    }
+    
+  }
+}
+
+//@media screen and (max-width: $screen-tablet) {
+  #pbThumbsToggler:checked ~ .pbWrapper {
+    padding: 0;
+  }
+//}
