@@ -1009,20 +1009,21 @@ class Blog  implements EntityLocaleInjectorInterface
         {
             if( $item )
             {
-                $data = array();
-                preg_match('/"(?P<type>\w+)":"(?P<tag>\w+)"/', $item, $matches);
+                $data = array( 'tag'=>'','type'=>'' );
+                preg_match('/"(?P<type>\V+)":"(?P<tag>\V+)"/', $item, $matches);
                 
-                $data["tag"] = $matches["tag"];
-                 $data["type"] = $matches["type"];
+                if ( array_key_exists( "tag" , $matches ) )
+                    $data["tag"] = $matches["tag"];
                 
+                if ( array_key_exists( "type" , $matches ) )
+                    $data["type"] = $matches["type"];
+                    
                 $result[] = $data;
             }
             //$data[$matches["type"]] = $matches["tags"];
             //$result.push($data);
         }
-        
-        //echo $text2."<br />";
-        //print_r($result);
+
         return $result;
   
     }   
@@ -1031,12 +1032,19 @@ class Blog  implements EntityLocaleInjectorInterface
     {
         if ( $locale == 'fr' )
          setlocale(LC_ALL, 'fr_FR.UTF-8');
-        
-        //echo  mktime(0, 0, 0, 12, 22, 1978);
-        //echo "<br /><br /><br /><br /><br /><br /><br /><br /><br />".strftime("%A %e %B %Y",  $date->getTimestamp() );
-       // echo $locale;
-        
-        //print_r( $date->getTimestamp() );exit();
+
+        if( $format =='' )
+        {
+            if ( $locale == 'fr' )
+            {
+                 $format = '%e %B %Y';
+            }
+            else
+            {
+                $format = '%B %e, %Y';
+            }
+            
+        }
         
         return strftime($format,  $date->getTimestamp() );
         

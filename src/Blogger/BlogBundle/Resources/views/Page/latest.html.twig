@@ -34,7 +34,7 @@
                   {% endif %}          
                     <div class="blog-content">
                         <a href="{{ path( 'header.menu.blog_article_link' | trans  ,  { 'permalink': blog.getPermaLink() } ) }}" class="blog-title">{{ blog.title }}</a>
-                        <div class="date"><time datetime="{{ blog.created|date('c') }}">{{ blog.getDateLocale(blog.created,  app.request.locale  , '%e %B %Y' ) }}</time></div>
+                        <div class="date"><time datetime="{{ blog.created|date('c') }}">{{ blog.getDateLocale(blog.created,  app.request.locale  , '' ) }}</time></div>
                         <span class="author">par {{ blog.author }}</span>
                     </div>
                 </li>

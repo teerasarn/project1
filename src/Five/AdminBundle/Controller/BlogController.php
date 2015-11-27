@@ -153,11 +153,6 @@ class BlogController extends Controller
 
             $data       = $Request->request->get( 'data' );
             
-            //$categories = $data[ 'categories' ];
-            //$context    = $data['context'];
-            
-            //$cats       = $this->get( 'doctrine' )->getManager()->getRepository( "FiveCuisinesVerdunBundle:GalleryCategory" )->getByNames( $categories, $data[ 'context' ] );
-            
             $Blog    = false;
 
             if( $data[ 'id' ] != '' && !empty( $data[ 'id' ] ) && is_numeric($data[ 'id' ]) )
@@ -211,17 +206,17 @@ class BlogController extends Controller
                 
                 //==== not thing put here then use title sub 40
                 if($data[ 'permaLinkEn' ] == ''  )
-                {
-                    $data[ 'permaLinkEn' ] =  strtolower( substr($data[ 'titleTextEn' ],0,40 ) );               
+                {  
+                    $data[ 'permaLinkEn' ] = strtolower( substr($data[ 'titleTextEn' ],0,40 ) ) ;               
                 }
                 
                 if($data[ 'permaLinkFr' ] == ''  )
                 {
-                    $data[ 'permaLinkFr' ] =  strtolower( substr($data[ 'titleTextFr' ],0,40 ) );               
+                    $data[ 'permaLinkFr' ] =  strtolower( substr($data[ 'titleTextFr' ],0,40 ) ) ;               
                 }
                 
-                $permalink_en = str_replace( '_' ,'-', str_replace( ' ' , '-' , $data[ 'permaLinkEn' ] )  )  ;
-                $permalink_fr = str_replace( '_' ,'-', str_replace( ' ' , '-' , $data[ 'permaLinkFr' ] )  )  ;
+                $permalink_en = $this->cleanPermalink(str_replace( '_' ,'-', str_replace( ' ' , '-' , $data[ 'permaLinkEn' ] )  ) ) ;
+                $permalink_fr = $this->cleanPermalink(str_replace( '_' ,'-', str_replace( ' ' , '-' , $data[ 'permaLinkFr' ] )  ) ) ;
  
                 $permalink_en_count = $this->get( 'doctrine' )->getManager()->getRepository( "BloggerBlogBundle:Blog" )->countByPermalink( $permalink_en, 'en' , $Blog->getId() );
                 
@@ -241,48 +236,39 @@ class BlogController extends Controller
                 $Blog->setPermaLinkFr( $permalink_fr );
                 
                 $Blog->setTags( $data[ 'tags' ] );
-                //$Blog->setTags('');
-/*
-	//if needed tag 
-                if( isset( $data[ 'tags' ] ) )
-                {
-                    $Blog->setTags( $data[ 'tags' ] );
-                }
-   //if need remove images
-*/                
-				
-    			$validator = $this->get('validator');
-    			$errors = $validator->validate($Blog);			
 			
-			    if (count($errors) > 0) {
-			        /*
-			         * Uses a __toString method on the $errors variable which is a
-			         * ConstraintViolationList object. This gives us a nice string
-			         * for debugging.
-			         */
-			        $errorsString = (string) $errors;
-			         //$params  = $this->container->getParameter( $options );        
-			        //return new Response($errorsString);
-			        /*
-					  return $this->render('FiveAdminBundle:Action:edit_blog.html.twig', array(
-        			  'errors' => $errors,		
-                 'form'               => $this->get( $params[ 'form' ] )->createView(),
-                 'form_action'        => $params[ 'form_action' ],
-                 'blog'            => $Blog,
-                // 'id'                 => $id,
-                 'options' =>  $options	       
-                 )); 
-			        */
-		 				 $error_array = array();
-						 foreach ($errors as $error )
-						 {
-							
-							 $error_array[$error->getPropertyPath()] = $error->getMessage();
-						 }						 
-						 
-						 $data["error"] = $error_array;
-			          return new JsonResponse( $data );  
-			    }
+                $validator = $this->get('validator');
+                $errors = $validator->validate($Blog);			
+
+                    if (count($errors) > 0) {
+                        /*
+                         * Uses a __toString method on the $errors variable which is a
+                         * ConstraintViolationList object. This gives us a nice string
+                         * for debugging.
+                         */
+                        $errorsString = (string) $errors;
+                         //$params  = $this->container->getParameter( $options );        
+                        //return new Response($errorsString);
+                        /*
+                                  return $this->render('FiveAdminBundle:Action:edit_blog.html.twig', array(
+                          'errors' => $errors,		
+         'form'               => $this->get( $params[ 'form' ] )->createView(),
+         'form_action'        => $params[ 'form_action' ],
+         'blog'            => $Blog,
+        // 'id'                 => $id,
+         'options' =>  $options	       
+         )); 
+                        */
+                                         $error_array = array();
+                                         foreach ($errors as $error )
+                                         {
+
+                                                 $error_array[$error->getPropertyPath()] = $error->getMessage();
+                                         }						 
+
+                                         $data["error"] = $error_array;
+                          return new JsonResponse( $data );  
+                    }
 
                 $this->get( 'doctrine' )->getManager()->persist( $Blog );    
 
@@ -296,6 +282,12 @@ class BlogController extends Controller
             return new JsonResponse( $data );
         //}
     } 
+    
+    protected function cleanPermalink($string)
+    {
+        
+         return preg_replace('/[^A-Za-z0-9\-]/', '', $string ); 
+    }
     
     public function listAction( $options )
     {

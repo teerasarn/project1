@@ -41,25 +41,7 @@ class BlogRepository extends EntityRepository
                   ->getResult();
     }	
 
-//    public function getLatestBlogsWithTag($limit = null , $first_result = null , $blog_tag = "" )
-//    {
-//        $qb = $this->createQueryBuilder('b')
-//                   ->select('b')
-//                   ->where("b.tags like :tags ")
-//                   ->setParameters( array( 'tags' =>  '%"'.$blog_tag.'"%' ) )
-//                   ->addOrderBy('b.created', 'DESC');
-//                   
-//    if (false === is_null($limit))
-//            $qb->setFirstResult($first_result);
-//
-//        if (false === is_null($limit))
-//            $qb->setMaxResults($limit);
-//
-//
-//        return $qb->getQuery()
-//                  ->getResult();
-//    }	
-//    
+
     public function getMonthlyBlogCount($limit = null)
     {
 

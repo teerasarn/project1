@@ -79,7 +79,7 @@
                         <div class="col-md-6 date_like">              
 
 
-                            <div class="date"><time datetime="{{ blog.created|date('c') }}"> {{ blog.getDateLocale(blog.created,  app.request.locale  , '%e %B %Y' ) }}</time></div>
+                            <div class="date"><time datetime="{{ blog.created|date('c') }}"> {{ blog.getDateLocale(blog.created,  app.request.locale, '' ) }}</time></div>
                             <span name="like_span" class="like" id="like" style="cursor:pointer;"><span id="likenum">{{ blog.likeCount }}</span> likes</span>     
                         </div>
                     </div>

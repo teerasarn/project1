@@ -117,11 +117,12 @@ border-bottom-right-radius: 0;
                     		
                         <div class="row">
 
-                            <div class="col-md-6">	
+                            <div class="col-md-6" id="detail-panel">	
                                      <div class="row">
                                        <div class="col-sm-12">
                                                <h3 class="five-openclose-header"><span class="fa icon-keyboard"></span>  Details <span class="fa icon-five-openclose"></span></h3>
                                                <hr />
+                                               <div id="error-msg-box" style="visibility: hidden;"></div> 
                                        </div>
                                    </div>
                                    <div class="row five-openclose-content">
@@ -138,16 +139,16 @@ border-bottom-right-radius: 0;
                                                <div class="tab-pane fade active in" id="imagedata-en-main">
                                                    <div class="input-group-sm">
                                                        Permalink <input name="permaLinkEn" type="text" class="form-control input-small pic-title" placeholder="Permalink" value="{{blog.getPermaLinkVal('en')}}"  />
-                                                       Title <input name="titleTextEn" type="text" class="form-control input-small pic-title" placeholder="Title" value="{{blog.getTitleEn()}}" required="required" />
-                                                       Intro <textarea name="introTextEn" class="form-control input-small pic-desc" placeholder="Intro" required="required">{{blog.getIntroTextEn() | raw}}</textarea>
+                                                       Title <input name="titleTextEn" type="text" class="form-control input-small pic-title" placeholder="Title (English) *" value="{{blog.getTitleEn()}}" required="required" />
+                                                       Intro <textarea name="introTextEn" class="form-control input-small pic-desc" placeholder="Intro (English) *" required="required">{{blog.getIntroTextEn() | raw}}</textarea>
 {#                                                       Blog Article <textarea name="blogEn" class="form-control input-small pic-desc" placeholder="Description" required="required">{{blog.getBlogEn() | raw}}</textarea>                                                                                                
 #}                                                   </div>
                                                </div> <!-- / .tab-pane -->
                                                <div class="tab-pane fade" id="imagedata-fr-main">
                                                    <div class="input-group-sm">
                                                        Permalink <input name="permaLinkFr" type="text" class="form-control input-small pic-title" placeholder="Permalink" value="{{blog.getPermaLinkVal('fr')}}"  />
-                                                       Title <input name="titleTextFr" type="text" class="form-control input-small pic-title" placeholder="Title" value="{{blog.getTitleFr()}}" required="required" />
-                                                       Intro <textarea name="introTextFr" class="form-control input-small pic-desc" placeholder="Intro" required="required">{{blog.getIntroTextFr() | raw}}</textarea>
+                                                       Title <input name="titleTextFr" type="text" class="form-control input-small pic-title" placeholder="Title (France) *" value="{{blog.getTitleFr()}}" required="required" />
+                                                       Intro <textarea name="introTextFr" class="form-control input-small pic-desc" placeholder="Intro (France) *" required="required">{{blog.getIntroTextFr() | raw}}</textarea>
 {#                                                       Blog Article <textarea name="blogFr" class="form-control input-small pic-desc" placeholder="Description" required="required">{{blog.getBlogFr() | raw}}</textarea>                                                                                            
 #}                                                   </div>
                                                </div> <!-- / .tab-pane -->                                                                                        
@@ -502,37 +503,30 @@ border-bottom-right-radius: 0;
 
 #}
  			<div class="row">
-                            <div class="col-md-6">
-                        	<div class="row">    
-                                                <div class="col-md-12">
-                                                    <h3 class="five-openclose-header">
-                                                        <span class="fa  icon-picture-2"></span>  Author 
-                                                        <span class="fa icon-five-openclose" data-original-title="Click to expand/close" data-toggle="tooltip" title=""></span>
-                                                    </h3>
-                                                    <hr />
-                                                </div>
-                               	</div>
-                               										
-                                <div class="row five-openclose-content">
-                                       <div class="col-sm-12" >
-                                                   <div class="input-group-sm">
-
-                                                       <input name="author" type="text" class="form-control input-small pic-title" placeholder="author" value="{{blog.author()}}" required="required" />
-                                                   </div>
-                                                                                
-                                           </div>
-                                </div>  
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button id="save_btn" class="btn btn-default">
-                                            Save
-                                        </button>
-                                        <button type="button" id="cancle_btn" class="btn btn-default">
-                                            Cancle
-                                        </button>
+                            <div class="col-md-6"  id="author-panel">
+                                <div>
+                                    <div class="row" >    
+                                                    <div class="col-md-12">
+                                                        <h3 class="five-openclose-header">
+                                                            <span class="fa  icon-picture-2"></span>  Author 
+                                                            <span class="fa icon-five-openclose" data-original-title="Click to expand/close" data-toggle="tooltip" title=""></span>
+                                                        </h3>
+                                                        <hr />
+                                                    </div>
+                                                   
                                     </div>
+
+                                    <div class="row five-openclose-content">
+                                           <div class="col-sm-12" >
+                                                       <div class="input-group-sm">
+
+                                                           <input name="author" type="text" class="form-control input-small pic-title" placeholder="author *" value="{{blog.author()}}" required="required" />
+                                                       </div>
+                                                       <div id="error-author-msg-box" style="visibility: hidden;"></div>
+                                               </div>
+                                    </div>  
                                 </div>
+
                            </div>
                                                    
                             <div class="col-md-6"> 
@@ -542,6 +536,23 @@ border-bottom-right-radius: 0;
                            </div>                       
                                                    
                        </div> 	
+                                
+                       <div class="row">
+                           <div class="col-md-6"  id="author-panel">
+                                <div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button id="save_btn" class="btn btn-default">
+                                                Save
+                                            </button>
+                                            <button type="button" id="cancle_btn" class="btn btn-default">
+                                                Cancle
+                                            </button>
+                                        </div>
+                                    </div>
+                                 </div>
+                            </div>
+                       </div>
                                                      
      
                     </div>
@@ -965,6 +976,15 @@ var handlePictureUpdateBtnClick = function()
 
 $( document ).ready( function()
 {    
+{#    
+ //for debug: safari not support HTML5 
+        $( '#imagedata-main-main' ).parent().find( 'input[name="titleTextEn"]' ).removeAttr('required');
+        $( '#imagedata-main-main' ).parent().find( 'input[name="titleTextFr"]' ).removeAttr('required');
+        $( '#imagedata-main-main' ).parent().find( 'textarea[name="introTextEn"]' ).removeAttr('required');
+        $( '#imagedata-main-main' ).parent().find( 'textarea[name="introTextFr"]' ).removeAttr('required');  
+        $( 'input[name="author"]' ).removeAttr('required');  
+       #} 
+    
     $( document ).on( 'click', '.picture-box .picture_delete', handlePictureBoxDeleteClick );
     $( document ).on( 'click', '.picture-box .edit_cancel, .picture-box .edit', handlePictureBoxEditCancelClick );
 
@@ -973,10 +993,6 @@ $( document ).ready( function()
              
     $( "#blog-form" ).submit(function(e){
               
-              //console.log("s: "  + CKEDITOR.instances["blogEn"].getData() );
-              //console.log("f: "  + CKEDITOR.instances["blogFr"].getData() );
-              //console.log( '' );return;	 
-
             var data  =  { 'data': {
             'id': $('input[name=blog_id]').val(),
             
@@ -989,12 +1005,6 @@ $( document ).ready( function()
             'BlogEn' :     CKEDITOR.instances["blogEn"].getData(),
             'BlogFr' :     CKEDITOR.instances["blogFr"].getData(),
 
-{#          'imageText1En' : $( '#imagedata-main-img1' ).parent().find( 'textarea[name="imageText1En"]' ).val(),
-            'imageText1Fr' : $( '#imagedata-main-img1' ).parent().find( 'textarea[name="imageText1Fr"]' ).val(),            
-            
-            'imageText2En' : $( '#imagedata-main-img2' ).parent().find( 'textarea[name="imageText2En"]' ).val(),
-            'imageText2Fr' : $( '#imagedata-main-img2' ).parent().find( 'textarea[name="imageText2Fr"]' ).val(),  #}
-
             'imageText1En' : '',
             'imageText1Fr' : '',            
             
@@ -1005,8 +1015,6 @@ $( document ).ready( function()
             'permaLinkFr' : $( '#imagedata-main-main' ).parent().find( 'input[name="permaLinkFr"]' ).val(),  
             
             'imageMain' :  $( '#image_main_src' ).attr('src'),   
-{#            'image1' :  $( '#image1_src' ).attr('src'),   
-            'image2' :  $( '#image2_src' ).attr('src'),  #} 
                                 
             'image1' : '',
             'image2' : '',
@@ -1015,7 +1023,70 @@ $( document ).ready( function()
             
             'author' : $( 'input[name="author"]' ).val() 
     } };
-            //console.log( $( 'input[name="blog_tags"]' ).val() );
+        //  data validate if HTML 5 required not working
+
+            var error = false;
+            if ( data.data.titleTextEn == "" || data.data.titleTextFr == "" || data.data.introTextEn == "" || data.data.introTextFr == "" )
+            {
+
+                    var err_msg = "";
+                    if ( data.data.titleTextEn == "" )
+                        err_msg = err_msg + "<div style='color: red;'>* Title (English) should not be empty.</div>"
+                    if ( data.data.introTextEn == "" )
+                        err_msg = err_msg + "<div style='color: red;'>* Intro (English) should not be empty.</div>"
+                    if ( data.data.titleTextFr == "" )
+                        err_msg = err_msg + "<div style='color: red;'>* Title (France) should not be empty.</div>"
+                    if ( data.data.introTextFr == "" )
+                        err_msg = err_msg + "<div style='color: red;'>* Intro (France) should not be empty.</div>"
+                   
+                    err_msg = err_msg + "<hr />";
+                    
+                    $('#detail-panel').focus();
+                    
+                    $('#detail-panel').attr('style', "border-style: solid; border-color: red");
+                    $('#error-msg-box').html(err_msg);
+                    $('#error-msg-box').attr('style', '');
+                    
+                    error = true;
+            }
+            else
+            {
+                
+                $('#detail-panel').attr('style', '');
+                $('#error-msg-box').attr('style', 'visibility: hidden;');
+                $('#error-msg-box').html('');
+            }
+
+            
+            if ( data.data.author == "" )
+            {
+                var err_msg_author = "";
+                        err_msg_author = err_msg_author + "<div style='color: red;'>* Author Name should not be empty.</div>"
+                        
+                err_msg_author = err_msg_author + "<hr />";
+                    error = true;
+                    
+                if (!error)
+                    $('#author-panel').focus();
+                
+                
+                $('#author-panel').attr('style', "border-style: solid; border-color: red");
+                $('#error-author-msg-box').html(err_msg_author);
+                $('#error-author-msg-box').attr('style', '');     
+            }
+            else
+            {
+                                    
+                $('#author-panel').attr('style', '');
+                $('#error-author-msg-box').attr('style', 'visibility: hidden;');
+                $('#error-author-msg-box').html('');
+
+            }
+            
+            if ( error )
+                return false;
+            //
+
             jQuery.ajax( {
                 type:     'POST',
                 url:      '/admin/blog/save',
@@ -1054,69 +1125,7 @@ $( document ).ready( function()
 
     		return false;
 		});  
-/*
-    $( '#save_btn' ).on( 'click', function()
-    {
-       	
-   		   var data  =  { 'data': {
-    
-            'id': $('input[name=blog_id]').val(),
-            
-            'titleTextEn' : $( '#imagedata-main-main' ).parent().find( 'input[name="titleTextEn"]' ).val(),
-            'titleTextFr' : $( '#imagedata-main-main' ).parent().find( 'input[name="titleTextFr"]' ).val(),
-            
-            'introTextEn' : $( '#imagedata-main-main' ).parent().find( 'textarea[name="introTextEn"]' ).val(),
-            'introTextFr' : $( '#imagedata-main-main' ).parent().find( 'textarea[name="introTextFr"]' ).val(),
-            
-            'BlogEn' :      $( '#imagedata-main-main' ).parent().find( 'textarea[name="blogEn"]' ).val(),
-            'BlogFr' :      $( '#imagedata-main-main' ).parent().find( 'textarea[name="blogFr"]' ).val(),
 
-			   'imageText1En' : $( '#imagedata-main-img1' ).parent().find( 'textarea[name="imageText1En"]' ).val(),
-            'imageText1Fr' : $( '#imagedata-main-img1' ).parent().find( 'textarea[name="imageText1Fr"]' ).val(),            
-            
- 			   'imageText2En' : $( '#imagedata-main-img2' ).parent().find( 'textarea[name="imageText2En"]' ).val(),
-            'imageText2Fr' : $( '#imagedata-main-img2' ).parent().find( 'textarea[name="imageText2Fr"]' ).val(),  
-            
-            'imageMain' :  $( '#image_main_src' ).attr('src'),   
-            'image1' :  $( '#image1_src' ).attr('src'),   
-            'image2' :  $( '#image2_src' ).attr('src'),       
-            
-            'author' : $( 'input[name="author"]' ).val() 
-    } };
-            jQuery.ajax( {
-                type:     'POST',
-                url:      '/admin/blog/save',
-                data:     data,
-                dataType: 'json',
-                cache:    false,             
-                
-                error: function( result, txt )
-                {            
-                    console.log( result );
-                },
-
-                success: function( result )
-                {
-                  	console.log(typeof(result.error));
-                  	return;
-                    //check for requier field, not need now
-                		if( typeof(result.error) == 'object' )
-                		{
-									//console.log( result.error ); 
-									//for (var key in result.error) 
-									//{
-									//	console.log( "d: " + key +" : " + result.error[key] + " " );	
-										//$( 'input[name="' + key + '_error"]' ) );
-									//}
-									//return;               		
-                		}
-					
-                    window.location.href = '{{ path( "five_admin_blog_list", { context: context } ) }}?alert_type=success';
-                }
-            } );        
-    } );
-  
-*/    
     $( '#cancle_btn' ).on( 'click', function()
     {
     	 window.location.href = '{{ path( "five_admin_blog_list", { context: context } ) }}?alert_type=cancle';

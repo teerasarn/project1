@@ -35,7 +35,7 @@
                     <p>{{ blog.introText(50) }}</p>
                     <a href="{{ path( 'header.menu.blog_article_link' | trans  ,  { 'permalink': blog.getPermaLink()  } ) }}" class="readmore_btn">{{ 'blog.blog_readmore' | trans({}, 'blog') }}</a>
                     {#<span class="datetime"><time datetime="{{ blog.created|date('c') }}">{{ blog.created|date('F j, Y') }}</time></span>#}
-                    <span class="datetime"><time datetime="{{ blog.created|date('c') }}"> {{ blog.getDateLocale(blog.created,  app.request.locale  , '%B %e, %Y' ) }}</time></span>
+                    <span class="datetime"><time datetime="{{ blog.created|date('c') }}"> {{ blog.getDateLocale(blog.created,  app.request.locale  , '' ) }}</time></span>
                   </div>
               {% else %} 
                    <div class="blog-item no-prev">
@@ -53,7 +53,7 @@
                     <p>{{ blog.introText(50) }}</p>
                     <a href="{{ path( 'header.menu.blog_article_link' | trans  ,  { 'permalink': blog.getPermaLink()  } ) }}" class="readmore_btn">{{ 'blog.blog_readmore' | trans({}, 'blog') }}</a>
                    {# <span class="datetime"><time datetime="{{ blog.created|date('c') }}">{{ blog.created|date('F j, Y') }}</time></span>#}
-                   <span class="datetime"><time datetime="{{ blog.created|date('c') }}"> {{ blog.getDateLocale(blog.created,  app.request.locale  , '%B %e, %Y' ) }}</time></span>
+                   <span class="datetime"><time datetime="{{ blog.created|date('c') }}"> {{ blog.getDateLocale(blog.created,  app.request.locale  , '' ) }}</time></span>
                    
                   </div> 
                     
