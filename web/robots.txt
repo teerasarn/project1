@@ -1,7 +1,0 @@
-User-agent: *
-Allow: /
-Allow: /en/*
-Allow: /fr/*
-Disallow: /admin
-
-sitemap: http://cuisinesverdun.com/sitemap.xml
