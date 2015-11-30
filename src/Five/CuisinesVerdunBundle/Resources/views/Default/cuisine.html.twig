@@ -1,0 +1,314 @@
+{% extends 'FiveCuisinesVerdunBundle::base.html.twig' %}
+
+{% block bodyTag %}
+
+  <body class="{{ page }} {{ app.request.get( '_locale' ) }}{% if is_mobile()  %} mobile{% endif %}">
+
+{% endblock %}
+
+{% block content %}
+  <section id="header-section">
+    <div class="header-1 inner-shadow">
+      <div class="container">
+        <div class="row">
+          <div class="float-block">
+            <h1>{{ 'h1' | trans({}, page) | raw }}</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="header-2">
+      <div class="image-holder inner-shadow"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-7 col-sm-offset-5">
+            <h2>{{ 'header_section.title' | trans({}, page) | raw }}</h2>
+            <h5>{{ 'header_section.subtitle' | trans({}, page) | raw }}</h5>
+            <p>{{ 'header_section.text' | trans({}, page) | raw }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="header-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-7 aligned-right">
+            <h2>{{ 'header_section.title_2' | trans({}, page) | raw }}</h2>
+            <h5>{{ 'header_section.subtitle_2' | trans({}, page) | raw }}</h5>
+            <p>{{ 'header_section.text_2' | trans({}, page) | raw }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="image-holder inner-shadow"></div>
+
+    </div>
+  </section>
+
+  <section id="styles-section">
+    <div class="container">
+      {#<div class="row products-row">
+        <div class ="col-md-12">
+          <h4>{{ 'styles_section.products_title' | trans({}, page) | raw }}</h4>
+          <hr class="hr-green-200">
+        </div>
+      </div>#}
+      <div class="row">
+        <div class ="col-md-8 col-md-offset-2">
+          <h2 id="styles">{{ 'styles_section.title' | trans({}, page) | raw }}</h2>
+          <h5>{{ 'styles_section.subtitle' | trans({}, page) | raw }}</h5>
+          <p>{{ 'styles_section.text' | trans({}, page) | raw }}</p>
+        </div>
+      </div>
+      <hr class="hr-green-200">
+    </div>
+    <div class="container-fluid styles-grid">
+    {% if page == 'cuisine' %}
+      <div class="row styles-grid-row">
+        <div class="col-xs-9">
+          <div class="container-fluid">
+            <div class="row" style="padding-top: 0;">
+              <div class="col-xs-6">
+
+                <div class="style-image style-1 inner-shadow" style="background-image:url({{ styleGalleries[0].getCoverImage().getSrc() }});">
+                  <div class="gallery-link">
+                    <a href="{{ styleGalleries[0].getCoverImage().getSrc() }}"><img src="{{ styleGalleries[0].getCoverImage().getSrcThumb() }}"  title="{{ '<h4>' ~ styleGalleries[0].getCoverImage().getTitle() ~ '</h4>' ~ styleGalleries[0].getCoverImage().getDescription() }}">
+                      
+
+                        <p>{{ styles[0].getTitle() }}</p></a>
+
+                    {% for img in styleGalleries[0].getImages() %}
+                      {% if img.getSrc() != styleGalleries[0].getCoverImage().getSrc() %}
+                      <a href="{{ img.getSrc() }}"><img src="{{ img.getSrcThumb() }}"  title="{{ '<h4>' ~ img.getTitle() ~ '</h4>' ~ img.getDescription() }}"></a>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-xs-6">
+                <div class="style-image style-2 inner-shadow" style="background-image:url({{ styleGalleries[1].getCoverImage().getSrc() }});">
+                  <div class="gallery-link">
+                    <a href="{{ styleGalleries[1].getCoverImage().getSrc() }}"><img src="{{ styleGalleries[1].getCoverImage().getSrcThumb() }}"  title="{{ '<h4>' ~ styleGalleries[1].getCoverImage().getTitle() ~ '</h4>' ~ styleGalleries[1].getCoverImage().getDescription() }}">
+                      
+
+                        <p>{{ styles[1].getTitle() }}</p></a>
+
+                    {% for img in styleGalleries[1].getImages() %}
+                      {% if img.getSrc() != styleGalleries[1].getCoverImage().getSrc() %}
+                      <a href="{{ img.getSrc() }}"><img src="{{ img.getSrcThumb() }}"  title="{{ '<h4>' ~ img.getTitle() ~ '</h4>' ~ img.getDescription() }}"></a>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>                
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+          <div class="style-image style-4 inner-shadow" style="background-image:url({{ styleGalleries[3].getCoverImage().getSrc() }});">
+            <div class="gallery-link">
+                    <a href="{{ styleGalleries[3].getCoverImage().getSrc() }}"><img src="{{ styleGalleries[3].getCoverImage().getSrcThumb() }}"  title="{{ '<h4>' ~ styleGalleries[3].getCoverImage().getTitle() ~ '</h4>' ~ styleGalleries[3].getCoverImage().getDescription() }}">
+                      
+
+                        <p>{{ styles[3].getTitle() }}</p></a>
+
+                    {% for img in styleGalleries[3].getImages() %}
+                      {% if img.getSrc() != styleGalleries[3].getCoverImage().getSrc() %}
+                      <a href="{{ img.getSrc() }}"><img src="{{ img.getSrcThumb() }}"  title="{{ '<h4>' ~ img.getTitle() ~ '</h4>' ~ img.getDescription() }}"></a>
+                      {% endif %}
+                    {% endfor %}
+            </div>
+          </div>
+
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-3">
+
+
+          <div class="style-image style-3 inner-shadow" style="background-image:url({{ styleGalleries[2].getCoverImage().getSrc() }});">
+            <div class="gallery-link">
+                    <a href="{{ styleGalleries[2].getCoverImage().getSrc() }}"><img src="{{ styleGalleries[2].getCoverImage().getSrcThumb() }}"  title="{{ '<h4>' ~ styleGalleries[2].getCoverImage().getTitle() ~ '</h4>' ~ styleGalleries[2].getCoverImage().getDescription() }}">
+                      
+
+                        <p>{{ styles[2].getTitle() }}</p></a>
+
+                    {% for img in styleGalleries[2].getImages() %}
+                      {% if img.getSrc() != styleGalleries[2].getCoverImage().getSrc() %}
+                      <a href="{{ img.getSrc() }}"><img src="{{ img.getSrcThumb() }}"  title="{{ '<h4>' ~ img.getTitle() ~ '</h4>' ~ img.getDescription() }}"></a>
+                      {% endif %}                      
+                    {% endfor %} 
+            </div>
+          </div>
+        </div>
+      </div>
+    {% else %} {#/////////////////////////////////////////////*******************************************////////////////////////#}
+      <div class="row styles-grid-row">
+        <div class="col-xs-4">
+          <div class="container-fluid">
+            <div class="row" style="padding-top: 0;">
+              <div class="col-xs-12">
+                <div class="style-image style-1 inner-shadow" style="background-image:url({{ styleGalleries[0].getCoverImage().getSrc() }});">
+                  <div class="gallery-link">
+                    <a href="{{ styleGalleries[0].getCoverImage().getSrc() }}"><img src="{{ styleGalleries[0].getCoverImage().getSrcThumb() }}"  title="{{ '<h4>' ~ styleGalleries[0].getCoverImage().getTitle() ~ '</h4>' ~ styleGalleries[0].getCoverImage().getDescription() }}">
+                      
+
+                        <p>{{ styles[0].getTitle() }}</p></a>
+
+                    {% for img in styleGalleries[0].getImages() %}
+                      {% if img.getSrc() != styleGalleries[0].getCoverImage().getSrc() %}
+                      <a href="{{ img.getSrc() }}"><img src="{{ img.getSrcThumb() }}"  title="{{ '<h4>' ~ img.getTitle() ~ '</h4>' ~ img.getDescription() }}"></a>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="style-image style-2 inner-shadow" style="background-image:url({{ styleGalleries[1].getCoverImage().getSrc() }});">
+                  <div class="gallery-link">
+
+                    <a href="{{ styleGalleries[1].getCoverImage().getSrc() }}"><img src="{{ styleGalleries[1].getCoverImage().getSrcThumb() }}"  title="{{ '<h4>' ~ styleGalleries[1].getCoverImage().getTitle() ~ '</h4>' ~ styleGalleries[1].getCoverImage().getDescription() }}">
+                      
+
+                        <p>{{ styles[1].getTitle() }}</p></a>
+
+                    {% for img in styleGalleries[1].getImages() %}
+                      {% if img.getSrc() != styleGalleries[1].getCoverImage().getSrc() %}
+                      <a href="{{ img.getSrc() }}"><img src="{{ img.getSrcThumb() }}"  title="{{ '<h4>' ~ img.getTitle() ~ '</h4>' ~ img.getDescription() }}"></a>
+                      {% endif %}
+                    {% endfor %}
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-4">
+
+          <div class="style-image style-3 inner-shadow" style="background-image:url({{ styleGalleries[2].getCoverImage().getSrc() }});">
+            <div class="gallery-link">
+                    <a href="{{ styleGalleries[2].getCoverImage().getSrc() }}"><img src="{{ styleGalleries[2].getCoverImage().getSrcThumb() }}"  title="{{ '<h4>' ~ styleGalleries[2].getCoverImage().getTitle() ~ '</h4>' ~ styleGalleries[2].getCoverImage().getDescription() }}">
+                      
+
+                        <p>{{ styles[2].getTitle() }}</p></a>
+
+                    {% for img in styleGalleries[2].getImages() %}
+                      {% if img.getSrc() != styleGalleries[2].getCoverImage().getSrc() %}
+                      <a href="{{ img.getSrc() }}"><img src="{{ img.getSrcThumb() }}"  title="{{ '<h4>' ~ img.getTitle() ~ '</h4>' ~ img.getDescription() }}"></a>
+                      {% endif %}                      
+                    {% endfor %} 
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <div class="style-image style-4 inner-shadow" style="background-image:url({{ styleGalleries[3].getCoverImage().getSrc() }});">
+            <div class="gallery-link">
+                    <a href="{{ styleGalleries[3].getCoverImage().getSrc() }}"><img src="{{ styleGalleries[3].getCoverImage().getSrcThumb() }}"  title="{{ '<h4>' ~ styleGalleries[3].getCoverImage().getTitle() ~ '</h4>' ~ styleGalleries[3].getCoverImage().getDescription() }}">
+                      
+
+                        <p>{{ styles[3].getTitle() }}</p></a>
+
+                    {% for img in styleGalleries[3].getImages() %}
+                      {% if img.getSrc() != styleGalleries[3].getCoverImage().getSrc() %}
+                      <a href="{{ img.getSrc() }}"><img src="{{ img.getSrcThumb() }}"  title="{{ '<h4>' ~ img.getTitle() ~ '</h4>' ~ img.getDescription() }}"></a>
+                      {% endif %}
+                    {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+    </div>
+  </section>
+
+  <section id="materials-section">
+    <div class="container">
+      <div class="row">
+        <div class ="col-md-8 col-md-offset-2">
+          <h2 id="materials">{{ 'materials_section.title' | trans({}, page) | raw }}</h2>
+          <h5>{{ 'materials_section.subtitle' | trans({}, page) | raw }}</h5>
+          <p>{{ 'materials_section.text' | trans({}, page) | raw }}</p>
+          {#<a href="#" class="btn btn-primary">{{ 'materials_section.button' | trans({}, page) | raw }}</a>#}
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row mat-grid">
+        
+          {% for mat in materialGalleries %}
+            {% if loop.index <= 6 %}
+            {#% for img in materialsImages[mat.id] %#}
+
+
+
+
+                <div class="col-xs-6 col-sm-6 col-md-4 material-cell material-cell-{{ mat.getCoverImage().getId() }} inner-shadow" style="background-image: url('{{ mat.getCoverImage().getSrc() }}')">
+                  <div class="gallery-link">                    
+                    <a href="{{ mat.getCoverImage().getSrc() }}"><img src="{{ mat.getCoverImage().getSrcThumb() }}"  title="{{ '<h4>' ~ mat.getCoverImage().getTitle() ~ '</h4>' ~ mat.getCoverImage().getDescription() }}">
+                      <p>{{ mat.getCategories().last().getTitle() }}</p>
+                    </a>
+            {% for img in mat.getImages() %}
+              
+                    {% if img.getSrc() != mat.getCoverImage().getSrc() %}
+                    <a href="{{ img.getSrc() }}"><img src="{{ img.getSrcThumb() }}"  title="{{ '<h4>' ~ img.getTitle() ~ '</h4>' ~ img.getDescription() }}"></a>
+                    {% endif %}
+              
+            {% endfor %}
+            {% endif %}
+            </div>
+            </div>
+          {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section id="ideas-section">
+    <div class="ideas">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-7 aligned-right">
+            <h2>{{ 'ideas_section.title' | trans({}, page) | raw }}</h2>
+            <h5>{{ 'ideas_section.subtitle' | trans({}, page) | raw }}</h5>
+            <p>{{ 'ideas_section.text' | trans({}, page) | raw }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="image-holder inner-shadow"></div>
+
+    </div>
+  </section>
+
+  <section id="partners-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6"><img src="{{ asset( assets_path ~ 'partners_section.image' | trans({}, page) ) }}"/></div>
+        <div class="col-sm-6">
+          <h2>{{ 'partners_section.title' | trans({}, page) | raw }}</h2>
+          <h5>{{ 'partners_section.subtitle' | trans({}, page) | raw }}</h5>
+          <p>{{ 'partners_section.text' | trans({}, page) | raw }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  {#
+  <section id="warranty-section">
+    <div class="warranty">
+      <div class="image-holder inner-shadow"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-7 col-sm-offset-5">
+            <h2>{{ 'guarantee_section.title' | trans({}, page) | raw }}</h2>
+            <p><strong>{{ 'guarantee_section.subtitle' | trans({}, page) | raw }}</strong> {{ 'guarantee_section.text' | trans({}, page) | raw }}</p>
+            <p><a href="{{ 'guarantee_section.details_link' | trans({}, page) | raw }}" target="_blank" class="more-link">{{ 'guarantee_section.details_link_text' | trans({}, page) | raw }}</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  #}
+
+{% endblock %}

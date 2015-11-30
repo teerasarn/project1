@@ -1,0 +1,41 @@
+security:
+    encoders:
+        Five\AdminBundle\Entity\User: sha512
+        #Symfony\Component\Security\Core\User\User: plaintext
+
+    role_hierarchy:
+        ROLE_ADMIN:       [ROLE_USER, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        #chain_provider:
+            #chain:
+            #    providers: [in_memory, userservice]
+        custom:
+            id: five_admin.user_manager
+        administrators:
+            entity: { class: Five\AdminBundle\Entity\User, property: email }
+
+        # in_memory:
+        #     memory:
+        #         users:
+        #             user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+        #             admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+
+    firewalls:
+        main:
+            pattern: ^/
+            form_login:
+                provider: custom
+                login_path: login
+                check_path: login_check
+                #csrf_provider: form.csrf_provider
+            logout:       true
+            anonymous:    true
+
+    access_control:
+        - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin$, role: ROLE_ADMIN }
+        - { path: ^/admin/$, role: ROLE_ADMIN }

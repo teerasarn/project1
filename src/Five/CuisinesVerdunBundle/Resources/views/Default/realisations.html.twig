@@ -1,0 +1,64 @@
+{% extends 'FiveCuisinesVerdunBundle::base.html.twig' %}
+
+{% block bodyTag %}
+
+  <body class="{{ page }} {{ app.request.get( '_locale' ) }}{% if is_mobile()  %} mobile{% endif %}">
+
+{% endblock %}
+
+{% block content %}
+  {#
+  <section id="header-section">
+    <div class="header-1 inner-shadow">
+      <div class="container">
+        <div class="row">
+          <div class="float-block">
+            <h1>{{ 'h1' | trans({}, page) | raw }}</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  #}
+  <section id="portfolio-section">
+    <div id="portfolio-filters" class="clearfix">
+      <div class="form-centered" id="filters_wrapper">
+        <div>
+          <span class="filters-title">{{ 'filters.title' | trans({}, page) | raw }}:</span>
+          <label for="sel_rooms">{{ 'filters.rooms' | trans({}, page) | raw }}</label>
+        </div>
+        <select id="sel_rooms" name="sel_rooms" class="turnintodropdown">
+          <option value="-1" selected="selected">{{ 'filters.choose' | trans({}, page) }}</option>
+          {% for room in dropdownRooms %}
+              {#<option value="{{ room.getName() }}">{{ room.getTitle() }}</option>#}
+              <option value="{{ room.getId() }}">{{ room.getTitle() }}</option>
+          {% endfor %}
+
+        </select>
+        <div>
+          <label for="sel_styles">Style</label>
+        </div>
+        <select id="sel_styles" name="sel_rooms" class="turnintodropdown">
+          <option value="-1" selected="selected">{{ 'filters.choose' | trans({}, page) }}</option>
+          {% for style in dropdownStyles %}
+              {#<option value="{{ style.getName() }}">{{ style.getTitle() }}</option>#}
+              <option value="{{ style.getId() }}">{{ style.getTitle() }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="container-fluid" id="images_wrapper">
+      <div class="row portfolio-grid">
+    </div>
+    <div class="add-more-block">
+      <a href="#" class="add-more">
+        {{ 'filters.add_more' | trans({}, page) | raw }}
+      </a>
+    </div>
+  </section>
+  
+
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+{% endblock %}

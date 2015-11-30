@@ -1,0 +1,10 @@
+  <link type="text/css" rel="stylesheet" href="http://fast.fonts.net/cssapi/4b53aaba-2c0a-4b7b-b2bf-bbd37a92ae23.css"/>
+    {% stylesheets '@FiveCuisinesVerdunBundle/Resources/public/css/bootstrap.css'
+        '@FiveCuisinesVerdunBundle/Resources/public/css/photobox.css'        
+        '@FiveCuisinesVerdunBundle/Resources/public/css/main.css'
+        filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+    <link rel="stylesheet" href="{{ asset( assets_path ~ 'css/' ~ page ~ '.css' ) }}">
+    <link rel="stylesheet" href="/bundles/fivecuisinesverdun/css/animate.css" >
+    <link rel="stylesheet" href="/bundles/fivecuisinesverdun/css/promotions.css" >

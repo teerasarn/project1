@@ -1,0 +1,19 @@
+five_admin_user_list:
+    path:     /
+    defaults: { _controller: FiveAdminBundle:User:list, options: 'five_admin.crud.user_list' }
+
+five_admin_user_edit:
+    path:     /{id}/edit
+    defaults: { _controller: FiveAdminBundle:User:edit, options: 'five_admin.crud.user_edit' }
+
+five_admin_user_delete:
+    path:     /{id}/delete
+    defaults: { _controller: FiveAdminBundle:User:delete, options: 'five_admin.crud.user_delete' , entityName: 'AurayCapitalSiteBundle:User'}
+
+five_admin_user_create:
+    path:     /create
+    defaults: { _controller: FiveAdminBundle:User:create, options: 'five_admin.crud.user_create' }
+
+_user_new:
+    path:     /new_user
+    defaults: { _controller: FiveAdminBundle:User:userCreate }

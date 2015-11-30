@@ -1,0 +1,127 @@
+
+# gen_galleries:
+#     pattern:  /gen-galleries
+#     defaults: { _controller: "FiveCuisinesVerdunBundle:Default:generateGalleries" }
+#     requirements:
+#         _locale: en
+
+mapgalleries:
+    pattern: /map-galleries
+    defaults: {_controller: "FiveCuisinesVerdunBundle:Default:mapImagesToGalleries" }
+
+mappings:
+    pattern: /mappings
+    defaults: {_controller: "FiveCuisinesVerdunBundle:Default:setMapping"}
+
+redirect:
+    pattern:  /
+    defaults: { _controller: FiveCuisinesVerdunBundle:User:root }
+
+index_en:
+    pattern:  /{_locale}
+    defaults: { _controller: "FiveCuisinesVerdunBundle:User:index" }
+    requirements:
+        _locale: en
+
+index_fr:
+    pattern:  /{_locale}
+    defaults: { _controller: "FiveCuisinesVerdunBundle:User:index" }
+    requirements:
+        _locale: fr
+
+contact_en:
+    pattern:  /{_locale}/contact
+    defaults: { _controller: "FiveCuisinesVerdunBundle:User:contact" }
+    requirements:
+        _locale: en
+
+contact_fr:
+    pattern:  /{_locale}/contact
+    defaults: { _controller: "FiveCuisinesVerdunBundle:User:contact" }
+    requirements:
+        _locale: fr
+
+cuisine_en:
+    pattern:  /{_locale}/kitchen-renovation
+    defaults: { _controller: "FiveCuisinesVerdunBundle:User:cuisine" }
+    requirements:
+        _locale: en
+
+cuisine_fr:
+    pattern:  /{_locale}/renovation-cuisine
+    defaults: { _controller: "FiveCuisinesVerdunBundle:User:cuisine" }
+    requirements:
+        _locale: fr
+
+entreprise_en:
+    pattern:  /{_locale}/company
+    defaults: { _controller: "FiveCuisinesVerdunBundle:User:entreprise" }
+    requirements:
+        _locale: en
+
+entreprise_fr:
+    pattern:  /{_locale}/entreprise
+    defaults: { _controller: "FiveCuisinesVerdunBundle:User:entreprise" }
+    requirements:
+        _locale: fr
+
+salledebain_en:
+    pattern:  /{_locale}/bathroom-renovation
+    defaults: { _controller: "FiveCuisinesVerdunBundle:User:salledebain" }
+    requirements:
+        _locale: en
+
+salledebain_fr:
+    pattern:  /{_locale}/renovation-salle-de-bain
+    defaults: { _controller: "FiveCuisinesVerdunBundle:User:salledebain" }
+    requirements:
+        _locale: fr
+
+realisations_en:
+    pattern:  /{_locale}/projects
+    defaults: { _controller: "FiveCuisinesVerdunBundle:User:realisations" }
+    requirements:
+        _locale: en
+
+realisations_fr:
+    pattern:  /{_locale}/realisations
+    defaults: { _controller: "FiveCuisinesVerdunBundle:User:realisations" }
+    requirements:
+        _locale: fr
+
+services_en:
+    pattern:  /{_locale}/services
+    defaults: { _controller: "FiveCuisinesVerdunBundle:User:services" }
+    requirements:
+        _locale: en
+
+services_fr:
+    pattern:  /{_locale}/services
+    defaults: { _controller: "FiveCuisinesVerdunBundle:User:services" }
+    requirements:
+        _locale: fr
+
+admin_home:
+    pattern:  /admin
+    defaults: { _controller: "FiveCuisinesVerdunBundle:Admin:home" }
+
+admin_info:
+    pattern:  /admin/info
+    defaults: { _controller: "FiveCuisinesVerdunBundle:Admin:info" }
+
+admin_carrousels:
+    pattern:  /admin/carrousels
+    defaults: { _controller: "FiveCuisinesVerdunBundle:Admin:carrousels" }
+
+admin_api:
+    pattern:  /admin/api
+    defaults: { _controller: "FiveCuisinesVerdunBundle:Admin:api" }
+
+#email_test:
+#    pattern:  /email_test
+#    defaults: { _controller: "FiveCuisinesVerdunBundle:Default:emailTest" }
+
+api_carousel_images:
+    pattern: /api/fetchCarousel
+    defaults: { _controller: "FiveCuisinesVerdunBundle:Default:fetchCarousel" }
+

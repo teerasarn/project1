@@ -1,0 +1,87 @@
+{% set query         = app.request.attributes.get('_route_params') %}
+{% set locale_switch = ( app.request.get( '_locale' ) == 'en' ) ? 'fr' : 'en' %}
+
+<!doctype html>
+<html class="no-js">
+
+    <head>
+        {% block headMeta %}
+            {% include 'FiveAdminBundle:Layout:head-meta.html.twig' %}
+        {% endblock %}
+
+        <!-- [ STYLESHEETS ] start > -->
+        {% block css %}
+            {% include 'FiveAdminBundle:Layout:stylesheets.html.twig' %}           
+            <link rel="stylesheet" href="{{ asset('bundles/lexiktranslation/ng-table/ng-table.min.css') }}">
+        {% endblock %}
+        <!-- [ STYLESHEETS ] end | -->        
+
+        {% block head %}{% endblock %}     
+
+    </head>
+    
+    {% block bodyTag %}
+        <body class="skin-black">
+    {% endblock %}
+    
+        <!-- [ Body Content ] start > -->
+        {% block bodyContent %}
+
+            {% block header %}
+                {% include 'FiveAdminBundle:Layout:header.html.twig' %}
+            {% endblock %}
+
+            <div class="wrapper row-offcanvas row-offcanvas-left">
+                <!-- Left side column. contains the logo and sidebar -->
+
+                {% include 'FiveAdminBundle:Layout:sidebar.html.twig' %}
+
+                <!-- Right side column. Contains the navbar and content of the page -->
+                <aside class="right-side">
+
+                    <!-- Content Header (Page header) -->
+                    {% include 'FiveAdminBundle:Layout:content-header.html.twig' %}
+
+                    <!-- Main content -->
+                    <section class="content">
+                        {% block flash_message %}
+                        {% set flashes = app.session.flashbag.all() %}
+                        {% set css = {'error': 'warning', 'success': 'success'} %}
+
+                        {% if flashes | length > 0 %}
+                            <div class="row">
+                                <div class="col-md-12">
+                            {% for type, messages in flashes %}
+                                {% for message in messages %}
+                                    <div class="alert alert-{{ css[type] }}">{{ message }}</div>
+                                {% endfor %}
+                            {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% endblock flash_message %}                        
+                        {% block content %}{% endblock %}
+
+                    </section><!-- /.content -->
+                </aside><!-- /.right-side -->
+            </div><!-- ./wrapper -->
+                      
+    
+            <!-- [ FOOTER ] start > -->
+            {% block footer %}
+                {% include 'FiveAdminBundle:Layout:footer.html.twig' %}
+            {% endblock %}
+            <!-- [ FOOTER ] end | -->
+            
+            <!-- [ SCRIPTS ] start > -->
+            {% block js %}
+                {% include 'FiveAdminBundle:Layout:javascripts.html.twig' %}
+            {% endblock %}            
+            <!-- [ SCRIPTS ] end | -->        
+
+        {% endblock %}        
+        <!-- [ BODY CONTENT ] end | -->
+
+    </body>
+
+</html>

@@ -1,0 +1,43 @@
+login:
+    path:     /admin/login
+    defaults: { _controller: FiveAdminBundle:Security:login }
+
+logout:
+    path:     /logout
+    defaults: { _controller: FiveAdminBundle:Security:logout }
+
+login_check:
+    path:     /login_check
+    defaults: { _controller: FiveAdminBundle:Security:check }
+
+login_success:
+    path: /login_success
+    defaults: { _controller: FiveAdminBundle:Security:loginSuccess }
+
+login_error:
+    path: /login_error
+    defaults: { _controller: FiveAdminBundle:Security:loginError }
+
+five_cuisines_verdun:
+    resource: "@FiveCuisinesVerdunBundle/Resources/config/routing.yml"
+    prefix:   /
+
+five_cuisines_verdun_api:
+    resource: "@FiveCVApiBundle/Resources/config/routing.yml"
+    prefix:   /api/{_locale}
+
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc
+
+five_admin:
+    resource: "@FiveAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+    
+blogger_blog:
+    resource: "@BloggerBlogBundle/Resources/config/routing.yml"
+    prefix:   /    
+    
+elfinder:
+     resource: "@FMElfinderBundle/Resources/config/routing.yml"

@@ -1,0 +1,278 @@
+{% macro partialTranslations(form, fieldsNames, fieldsGroupHeaders) %}
+    <div class="a2lix_translations tabbable">
+        <ul class="a2lix_translationsLocales nav nav-tabs">
+        {% for translationsFields in form %}
+            {% set locale = translationsFields.vars.name %}
+
+            <li {% if app.request.locale == locale %}class="active"{% endif %}>
+                <a href="#" data-toggle="tab" data-target=".a2lix_translationsFields-{{ locale }}">
+                    {{ locale|capitalize }}
+                    {% if form.vars.default_locale == locale %}[Default]{% endif %}
+                    {% if translationsFields.vars.required %}*{% endif %}
+                </a>
+            </li>
+        {% endfor %}
+        </ul>
+
+        <div class="a2lix_translationsFields tab-content">
+        {% for translationsFields in form %}
+            {% set locale = translationsFields.vars.name %}
+
+            <div class="a2lix_translationsFields-{{ locale }} tab-pane {% if app.request.locale == locale %}active{% endif %}">
+            {% for translationsField in translationsFields if translationsField.vars.name in fieldsNames %}
+
+                {{ form_row( translationsField ) }}
+            {% endfor %}
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro localesTab( form, fields, options ) %}
+{% import _self as forms %}
+{% set randName = random(100) ~ random(100) ~ random(100) ~ random(['a','b', 'c', 'd', 'e']) %}
+<div class="nav-tabs-custom translation-tabs widget">
+    <ul class="nav nav-tabs">
+        {% for translationsFields in form %}
+            {% set locale = translationsFields.vars.name %}
+
+            <li {% if app.request.locale == locale %}class="active"{% endif %}>
+                <a href="#" data-toggle="tab" data-target=".localesTab-{{ locale }}-{{ randName }}">
+                    {{ locale|capitalize }}
+                    {% if form.vars.default_locale == locale %}[Default]{% endif %}
+                    {% if translationsFields.vars.required %}*{% endif %}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="tab-content">
+        {% for translationsFields in form %}
+            {% set locale = translationsFields.vars.name %}
+            
+            <div class="localesTab-{{ locale }}-{{ randName }} tab-pane {% if app.request.locale == locale %}active{% endif %}">
+                {# {{ forms.fieldsGroup( translationsFields, fields, options | default( {} ) ) }} #}
+                {# {{ forms.fieldsGroup( form, fields, options | default( {} ) ) }} #}
+            {% for translationsField in translationsFields if translationsField.vars.name in fields %}
+                {# {{ translationsField.vars.name }} #}
+                {{ form_row( translationsField ) }}
+                <hr />
+                {# {{ forms.fieldsGroup( form, [translationsField.vars.name], options | default( {} ) ) }} #}
+{#             {% for var in form.vars %}
+                    {{ var }}
+                {% endfor %} #}
+                {# {{ _self.fieldsGroup( translationsField, fields, options | default( {} ) ) }} #}
+{#                 <div class="form-group">
+                    {{ form_label( translationsField ) }}
+                    {{ form_widget( translationsField, { attr: { class : 'form-control' } } ) }}
+                </div> #}
+            {% endfor %}
+            </div>
+        {% endfor %}        
+        <!-- /.tab-pane --> 
+    </div>
+    <!-- /.tab-content -->
+</div>
+{% endmacro %}
+
+{% macro tabsWidget( tabs, options ) %}
+{% import _self as forms %}
+{% set randName = random(100) ~ random(100) ~ random(100) ~ random(['a','b', 'c', 'd', 'e']) %}
+<div class="nav-tabs-custom">
+    <ul class="nav nav-pills nav-justified">
+        {% for key,content in tabs %}
+
+            <li {% if loop.first %}class="active"{% endif %}>
+                <a href="#" data-toggle="tab" data-target=".tabWidget-{{ loop.index }}-{{ randName }}">
+                    {{ key|capitalize }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="tab-content">
+        {% for key,content in tabs %}
+            
+            <div class="tabWidget-{{ loop.index }}-{{ randName }} tab-pane {% if loop.first %}active{% endif %}">
+                {{ content | raw }}
+            </div>
+        {% endfor %}        
+        <!-- /.tab-pane --> 
+    </div>
+    <!-- /.tab-content -->
+</div>
+{% endmacro %}
+
+{% macro boxWidget( title, body, id, collaspe ) %}
+<div id="{{ id }}" class="panel box box-info">
+    <div class="box-header">
+        <h3 class="box-title">
+            <a data-toggle="collapse" data-parent="#{{ id }}" href="#{{ id }}_box_widget" class="">
+                {{ title }}
+            </a>
+        </h3>
+    </div>
+    <div id="{{ id }}_box_widget" class="box-content panel-collapse {{ collapse | default('collapse') }}" style="height: auto;">
+
+                                            
+        <div class="box-body">
+            {{ body | raw }}
+        </div>
+    </div>    
+</div>
+{% endmacro %}
+
+{% macro fieldsGroup( form, fields, options ) %}
+    {% import _self as forms %}
+
+    {% set cols = options.cols | default( 1 ) %}
+
+    {% for field in fields %}
+        
+        {% if cols > 1 %}
+            {% if loop.first %}
+                <div class="clearfix">
+            {% endif %}
+            <div class="col-md-{{ ( 12 / cols ) }}">
+        {% endif %}
+{% for var in field %}
+    {{ var is iterable ? 'List ' ~ field|keys : var }}
+{% endfor %}
+
+        {% if form[field] is iterable %}
+            {% for child in form[ field ] %}
+                
+                {# {{ forms.fieldsGroup( child, ['key','value'], options ) }} #}
+            {% endfor %}
+        {% else %}
+
+                <div class="form-group">
+                    {% set classNames = 'form-control' %}
+                    {% set class      = 'class' in form[ field ].vars.attr | keys ? form[ field ].vars.attr.class ~ ' ' ~ classNames : classNames %}
+                    {% set attr       = form[ field ].vars.attr | default( {} ) %}
+                    {% set attr       = attr | merge({ 'class': class }) %}                    
+
+                    {{ form_label( form[ field ] ) }}
+                    {{ form_widget( form[ field ], { 'attr' : attr } ) }}
+                </div>
+        {% endif %}
+
+        {% if cols > 1 %}
+                </div>
+            {% if loop.last %}
+                </div>
+            {% endif %}
+        {% endif %}        
+
+    {% endfor %}
+
+{% endmacro %}
+
+{% macro galleryImagesWidget( field ) %}
+    
+    {% if field is iterable %}
+
+        {% for child in field %}
+            
+            {% if child.image is defined and child.image is not empty %}
+                
+                {{ 'img defined' }}             
+{#                 {% if child.image is defined %}
+                {% endif %} #}
+                {{ child.vars.name }}
+            
+            {% endif %}
+
+            {% for subfield in child %}
+                {% if subfield.vars.name == 'image' and subfield.vars.data is not empty %}
+                <div class="col-lg-6">
+                    <img class="img-responsive" src="{{ asset( 'uploads/media/' ~ subfield.vars.data  ) }}" width="90" />
+                    {{ form_widget( subfield ) }}
+                    {# {{ hidden_widget( subfield ) }} #}
+                </div>
+                {% else %}
+    
+                    {{ form_widget( subfield ) }}
+
+                {% endif %}
+                {# {{ subfield.vars.name }} #}
+            {% endfor %}
+
+        {% endfor %}
+
+    {% endif %}
+
+{% endmacro %}
+
+{% macro dropzoneUploadWidget() %}
+{# <input type="file" multiple="multiple" class="dz-hidden-input"> #}
+<div id="actions" class="row">
+
+      <div class="col-lg-7">
+        <!-- The fileinput-button span is used to style the file input field as button -->
+        <span class="btn btn-success fileinput-button dz-clickable">
+            <i class="glyphicon glyphicon-plus"></i>
+            <span>Add files...</span>
+        </span>
+        <button type="submit" class="btn btn-primary start">
+            <i class="glyphicon glyphicon-upload"></i>
+            <span>Start upload</span>
+        </button>
+        <button type="reset" class="btn btn-warning cancel">
+            <i class="glyphicon glyphicon-ban-circle"></i>
+            <span>Cancel upload</span>
+        </button>
+      </div>
+
+      <div class="col-lg-5">
+        <!-- The global file processing state -->
+        <span class="fileupload-process">
+          <div id="total-progress" class="progress progress-striped progress-sm active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress=""></div>
+          </div>
+        </span>
+      </div>
+
+    </div>
+    <div class="table table-striped" class="files" id="previews">
+    
+      <div id="template" class="file-row col-md-6">
+        <!-- This is used as the file preview template -->
+        
+            {# <div class="col-md-6"> #}
+                <div class="row">
+                    <div class="col-md-6">                
+                        <span class="preview"><img data-dz-thumbnail /></span>
+                        <p class="name" data-dz-name></p>
+                        <strong class="error text-danger" data-dz-errormessage></strong>                
+                    </div>
+            <div class="col-md-6">
+                <p class="size" data-dz-size></p>
+                <div class="progress progress-striped active progress-sm" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                  <div class="progress-bar progress-bar-success " style="width:0%;" data-dz-uploadprogress></div>
+                </div> 
+                  <button data-dz-remove class="btn btn-danger btn-xs delete">
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span>Delete</span>
+                  </button>                               
+            </div>                    
+                </div>
+            {# </div> #}
+
+        
+
+ {#         <div>
+         <button class="btn btn-primary start">
+              <i class="glyphicon glyphicon-upload"></i>
+              <span>Start</span>
+          </button>
+          <button data-dz-remove class="btn btn-warning cancel">
+              <i class="glyphicon glyphicon-ban-circle"></i>
+              <span>Cancel</span>
+          </button> 
+
+        </div>#}
+      
+      </div>
+
+    </div>
+{% endmacro %}

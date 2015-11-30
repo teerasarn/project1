@@ -1,0 +1,31 @@
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     localhost
+    database_port:     ~
+    database_name:     pfverdun_dev
+    database_user:     pfverdun
+    database_password: "*tp$[U_WPyn("
+
+    mailer_transport:  sendmail
+    mailer_host:       ~
+    mailer_user:       ~
+    mailer_password:   ~
+    assetic.sass.bin: /usr/bin/sass
+    assetic.compass.bin: /usr/bin/compass
+    assetic.ruby.bin: /usr/bin/ruby
+
+    locale:            en
+    secret:            c39178826b4adb8836fca7a5c7b3869b9f11230b
+    managed_locales:
+        - en
+        - fr
+    managed_locales_name:
+        en:
+            fr: Français
+            en: English
+        fr:
+            en: English
+            fr: Français
+    assetic.sass.bin: /usr/bin/sass
+    assetic.compass.bin: /usr/bin/compass
+    assetic.ruby.bin: /usr/bin/ruby

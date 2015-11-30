@@ -1,0 +1,193 @@
+
+{% include 'FiveAdminBundle:Gallery:list-filters.html.twig' %}
+<style>
+.iswitch.off .state-background
+{
+    background: #EB5055;
+    background-color: #EB5055;
+}
+
+.publish_action
+{
+    font-weight: 900;
+    transition: all 0.85s ease;
+    -webkit-transition: all 0.85s ease;
+    text-align: center;
+    vertical-align: top;
+
+}
+.text-public
+{
+    color: #68C39F;
+    /*text-shadow: 0 1px 1px rgba(0,0,0, .3);*/
+}
+.text-private
+{
+    color : #EB5055;
+}
+</style>
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="widget">
+
+{#             <div class="widget-header">
+                <h2> <strong>Default</strong>
+                    DataTable
+                </h2>
+                <div class="additional-btn">
+                    <a href="#" class="hidden reload"> <i class="icon-ccw-1"></i>
+                    </a>
+                    <a href="#" class="widget-toggle"> <i class="icon-down-open-2"></i>
+                    </a>
+                    <a href="#" class="widget-close">
+                        <i class="icon-cancel-3"></i>
+                    </a>
+                </div>
+            </div> #}
+
+
+            <div class="widget-content">
+
+
+                    <div class="table-responsive">
+
+                        {# <form class='form-horizontal' role='form'> #}
+                            <br/>
+                            <table id="datatables-1" class="datatables table table-striped table-bordered" cellspacing="0" width="100%">
+
+                                <thead>
+                                    <tr>
+                                        {% for prop in options.expose %}
+                                            <th>{{ prop.label }}</th>
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+
+                                <tfoot>
+                                    <tr>
+                                        {% for prop in options.expose %}
+                                            <th>{{ prop.label }}</th>
+                                        {% endfor %}
+                                    </tr>
+                                </tfoot>
+
+                                <tbody>
+                                {% for entity in entities %}
+
+                                    {% set showRow = true %}
+                                    {% if options.filters|default(false) is sameas(true) %}
+                                        {% set entityCats  = entity.getAllCategoriesNameList(true)|default('') %}
+                                        {% set queryCat    = app.request.query.get( 'category', null )  %}
+                                        {% set queryParent = app.request.query.get( 'parent', null ) %}
+
+                                        {% if queryParent != null and queryParent is not empty and queryParent not in entityCats and queryCat != null and queryCat is not empty and queryCat not in entityCats %}
+                                            {% set showRow = false %}
+
+
+                                        {% endif %}
+
+                                        {#% if queryParent in entityCats or queryParent == null %}
+                                            {% set showRow = true %}
+                                        {% else %}
+                                            {% set showRow = false %}
+                                        {% endif %#}
+                                    {% endif %}
+
+                                    {% if 1 == 1 %}
+                                    <tr>
+
+                                    {% for prop in options.expose %}
+                                        <td>
+                                        {% if prop.action is defined %}
+                                            {% set actions = options[ prop.action ] %}
+
+                                            {% if prop.action == 'edit_action' %}
+                                                {{ button.edit( prop.label, actions.path, { id : entity.id }|merge(app.request.get('_route_params')) ) }}
+                                            {% endif %}
+
+                                            {% if prop.action == 'delete_action' %}
+                                                <button class="btn btn-danger btn-sm delete_action" data-toggle="modal" data-target="#deleteModal" data-id="{{ entity.id }}" data-href="{{ path( actions.path, { id : entity.id } ) }}">
+                                                    <i class="fa fa-trash-o"></i>
+                                                    {{ prop.label }}
+                                                </button>
+                                            {% endif %}
+
+                                            {% if prop.action == 'publish_action' %}
+                                                <div class="publish_action {{ entity.getEnabled() ? 'text-public' : 'text-private' }}">
+                                                    <span class="publish_action_label">{{ entity.getEnabled() ? 'Public' : 'Private' }}</span><br />
+                                                <input type="checkbox" class="ios-switch {{ entity.getEnabled() ? 'on' : 'off' }} ios-switch-success ios-switch-sm" data-publish="{{ path( 'five_admin_gallery_publish', { 'id' : entity.getId(), 'enabled' : entity.getEnabled() ? 'true' : 'false' } ) }}" {{ entity.getEnabled() ? ' checked="" ' : ' style="background-color:#EB5055;"' }}  value="1" />  
+                                                </div>                                                
+
+                                                <!--<button class="btn btn-large btn-{{ entity.getEnabled() ? 'success' : 'danger'  }} publish_action" data-toggle="modal" data-target="#deleteModal" data-id="{{ entity.id }}" data-href="{#{ path( actions.path, { id : entity.id } ) }#}" {{ entity.getEnabled() ? '' : 'style="background-color:#EB5055;"'}}>
+                                                    <i class="glyphicon glyphicon-eye-{{ entity.getEnabled() ? 'open' : 'close' }}"></i>
+                                                    {#{ prop.label }#}
+                                                </button>#}-->
+                                            {% endif %}
+                                            
+
+                                        {% endif %}
+
+                                        {% if prop.call is defined %}
+                                            {% if prop.type is defined %}
+                                                    {% if prop.type == 'date' %}
+                                                        {{ attribute( entity, prop.call ) | date( 'Y-m-d H:i:s' ) }}
+                                                    {% endif %}
+
+                                                    {% if prop.type == 'label' %}
+                                                        {% set labelContent = attribute( entity, prop.call ) | split( ',' ) %}
+                                                        {% set labelContent = labelContent is iterable ? labelContent : [ labelContent ] %}
+
+                                                        {% for label in labelContent %}
+
+                                                            <span class="label label-default large" style="font-size:100%">{{ label }}</span>
+                                                        {% endfor %}
+                                                    {% endif %}
+
+                                                    {% if prop.type == 'image' %}
+                                                        {% set imgs = entity.getImages() %}
+
+                                                        {% if entity.getCover() != '/bundles/fiveadmin/img/no-image.png' %}
+                                                            <img src="{{ entity.getCover()}}" class="img-responsive" style="max-width:200px!important;" />
+                                                        {% else %}
+                                                            <img src="{{ imgs[0] is defined ? imgs[0].getSrc() : '/bundles/fiveadmin/img/no-image.png' }}" class="img-responsive" style="max-width:200px!important;" />
+                                                        {% endif %}
+
+                                                    {% endif %}
+
+                                                    {% if prop.type == 'blog_image' %}
+                                                        {% set imgs = entity.image %}
+
+                                                        {% if entity.image != '/bundles/fiveadmin/img/no-image.png' %}
+                                                            <img src="{{ entity.image}}" class="img-responsive" style="max-width:200px!important;" />
+                                                       {% endif %}
+
+                                                    {% endif %}                                                    
+                                                    
+                                            {% else %}
+                                                {% if prop.property is defined %}
+                                                    {% set childCall =  attribute( entity, prop.call ) %}
+                                                    {{ attribute( childCall, prop.property ) }}
+                                                {% else %}
+                                                {{ attribute( entity, prop.call ) }}
+                                                {% endif %}
+                                            {% endif %}
+
+                                        {% endif %}
+                                        </td>
+                                    {% endfor %}
+
+                                    </tr>
+                                    {% endif %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+                        </div>
+                    {# </form> #}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'FiveAdminBundle:Action:delete-modal.html.twig' %}

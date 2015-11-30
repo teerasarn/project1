@@ -1,0 +1,13 @@
+    RewriteEngine On
+    RewriteBase /
+
+    # Pictures rewrite
+    RewriteCond %{REQUEST_URI} ^/(en|fr)/picture/([a-zA-Z0-9]+)$
+    RewriteRule ^(en|fr)/picture/([a-zA-Z0-9]+) /uploads/$2.jpg [L]
+    
+    # Pictures thumb rewrite
+    RewriteCond %{REQUEST_URI} ^/(en|fr)/picture/thumb/([a-zA-Z0-9]+)$
+    RewriteRule ^(en|fr)/picture/thumb/([a-zA-Z0-9]+) /uploads/thumb/$2.jpg [L]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ app.php [QSA,L]

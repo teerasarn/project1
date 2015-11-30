@@ -1,0 +1,40 @@
+@import "bootstrap/mixins";
+@import "bootstrap/variables";
+@import "five-variables";
+
+.contact {
+  #contact-intro {
+    height: 540px;
+    padding-top: $menu-height;
+    background-image: url('../img/contact-intro.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    -ms-behavior: url(/backgroundsize.min.htc);
+    .float-block {
+      float: left;
+      margin-top: 70px;
+    }
+    h2 {
+      font-size: 36px;
+      padding: 40px 45px;
+      margin: 70px 40px;
+      background-color: #ffffff;
+      @include box-shadow(0px 0px 35px 0 rgba(50, 50, 50, 0.75));
+      text-transform: uppercase;
+      .green-text {
+        color: $brand-primary;
+      }
+    }
+  }
+}
+@media (max-width: $screen-xs-max) {
+  .contact {
+    #contact-intro {
+      h2 {
+        font-size: 32px;
+        padding: 25px;
+      }
+    }
+  }
+}

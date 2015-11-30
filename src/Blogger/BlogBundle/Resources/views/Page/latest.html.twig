@@ -1,0 +1,49 @@
+{# src/Blogger/BlogBundle/Resources/views/Page/latest.html.twig #}
+
+{% block body %}
+<section class="recent_article"> 
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>{{ 'blog.blog_article.latest_blog' | trans({}, 'blog') }}</h2>
+            </div>
+        </div>
+        <div class="row">
+            <ul class="recent_list">    
+                {% for blog in blogs %}
+                <li>
+                  {% if blog.isImageExist(blog.image) == true %}   
+                    <div class="blog-image">
+                        <a href="{{ path( 'header.menu.blog_article_link' | trans  ,  { 'permalink': blog.getPermaLink() } ) }}">	
+                            <img src="{{ asset([ blog.getImageURL(blog.image)]|join) }}" />
+                            <div class="overlay">
+                                <span>{{ blog.title }}</span>
+                            </div>
+                        </a>                        
+                    </div>
+                  {% else %}
+                    <div class="blog-image no-prev">
+                        <a href="{{ path( 'header.menu.blog_article_link' | trans  ,  { 'permalink': blog.getPermaLink() } ) }}">	
+                            <!--<img src="{{ asset([ blog.getImageURL(blog.image)]|join) }}" />-->
+                            <div class="overlay">
+                                <span>{{ blog.title }}</span>
+                            </div>
+                        </a>                        
+                    </div>  
+                      
+                  {% endif %}          
+                    <div class="blog-content">
+                        <a href="{{ path( 'header.menu.blog_article_link' | trans  ,  { 'permalink': blog.getPermaLink() } ) }}" class="blog-title">{{ blog.title }}</a>
+                        <div class="date"><time datetime="{{ blog.created|date('c') }}">{{ blog.getDateLocale(blog.created,  app.request.locale  , '' ) }}</time></div>
+                        <span class="author">par {{ blog.author }}</span>
+                    </div>
+                </li>
+                
+                {% else %}
+                 <p>{{ 'blog.blog_no_blog' | trans({}, 'blog') | raw }}</p>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>
+{% endblock %}

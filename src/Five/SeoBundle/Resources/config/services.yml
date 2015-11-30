@@ -1,0 +1,24 @@
+parameters:
+#    five_seo.example.class: Five\SeoBundle\Example
+    five_seo.entity.class: Five\SeoBundle\Entity\Seo
+
+    # five_seo:
+
+services:
+
+    five_seo.twig.extension:
+        class: Five\SeoBundle\Twig\FiveSeoExtension
+        calls:            
+            - [ setManagerRegistry, [ "@doctrine" ] ]
+            - [ setEntityClass,     [ '%five_seo.entity.class%' ] ]
+            - [ setRequestStack,     [ '@request_stack' ] ]
+        tags:
+            - { name: twig.extension }
+#    five_seo.example:
+#        class: %five_seo.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+    # five_seo.fragement_renderer:
+    #     class: Five\SeoBundle\Listener\FragmentRendererListener
+    #     tags:
+    #         - { name: kernel.fragment_renderer }

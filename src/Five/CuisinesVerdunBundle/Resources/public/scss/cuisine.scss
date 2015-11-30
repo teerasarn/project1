@@ -1,0 +1,620 @@
+/* 
+    Created on : 15-May-2014, 11:51:14 AM
+    Author     : enrique
+*/
+
+@import "bootstrap/mixins";
+@import "bootstrap/variables";
+@import "five-variables";
+
+.salledebain,
+.cuisine,
+.realisations {
+  #header-section {
+    padding-top: $menu-height;
+    //background-color: #f3f3f3;
+    padding-bottom: 20px;
+    > div {
+      background-color: #ffffff;
+      margin-bottom: 0;
+      &:first-child {
+        margin-bottom: 20px;
+      }
+    }
+    .float-block {
+      float: right;
+      margin-top: 70px;
+    }
+    h2 {
+      margin-top: 80px;
+    }
+    .header-1 {
+      width: 100%;
+      height: 440px;
+      background-image: url('../img/cuisine-1.jpg');
+      background-size: cover;
+      background-position: center center;
+      -ms-behavior: url(/backgroundsize.min.htc);
+      h1 {
+        font-size: 36px;
+        padding: 40px 45px;
+        margin: 70px 40px;
+        background-color: #ffffff;
+        @include box-shadow(0px 0px 35px 0 rgba(50, 50, 50, 0.75));
+        text-transform: uppercase;
+        .green-text {
+          color: #c1b72a;
+        }
+      }
+    }
+    .header-2 {
+      position: relative;
+      width: 100%;
+      min-height: 420px;
+      .image-holder {
+        left: 0;
+        background-image: url('../img/cuisine-2.jpg');
+      }
+      div {
+        height: 100%;
+        /*@media screen and ( max-width: $container-tablet ) {
+          height: 320px;
+        }*/
+      }
+      @media screen and ( max-width: $container-tablet ) {
+        text-align: center;
+      }
+    }
+    .header-3 {
+      position: relative;
+      width: 100%;
+      min-height: 420px;
+      .image-holder {
+        left: 60%;
+        background-image: url('../img/cuisine-3.jpg');
+      }
+      h2 {
+        margin-top: 100px;
+      }
+      @media screen and ( max-width: $container-tablet ) {
+        text-align: center;
+        p {
+          &:last-child {
+            margin-bottom: 60px;
+          }
+        }
+      }
+    }
+  }
+  #materials-section {
+    padding: 60px 0 20px;
+    text-align: center;
+    .btn {
+      margin-top: 25px;
+      padding-right: 30px;
+      padding-left: 30px;
+    }
+    .mat-grid {
+      margin-top: 75px;
+      .material-cell {
+        background-size: cover;
+        background-position: center center;
+        -ms-behavior: url(/backgroundsize.min.htc);
+        overflow:hidden;
+        &.material-cell-31 {
+          background-position: 42% center;
+        }
+      }
+        
+      > div {
+        padding: 0;
+        img {
+          width: 100%;
+        }
+        .gallery-link {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          @include opacity(0);
+          background-image: url('../img/gallery-link-bg.png');
+          background-repeat: repeat;
+          @include transition(all 1200ms);
+          a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background-image: url('../img/more-gallery.png');
+            background-repeat: no-repeat;
+            background-position: center center;
+            -ms-behavior: url(/backgroundsize.min.htc);
+            p {
+              position: absolute;
+              bottom: 50%;
+              width: 100%;
+              margin-bottom: 26px;
+              font-family: $headings-font-family;
+              font-size: 32px;
+              text-align: center;
+              text-transform: uppercase;
+              color: #818181;
+            }
+            img {
+              display: none;
+            }
+          }
+        }
+        &:hover {
+          .gallery-link {
+            @include opacity(1);
+          }
+        }
+      }
+    }
+  }
+  
+  #styles-section {
+    padding: 40px 0;
+    text-align: center;
+    .row {
+      padding-top:15px;
+      padding-bottom: 15px;
+      > div {
+        &:first-child {
+          padding-left: 0;
+        }
+        &:last-child {
+          padding-right: 0;
+        }
+      }
+    }
+    .styles-grid {
+      .style-image {
+        background-size: cover;
+        position: relative;
+        overflow:hidden;
+        
+        .gallery-link {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          @include opacity(0);
+          background-image: url('../img/gallery-link-bg.png');
+          background-repeat: repeat;
+          @include transition(all 1200ms);
+          a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background-image: url('../img/more-gallery.png');
+            background-repeat: no-repeat;
+            background-position: center center;
+            -ms-behavior: url(/backgroundsize.min.htc);
+            p {
+              position: absolute;
+              bottom: 50%;
+              width: 100%;
+              margin-bottom: 26px;
+              font-family: $headings-font-family;
+              font-size: 32px;
+              text-align: center;
+              text-transform: uppercase;
+              color: #818181;
+            }
+            img {
+              display: none;
+            }
+          }
+        }
+        &:hover {
+          .gallery-link {
+            @include opacity(1);
+          }
+        }
+      }
+      .style-1 {
+        background-image: url('../img/cuisine-style-1.jpg');
+        background-size: auto 120%;
+        background-position: 27% 31%;
+        background-repeat: no-repeat no-repeat;
+        -ms-behavior: url(/backgroundsize.min.htc);
+        @include transition(all 1200ms);
+        &:hover {
+          background-size: auto 100%;
+        }
+      }
+      .style-2 {
+        background-image: url('../img/classique5.jpg');
+        background-size: auto 130%;
+        background-position: 27% 57%;
+        background-repeat: no-repeat no-repeat;
+        -ms-behavior: url(/backgroundsize.min.htc);
+        @include transition(all 1200ms);
+        &:hover {
+          background-size: auto 110%;
+        }
+      }
+      .style-3 {
+        background-image: url('../img/cuisine-style-3.jpg');
+        background-size: auto 120%;
+        background-position: 72% 10%;
+        background-repeat: no-repeat no-repeat;
+        -ms-behavior: url(/backgroundsize.min.htc);
+        @include transition(all 1200ms);
+        &:hover {
+          background-size: auto 100%;
+        }
+      }
+      .style-4 {
+        background-image: url('../img/cuisine-style-4.jpg');
+        background-size: 120% auto;
+        background-position: 0 48%;
+        background-repeat: no-repeat no-repeat;
+        -ms-behavior: url(/backgroundsize.min.htc);
+        @include transition(all 1200ms);
+        &:hover {
+          background-size: 100% auto;
+        }
+      }
+      .style-5 {
+        background-image: url('../img/cuisine-style-5.jpg');
+        background-size: auto 120%;
+        background-position: 27% 86%;
+        background-repeat: no-repeat no-repeat;
+        -ms-behavior: url(/backgroundsize.min.htc);
+        @include transition(all 1200ms);
+        &:hover {
+          background-size: auto 100%;
+        }
+      }
+      .style-6 {
+        background-image: url('../img/cuisine-style-6.jpg');
+        background-size: auto 120%;
+        background-position: 38% 31%;
+        background-repeat: no-repeat no-repeat;
+        -ms-behavior: url(/backgroundsize.min.htc);
+        @include transition(all 1200ms);
+        &:hover {
+          background-size: auto 100%;
+        }
+      }
+      .style-7 {
+        background-image: url('../img/cuisine-style-7.jpg');
+        background-size: 120% auto;
+        background-position: 22% 5%;
+        background-repeat: no-repeat no-repeat;
+        -ms-behavior: url(/backgroundsize.min.htc);
+        @include transition(all 1200ms);
+        &:hover {
+          background-size: 100% auto;
+        }
+      }
+      .style-8 {
+        background-image: url('../img/cuisine-style-7.jpg');
+        background-size: 120% auto;
+        background-position: 22% 5%;
+        background-repeat: no-repeat no-repeat;
+        -ms-behavior: url(/backgroundsize.min.htc);
+        @include transition(all 1200ms);
+        &:hover {
+          background-size: 100% auto;
+        }
+      }
+    }
+  }
+  #ideas-section {
+    padding: 0;
+    .ideas {
+      position: relative;
+      width: 100%;
+      min-height: 420px;
+      .image-holder {
+        left: 59.5%;
+        width: 40.5%;
+        background-image: url('../img/cuisine-ideas.jpg');
+      }
+      h2 {
+        margin-top: 80px;
+      }
+    }
+    @media screen and ( max-width: $container-tablet ) {
+      text-align: center;
+      p {
+        &:last-child {
+          margin-bottom: 60px;
+        }
+      }
+    }
+  }
+  #partners-section {
+    padding: 65px 0;
+    background-color: #f3f1ee;
+    img {
+      width: 100%;
+      height: auto;
+    }
+    h2 {
+      margin-top: 43px;
+    }
+    @media screen and ( max-width: $container-tablet ) {
+      text-align: center;
+    }
+  }
+  
+  #warranty-section {
+    .warranty {
+      position: relative;
+      width: 100%;
+      min-height: 420px;
+      background-color: #403e3c;
+      color: #ffffff;
+      .image-holder {
+        left: 0;
+        background-size: cover;
+        background-image: url('../img/cuisine-garantie-en.jpg');
+        -ms-behavior: url(/backgroundsize.min.htc);
+      }
+      h2 {
+        margin-top: 100px;
+        border-bottom: 3px solid $brand-primary;
+      }
+      strong{
+        font-family: $cvBold;
+        font-size: 20px;
+      }
+      .more-link {
+        color: $brand-primary;
+      }
+    }
+  }
+  &.fr {
+    #warranty-section {
+      .warranty {
+        .image-holder {
+          background-image: url('../img/cuisine-garantie-fr.jpg');
+        }
+      }
+    }
+  }
+}
+#pbOverlay {
+  text-align: left;
+  top: $menu-height;
+  #pbCloseBtn {
+    position: absolute;
+    top: -48px;
+    right: -48px;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    &:before {
+      background-image: url('../img/gallery-icons.png');
+      background-position: -96px 0;
+      width: 48px;
+      height: 48px;
+      background-color: transparent;
+      content: '';
+      border-radius: 0;
+    }
+  }
+  .prevNext {
+    @media screen and (orientation: portrait) {
+      width: 50px;
+      display: block;
+      b {
+        @include translate(0,0);
+        @include scale(1);
+      }
+    }
+  }
+  #pbNextBtn {
+    z-index: 100;
+    b {
+      width: 48px;
+      height: 48px;
+      &:after {
+        display: inline-block;
+        width: 48px;
+        height: 48px;
+        content: '';
+        background-image: url('../img/gallery-icons.png');
+        background-position: -48px 0;
+      }
+    }
+    @media screen and (orientation: portrait) {
+      @include opacity(1);
+      @include transition(none);
+      &:hover {
+        @include transition(none);
+        b { 
+          @include transition(none);
+          @include scale(1);
+          @include translate(0,0);
+        }
+      }
+    }
+  }
+  #pbPrevBtn {
+    z-index: 100;
+    b {
+      width: 48px;
+      height: 48px;
+      &:before {
+        display: inline-block;
+        width: 48px;
+        height: 48px;
+        content: '';
+        background-image: url('../img/gallery-icons.png');
+        background-position: 0 0;
+      }
+    }
+    @media screen and (orientation: portrait) {
+      @include opacity(1);
+      @include transition(none);
+      &:hover {
+        @include transition(none);
+        b { 
+          @include transition(none);
+          @include scale(1);
+          @include translate(0,0);
+        }
+      }
+    }
+  }
+  
+  
+  #pbCaption {
+    margin-bottom: 0;
+    bottom: 0;
+    height: 100%;
+    background-color: #ffffff;
+    right: -280px;
+    width: 280px;
+    overflow: auto;
+    transition: .4s;
+    .pbCaptionText {
+      margin: 60px 17px 30px;
+      border-bottom: 1px solid #000000; 
+      padding: 0;
+      h4 {
+        font-size: 20px;
+        color: #000000;
+        text-shadow: none;
+      }
+      p {
+        color: #000000;
+        text-shadow: none;
+      }
+    }
+    label {
+      display: none !important;
+    }
+    .pbSocial {
+      border-top: 1px solid #a1a1a1;
+      margin:30px 17px;
+      padding-top: 25px; 
+    }
+    h5 {
+      font-size: 20px;
+    }
+    @media screen and (orientation: portrait) {
+      width: 100%;
+      height: 40%;
+      right: 0;
+      bottom: -40%;
+      .pbCaptionText {
+        margin: 20px;
+        padding: 0;
+        h4 {
+          font-size: 14px;
+        }
+        p {
+          font-size: 11px;
+        }
+      }
+    }
+  }
+  &.show {
+    &.on {
+      #pbCaption {
+        right: 0;
+        transition-delay: .5s;
+        z-index:20;
+        @media screen and (orientation: portrait) {
+          bottom: 0;
+        }
+      }
+      #pbCloseBtn {
+        top: 0;
+        right: 0;
+      }
+    }
+    #pbNextBtn {
+      right: 280px;
+      @media screen and (orientation: portrait) {
+        right: 0;
+      }
+    }
+  }
+  .pbWrapper {
+    @include perspective(0);
+    text-align: center;
+    margin-top: 0px !important;
+    > img {
+      box-shadow: none;
+      max-height: 100%;
+      //@include transition(none);
+    }
+    > * {
+      border-radius: 0;
+    }
+    div {
+      display: none !important;
+      @include transition(none);
+    }
+  }
+}
+
+@media (max-width: $screen-xs-max) {
+  .salledebain,
+  .cuisine {
+    #header-section {
+      .header-1 {
+        h1 {
+          font-size: 20px;
+          padding: 30px;
+        }
+      }
+    }
+    #ideas-section {
+      .ideas {
+        .image-holder {
+          left: 0;
+          width: 100%;
+        }
+      }
+    }
+    #styles-section {
+      padding-bottom: 22px;
+      .row {
+        padding-top:3px;
+        padding-bottom: 3px;
+        > div {
+          padding-right: 3px;
+          padding-left: 3px;
+          &:first-child {
+            padding-right: 3px;
+            padding-left: 0;
+          }
+          &:last-child {
+            padding-right: 0;
+            padding-left: 3px;
+            &:first-child {
+              padding-left: 0;
+            }
+          }
+        }
+      }
+    }
+    #materials-section {
+      .mat-grid {
+        margin-top:3px;
+        margin-bottom: 3px;
+        padding-left: -3px;
+        padding-right: -3px;
+        > div {
+          margin: 3px;
+        }
+      }
+    }
+  }
+}
+
+//@media screen and (max-width: $screen-tablet) {
+  #pbThumbsToggler:checked ~ .pbWrapper {
+    padding: 0;
+  }
+//}

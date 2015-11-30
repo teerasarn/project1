@@ -1,0 +1,113 @@
+{% extends 'FiveAdminBundle::layout.html.twig' %}
+
+{% import "FiveAdminBundle:Form:macros.html.twig" as FiveForm %}
+{% form_theme form with [ 'FiveAdminBundle:Form:form_fields.html.twig' ] %}
+
+{% block page_head_title %}{{ entity.translate('en').getName()|default(options.page.title) }}{% endblock %}
+{% block page_head_icon %}<i class="{{ options.page.icon|default( 'glyphicon glyphicon-list-alt' ) }}"></i>{% endblock %}
+{% block page_head_subtitle %}<h3>{{ entity.id is not empty ? options.page.title | default( '' ) }}{{ entity.id | default( '' ) }}</h3>{% endblock %}
+
+{% block content %}
+    {{ form_errors(form) }}
+    {{ form_start( form, { 'action' : path( form_action.path, form_action.parameters ) } ) }}
+    {{ block( 'ButtonAction' ) }}
+    <div class="row">
+        <div class="col-md-12">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="widget">
+                            <div class="widget-content padding">
+                                {# <h2>col-sm-12</h2> #}
+                                <div class="row">
+            {% set img_src = ( entity.getPicture() is defined and entity.getPicture() != null ) ? '/uploads/media/' ~ entity.getPicture().getName() %}
+
+            {% for field in form %}
+                                    
+
+
+                {% if field.vars.name == 'picture' and img_src|default('') is not empty() %}
+
+                    <div class="col-md-12">
+                                        
+                                            <div class="col-md-12">
+                                                {# {{ form_label(form.picture ) }} #}
+                                                <label class="control-label">Picture</label>
+                                                {{ form_row(form.picture.file, { label_attr :{ label: false }, attr : { class : 'btn btn-primary' } } ) }}                                                  
+                                                {# <br />
+                                                
+                                                <br />{{ form_row(form.picture, { attr : { class : 'btn btn-primary' } } ) }} #}
+                                            </div>
+                                            {% if form.picture.name.vars.value is not empty %}
+                                            <div class="col-md-6">
+                                                <br /><img src="/uploads/media/{{ form.picture.name.vars.value }}" class="img-responsive" />
+                                            </div>                                    
+                                                <br /><br />&nbsp;
+                                            {% endif %}                                    
+
+                                        
+{#                           <img class="img-responsive" src="{{ img_src|default('') }}" />
+                          <div class="hidden">{{ form_widget( field ) }}</div> #}
+                    </div>
+                  
+                {% else %}
+                <div class="col-md-12">
+                {{ form_row( field ) }}
+                </div> 
+                {% endif %}               
+                <div class="divider"></div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+{#         </div>
+
+    </div> #}
+
+    {{ form_end( form ) }}
+
+
+{#     </div>
+</div>   #}  
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>    
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+    <!-- Page Specific JS Libraries -->
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-select/bootstrap-select.min.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-inputmask/inputmask.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-xeditable/js/bootstrap-editable.min.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-xeditable/demo/jquery.mockjax.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-xeditable/demo/demo-mock.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-select2/select2.min.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/jquery-clndr/moment-2.5.1.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-typeahead/bootstrap3-typeahead.min.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/ckeditor/ckeditor.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/ckeditor/adapters/jquery.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/js/pages/advanced-forms.js' ) }}"></script>
+
+    <script>
+    var config = {};
+        $( document ).ready( function()
+        {
+//config.extraAllowedContent = 'span[class] h1 h2 h3';
+            config.allowedContent = true;
+            config.extraPlugins = 'autogrow';
+            config.autoGrow_onStartup = true;
+            config.autoGrow_minHeight = 75;
+
+                        config.enterMode = CKEDITOR.ENTER_BR;
+            config.forcePasteAsPlainText = true;
+            config.toolbarCanCollapse = true;
+            config.toolbar = [
+            [ 'Source', '-', 'Link','Unlink', '-', 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat','Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ]
+                /*[ 'Source', '-', 'Link','Unlink', 'Anchor', '-','JustifyLeft', 'JustifyCenter', 'JustifyRight', '-', 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat','Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ]*/
+            ];            
+            $( '.editor-basic' ).ckeditor(config);
+        });
+
+        
+    </script>    
+{% endblock %}

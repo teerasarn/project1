@@ -1,0 +1,52 @@
+parameters:           
+     five_admin.blog.blog_list:
+        page:
+            title: "Blogs"
+            icon: fa fa-home
+        entities: 'Blogger\BlogBundle\Entity\Blog'
+        template: 'FiveAdminBundle:Action:list.html.twig'
+        edit_action:
+            path: 'five_admin_blog_edit'
+            parameters: { 'id': null }
+        create_action:
+            path: 'five_admin_blog_create'
+            parameters: {}
+        delete_action:
+            path: 'five_admin_blog_delete'
+            parameters: { 'id': null }
+        expose:
+            - { label: 'ID', call: 'id' }
+            - { label: 'Title', call: 'title' }
+            - { label: 'Autor', call: 'author' }
+            - { label: 'Image', call: 'image' , type: 'blog_image' }
+            - { label: 'Date Created', call: 'created', type: 'date', format: 'Y-m-d' }
+            - { label: 'Edit', action: 'edit_action' }
+            - { label: 'Delete', action: 'delete_action' }
+            
+     five_admin.blog.blog_edit:
+        page:
+            title: "Edit Blog ID#"
+            icon: fa fa-home
+        entity: 'Blogger\BlogBundle\Entity\Blog'
+        template: 'FiveAdminBundle:Action:edit_blog.html.twig'
+        form: 'five.form.blog'
+        form_action:
+            path: 'five_admin_blog_edit'
+            parameters: { 'id': null }
+        success_action:
+            path: 'five_admin_blog_list'
+            parameters: {}         
+              
+     five_admin.blog.blog_create:
+        page:
+            icon: fa icon-camera-2
+            title: "Create a new Blog Image"
+        entity: 'BloggerBlogBundle:Blog'
+        template: 'FiveAdminBundle:Action:edit_blog.html.twig'
+        form: 'five.form.blog'        
+        form_action: 
+            path: 'five_admin_blog_create'
+            parameters: {context:'realisation'}
+        success_action: 
+            path: 'five_admin_blog_list'
+            parameters: {context:'realisation'}

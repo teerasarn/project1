@@ -1,0 +1,34 @@
+seo:
+    path:     /
+    defaults: { _controller: "FiveSeoBundle:Seo:index" }
+
+seo_show:
+    path:     /{id}/show
+    defaults: { _controller: "FiveSeoBundle:Seo:show" }
+
+seo_new:
+    path:     /new
+    defaults: { _controller: "FiveSeoBundle:Seo:new" }
+
+seo_create:
+    path:     /create
+    defaults: { _controller: "FiveSeoBundle:Seo:create" }
+    requirements: { _method: post }
+
+seo_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "FiveSeoBundle:Seo:edit" }
+
+seo_update:
+    path:     /{id}/update
+    defaults: { _controller: "FiveSeoBundle:Seo:update" }
+    requirements: { _method: post|put }
+
+seo_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "FiveSeoBundle:Seo:delete" }
+    requirements: { _method: post|delete }
+
+seo_render_edit_form:
+    path:     /render/edit/form/{route}/{_locale}/{url}
+    defaults: { _controller: "FiveSeoBundle:Seo:renderEditForm" }

@@ -1,0 +1,120 @@
+{% extends 'FiveAdminBundle::layout.html.twig' %}
+{% import "FiveAdminBundle:Button:button-action-macro.html.twig" as button %}
+
+{% import "FiveAdminBundle:Form:macros.html.twig" as FiveForm %}
+
+
+{% block page_head_title %}All {{ ( app.request.get('_route_params').context is defined ? app.request.get('_route_params').context ~ ' Galleries' : options.page.title ) | title }} {#{ options.page.title | default( '' ) }#}
+                    <div class="pull-right">
+                        {% if options.create_action is defined %}
+                            {{ button.link( 'Create New', options.create_action.path, app.request.get( '_route_params' ) ) }}
+                        {% endif %}
+                    </div>
+{% endblock %}
+{% block page_head_icon %}<i class="{{ options.page.icon|default( 'glyphicon glyphicon-list-alt' ) }}"></i>{% endblock %}
+{% block page_head_subtitle %}{% endblock %}
+
+{% block content %}
+
+    {% include 'FiveAdminBundle:Action:alert-dismissable.html.twig' %}
+
+        {#% if options.page.name|default('') == 'gallery_image' %}
+            {% include 'FiveAdminBundle:Table:datatable-gallery_image.html.twig' with { filters : options.page.filters|default(false) } %}
+        {% else %#}
+    {% include 'FiveAdminBundle:Table:datatable.html.twig' %}
+        {#% endif %#}
+
+
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+
+    <!-- Library to sort table (not <li> or <div>) -->
+    <script src="/bundles/fiveadmin/js/vendor/misc/jquery.sortable.js" type="text/javascript"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/jquery-datatables/js/jquery.dataTables.min.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/jquery-datatables/js/dataTables.bootstrap.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/jquery-datatables/extensions/TableTools/js/dataTables.tableTools.min.js' ) }}"></script>
+
+    <script src="{{ asset( theme_path ~ 'assets/js/pages/datatables.js' ) }}"></script>
+    <script>
+        $( document ).ready( function()
+        {
+            $( ".datatables").dataTable( {
+                "pageLength" : 50,
+                "aaSorting": [[ 1, "asc" ]]
+            } );
+
+
+            $('#datatables-1').sortable({
+                containerSelector: 'table',
+                itemPath: '> tbody',
+                itemSelector: 'tr',
+                placeholder: '<tr class="placeholder"/>',
+                pullPlaceholder: false,
+                onDrop: function  (item, container, _super) {
+                    var field,
+                    newIndex = item.index()
+                    $.ajax({
+                        url: '/admin/api/gallery/order',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                            ids:S($("table tr td:first-child").text()).collapseWhitespace(",").s.replace(/\ /g, ","),
+                            index:Number($("select[name='datatables-1_length'] option:selected").text()) * (Number($("ul.pagination li.active").text()) -1)
+                        }
+                    })
+
+                    _super(item)
+                  }
+            })
+
+            $('.gallery-wrap').each(function() { // the containers for all your galleries
+                $(this).magnificPopup({
+                    delegate: 'img.image-item', // the selector for gallery item
+                    type: 'image',
+                        removalDelay: 300,
+                        mainClass: 'mfp-fade',
+                    gallery: {
+                      enabled:true
+                    }
+                });
+            });
+
+            $( '#updateFilter' ).on( 'click', function()
+            {
+                var filters = $( '.list-filter' );
+
+                $.each( filters, function( e, i )
+                {
+                    if( $( this ).val() != '' && $( this ).val() != "undefined" )
+                    {
+                        window.location.href = '{{ path( app.request.get( '_route' ), app.request.get( '_route_params' )|merge({parent:null,category:null})  ) }}?parent=' + $(this).data('parent') + '&category=' + $( this ).val() + '&context={{app.request.get('_route_params').context is defined ? app.request.get('_route_params').context: ''}}';
+                    }
+                } );
+            } );
+
+            $( '#deleteModal' ).on( 'show.bs.modal', function( event )
+            {
+                var button = $(event.relatedTarget)
+                var href   = button.data('href')
+                var id     = button.data('id')
+                var modal  = $(this)
+
+                modal.find('#deleteFormModal').attr( 'action', href );
+                modal.find('.delete_action_id').html( id );
+                modal.find( '#deleteFormModal' ).on( 'submit', function( evt )
+                {
+                    evt.preventDefault();
+
+                    $.post( $( '#deleteFormModal' ).attr( 'action' ), {}, function()
+                    {
+                        modal.modal( 'hide' );
+                        button.parent().parent().remove();
+                    } );
+                } );
+
+            } );
+        } );
+    </script>
+{% endblock %}

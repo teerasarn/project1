@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <title>Cuisines Verdun &raquo; Gestion &raquo; {{ page }}</title>
+    <style>
+        .imgs { list-style-type: none; margin: 0; padding: 0; }
+        .imgs li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; }
+        .imgs li span { position: absolute; margin-left: -1.3em; }
+    </style>
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="container">
+    {% block bodyContent %}
+
+        {% block header %}
+           <nav class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="/admin">Cuisines Verdun</a>
+                </div>
+                <div class="container-fluid">
+                <ul class="nav navbar-nav">
+                    <li><a href="/admin/info">Messages reçus</a></li>
+                    <li><a href="/admin/carrousels">Carrousels</a></li>
+                </ul>
+                </div>
+           </nav>
+        {% endblock %}
+
+
+        {% block content %}{% endblock %}
+
+
+        {% block footer %}
+
+        {% endblock %}
+
+
+        <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="//code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+        {% block javascript %}
+        {% endblock %}
+
+    {% endblock %}
+    </container>
+  </body>
+</html>

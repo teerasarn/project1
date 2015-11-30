@@ -1,0 +1,1184 @@
+{% extends 'FiveAdminBundle::layout.html.twig' %}
+
+{% import "FiveAdminBundle:Form:macros.html.twig" as FiveForm %}
+{% form_theme form with [ 'FiveAdminBundle:Form:form_fields.html.twig' ] %}
+
+{% block page_head_title %}{% if id is defined and id is not empty() %}#{{id}} {{blog.getTitleFr()}}{% else %}New{% endif %} {{blog.getTitleFr()}} | {{blog.getTitleFr()|title}} Blog{% endblock %}
+{% block page_head_icon %}<i class="fa icon-keyboard"></i>{% endblock %}
+{% block page_head_subtitle %}<h3></h3>{% endblock %}
+
+{% block content %}
+{% set pictures = blog.image %}
+
+   <script data-require="angular.js@1.2.x" src="http://code.angularjs.org/1.2.28/angular.js" data-semver="1.2.28"></script>
+   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.0.1/ng-tags-input.min.css" />
+   <script src="http://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.0.1/ng-tags-input.min.js"></script>
+   <link href="{{ asset( 'bundles/fiveadmin/five/gallery/five.gallery.css' ) }}" rel="stylesheet" type="text/css" />
+   
+<style>
+
+
+ol.vertical > li
+{
+    padding: 10px 10px 10px 10px;
+    background: #f9f9f9;
+    border: 1px solid #E4EAE6;
+    margin-bottom: 8px;
+}
+ol.vertical > li img
+{    
+    cursor: move;
+}
+
+ol.vertical li.placeholder:before {
+position: absolute;
+content: "";
+width: 0;
+height: 0;
+margin-top: -5px;
+left: -5px;
+top: -4px;
+border: 5px solid transparent;
+border-left-color: #68C39F;
+border-right: none;
+top: 1px;
+}
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+ol.vertical li.placeholder {
+position: relative;
+margin: 0;
+padding: 0;
+border-top: 1px dashed #68C39F;
+top: 1px;
+
+
+}
+ol.simple_with_drop li.placeholder {
+  position: relative;
+  /** More li styles **/
+}
+ol.simple_with_drop li.placeholder:before {
+  position: absolute;
+  /*margin-top: -5px;
+  top: -5px;*/
+  /** Define arrowhead **/
+}
+{#
+.dd-handle:before {
+content: '≡';
+display: block;
+
+width: 100%;
+text-align: center;
+text-indent: 0;
+color: #fff;
+font-size: 20px;
+font-weight: normal;
+}
+
+/* position: absolute; */
+.dd-handle
+{
+
+
+margin: 0;
+left: 0;
+top: 0;
+cursor: pointer;
+width: 30px;
+text-indent: 300%;
+white-space: nowrap;
+overflow: hidden;
+border: 0px solid #ddd;
+background: #909C9C;
+border-top-right-radius: 0;
+border-bottom-right-radius: 0;
+}
+#}
+
+</style>
+ 
+ 
+{{ block( 'ButtonAction' ) }}
+
+
+<form action="" method="post" id="blog-form">  
+  
+     	 <input type="hidden" name="blog_id" value="{{blog.id | raw}}">
+       <div class="row" ng-app="FiveBlog">
+            <div class="col-sm-12">
+                <div class="widget">
+                    <div class="widget-content padding">
+                    		
+                        <div class="row">
+
+                            <div class="col-md-6" id="detail-panel">	
+                                     <div class="row">
+                                       <div class="col-sm-12">
+                                               <h3 class="five-openclose-header"><span class="fa icon-keyboard"></span>  Details <span class="fa icon-five-openclose"></span></h3>
+                                               <hr />
+                                               <div id="error-msg-box" style="visibility: hidden;"></div> 
+                                       </div>
+                                   </div>
+                                   <div class="row five-openclose-content">
+                                       <div class="col-sm-12" >
+                                           <ul id="imagedata-main-main" class="nav nav-tabs nav-simple">
+                                               <li class="active" id="tab-en-main">
+                                                   <a href="#imagedata-en-main" data-toggle="tab">English</a>
+                                               </li>
+                                               <li class="" id="tab-fr-main">
+                                                   <a href="#imagedata-fr-main" data-toggle="tab">French</a>
+                                               </li>
+                                           </ul>                                                         
+                                           <div class="tab-content">
+                                               <div class="tab-pane fade active in" id="imagedata-en-main">
+                                                   <div class="input-group-sm">
+                                                       Permalink <input name="permaLinkEn" type="text" class="form-control input-small pic-title" placeholder="Permalink" value="{{blog.getPermaLinkVal('en')}}"  />
+                                                       Title <input name="titleTextEn" type="text" class="form-control input-small pic-title" placeholder="Title (English) *" value="{{blog.getTitleEn()}}" required="required" />
+                                                       Intro <textarea name="introTextEn" class="form-control input-small pic-desc" placeholder="Intro (English)" {#required="required"#}>{{blog.getIntroTextEn() | raw}}</textarea>
+{#                                                       Blog Article <textarea name="blogEn" class="form-control input-small pic-desc" placeholder="Description" required="required">{{blog.getBlogEn() | raw}}</textarea>                                                                                                
+#}                                                   </div>
+                                               </div> <!-- / .tab-pane -->
+                                               <div class="tab-pane fade" id="imagedata-fr-main">
+                                                   <div class="input-group-sm">
+                                                       Permalink <input name="permaLinkFr" type="text" class="form-control input-small pic-title" placeholder="Permalink" value="{{blog.getPermaLinkVal('fr')}}"  />
+                                                       Title <input name="titleTextFr" type="text" class="form-control input-small pic-title" placeholder="Title (France) *" value="{{blog.getTitleFr()}}" required="required" />
+                                                       Intro <textarea name="introTextFr" class="form-control input-small pic-desc" placeholder="Intro (France)" {#required="required"#}>{{blog.getIntroTextFr() | raw}}</textarea>
+{#                                                       Blog Article <textarea name="blogFr" class="form-control input-small pic-desc" placeholder="Description" required="required">{{blog.getBlogFr() | raw}}</textarea>                                                                                            
+#}                                                   </div>
+                                               </div> <!-- / .tab-pane -->                                                                                        
+                                           </div>
+                                       </div>
+                                  </div>  										
+				</div>
+										
+										
+                                    <div class="col-md-6">
+					<div class="row">
+                                             <div class="col-sm-12">
+                                                 <h3 class="five-openclose-header"><i class="fa  icon-coverflow"></i> Blog Image <span class="fa icon-five-openclose" data-original-title="Click to expand/close" data-toggle="tooltip" title=""></span></h3>
+                                                 <hr />                                                                
+                                             </div>
+                                        </div>          
+                                             
+					<div class="row five-openclose-content">
+                                         
+                                             
+                                            <div class="col-md-12">
+                                                {% set tag = 'image_main' %}
+                                                {% set pic =  blog.image %}
+                                                   <!--<a class="btn btn-success replace-images" id="{{ tag }}"><span class="fa icon-picture"></span>  Modify Pictures</a>-->                                   
+                                                                                        
+                                                    <div class="progress progress-xs no-rounded progress-striped active">
+                                                        <div id="progress_pictures_upload" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                                            <span class="sr-only"></span>
+                                                        </div><!-- .progress-bar .progress-bar-info -->
+                                                    </div>
+                                                    <div id="uploadzone" class="" style="width:100%;height:0px;"></div>
+                                                    <div id="uploadReplacePic" class="" style="width:100%;height:0px;"></div>
+                                                    <div id="upload_preview"></div>
+                                                    
+                                                <div class="display:none">
+                                                    {% include 'FiveAdminBundle:PictureBox:_picture-box.html.twig' with { class :  'picture-box-dummy hidden' } %}
+                                                </div>                                             
+
+                                                <div class="portlets" id="gallery_picures" style="display:block;">
+
+                                                        {% include 'FiveAdminBundle:PictureBox:blog_picture-box.html.twig'  %}
+
+                                                </div>                                                    
+                                                    
+                                            </div>                                            
+					</div>
+        
+                                             
+                                    </div>
+
+                    	 </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">    
+                                    <div class="col-md-12">
+                                        <h3 class="five-openclose-header">
+                                            <span class="fa  icon-picture-2"></span>  Description 
+                                            <span class="fa icon-five-openclose" data-original-title="Click to expand/close" data-toggle="tooltip" title=""></span>
+                                        </h3>
+                                        <hr />
+                                    </div>
+                               	</div>
+                               										
+                                   <div class="row five-openclose-content">
+                                       <div class="col-sm-12" >
+                                                   <div class="input-group-sm">
+
+                                                       <ul id="imagedata-main-main" class="nav nav-tabs nav-simple">
+                                                            <li class="active">
+                                                                <a href="#descdata-en-main" data-toggle="tab">English</a>
+                                                            </li>
+                                                            <li class="">
+                                                                <a href="#descdata-fr-main" data-toggle="tab">French</a>
+                                                            </li>
+                                                        </ul>   
+                                                       
+                                                       <div class="tab-content">
+                                                            <div class="tab-pane fade active in" id="descdata-en-main">
+                                                                <div class="input-group-sm">
+                                                                
+                                                                    <textarea id="blogEn" name="blogEn" required="required">{{blog.getBlogEn() | raw}}</textarea>
+
+                                                                    <script type="text/javascript">
+                                                                        var CKEDITOR_BASEPATH = "/bundles/ivoryckeditor/";
+                                                                    </script>
+                                                                    <script type="text/javascript" src="/bundles/ivoryckeditor/ckeditor.js"></script>
+                                                                    <script type="text/javascript">
+                                                                                                                                      
+                                                                        
+                                                                        if (CKEDITOR.instances["blogEn"]) { delete CKEDITOR.instances["blogEn"]; }
+                                                                        
+                                                                        CKEDITOR.replace("blogEn", 
+                                                                        {
+                                                                           "contentsCss" : ['/ckeditor/blog.css' , '{{ asset( theme_path ~ 'assets/libs/bootstrap/css/bootstrap.min.css' ) }}' ],
+                                                                           "bodyClass" : 'blog_content',
+                                                                           "allowedContent" : true,
+                                                                           "templates_files" : [ '/ckeditor/verduntemplates.js' ],
+                                                                           "language" : 'en', 
+                                                                           "filebrowserBrowseUrl":"\/elfinder" , 
+                                                                           "removeButtons": 'Save',
+                                                                           "enterMode" :CKEDITOR.ENTER_P,
+                                                                           "toolbar" : [
+                                                                                    { name: 'source',  items: [  'Source' ] },
+                                                                                    { name: 'templates',  items: [  'Templates' ] },
+                                                                                    { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
+                                                                                    { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Scayt' ] },
+                                                                                    { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
+                                                                                    { name: 'insert', items: [ 'Image', 'Table', 'HorizontalRule', 'SpecialChar' ] },
+                                                                                    { name: 'tools', items: [ 'Maximize' ] },
+                                                                                    { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+                                                                                    { name: 'others', items: [ '-' ] },
+                                                                                    '/',
+                                                                                    { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Strike', '-', 'RemoveFormat' ] },
+                                                                                    { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ] },
+                                                                                    { name: 'styles', items: [ 'Styles', 'Format' ] },
+                                                                                    { name: 'about', items: [ 'About' ] }
+                                                                            ],
+                                                            
+                                                                        } );  
+                                                                        
+                                                                    </script>                                  
+                                                                </div>
+                                                            </div> <!-- / .tab-pane -->
+                                                            <div class="tab-pane fade" id="descdata-fr-main">
+                                                                <div class="input-group-sm">
+                                                                
+                                                                    <textarea id="blogFr" name="blogFr" required="required">{{blog.getBlogFr() | raw}}</textarea>
+
+                                                                    <script type="text/javascript">
+                                                                        var CKEDITOR_BASEPATH = "/bundles/ivoryckeditor/";
+                                                                    </script>
+                                                                    <script type="text/javascript" src="/bundles/ivoryckeditor/ckeditor.js"></script>
+                                                                    <script type="text/javascript">
+                                                    
+                                                               
+                                                                        if (CKEDITOR.instances["blogFr"]) { delete CKEDITOR.instances["blogFr"]; }
+                                                                        CKEDITOR.replace("blogFr", 
+                                                                        {
+                                                                            "contentsCss" : ['/ckeditor/blog.css' , '{{ asset( theme_path ~ 'assets/libs/bootstrap/css/bootstrap.min.css' ) }}' ],
+                                                                            "bodyClass" : 'blog_content',
+                                                                            "allowedContent" : true,
+                                                                            "templates_files" : [ '/ckeditor/verduntemplates.js' ],
+                                                                            "language" : 'fr',
+                                                                            "filebrowserBrowseUrl":"\/elfinder",
+                                                                            "removeButtons": 'Save',
+                                                                            "enterMode" :CKEDITOR.ENTER_P,
+                                                                            "toolbar" : [
+                                                                                    { name: 'source',  items: [  'Source' ] },
+                                                                                    { name: 'templates',  items: [  'Templates' ] },
+                                                                                    { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
+                                                                                    { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Scayt' ] },
+                                                                                    { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
+                                                                                    { name: 'insert', items: [ 'Image', 'Table', 'HorizontalRule', 'SpecialChar' ] },
+                                                                                    { name: 'tools', items: [ 'Maximize' ] },
+                                                                                    { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+                                                                                    { name: 'others', items: [ '-' ] },
+                                                                                    '/',
+                                                                                    { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Strike', '-', 'RemoveFormat' ] },
+                                                                                    { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ] },
+                                                                                    { name: 'styles', items: [ 'Styles', 'Format' ] },
+                                                                                    { name: 'about', items: [ 'About' ] }
+                                                                            ]
+                                                                        });
+
+                                                                    </script>
+                                                                
+                                                                </div>
+                                                            </div> <!-- / .tab-pane -->         
+                                                        </div>
+                                                       {# <div id="blog-validate-text"></div>#}
+                                                                
+                                                   </div>
+                                                                                
+                                           </div>
+                                       </div>  
+
+                           </div>
+                       </div> 	                                                        
+                                                        
+
+                               
+                                                        
+                                                        
+                                                        
+{#<div class="row">
+										<div class="col-md-6">
+
+	                                <div class="row">
+	                                    <div class="col-sm-12 five-openclose-header" >
+	                                        <h3 ><span class="fa  icon-camera-2"></span>  Image Description 1 <span class="fa icon-five-openclose" data-original-title="Click to expand/close" data-toggle="tooltip" title=""></span></h3>
+	                                        <hr />
+	                                    </div>
+	                                </div>              
+	                                                    
+  											  <div class="row five-openclose-content">
+                                       <div class="col-sm-12" >
+                                           <ul id="imagedata-main-img1" class="nav nav-tabs nav-simple">
+                                               <li class="active">
+                                                   <a href="#imagedata-en-text1" data-toggle="tab">English</a>
+                                               </li>
+                                               <li class="">
+                                                   <a href="#imagedata-fr-text1" data-toggle="tab">French</a>
+                                               </li>
+                                           </ul>                                                         
+                                           <div class="tab-content">
+                                               <div class="tab-pane fade active in" id="imagedata-en-text1">
+                                                   <div class="input-group-sm">
+                                                       <textarea name="imageText1En" class="form-control input-small pic-desc" placeholder="Description">{{blog.imageText1En | raw}}</textarea>                                                                                                
+                                                   </div>
+                                               </div> <!-- / .tab-pane -->
+                                               <div class="tab-pane fade" id="imagedata-fr-text1">
+                                                   <div class="input-group-sm">
+                                                      <textarea name="imageText1Fr" class="form-control input-small pic-desc" placeholder="Description">{{blog.imageText1Fr | raw}}</textarea>                                                                                            
+                                                   </div>
+                                               </div> <!-- / .tab-pane -->                                                                                        
+                                           </div>
+                                           
+                                       </div>
+                                   </div>                                 
+										</div>
+										<div class="col-md-6"> 
+												
+                                         <div class="row">
+                                             <div class="col-sm-12">
+                                                 <h3 class="five-openclose-header"><i class="fa  icon-coverflow"></i> Image 1 <span class="fa icon-five-openclose" data-original-title="Click to expand/close" data-toggle="tooltip" title=""></span></h3>
+                                                 <hr />                                                                
+                                             </div>
+                                         </div>
+                                         
+                                         
+													   <div class="row five-openclose-content">
+														   <div class="col-md-12">
+											  {% set tag = 'image1' %}
+										     {% set pic =  blog.image1 %}
+                                                   <!--<a class="btn btn-success replace-images" id="{{ tag }}"><span class="fa icon-picture"></span>  Modify Pictures</a>-->
+                                                                                        
+                                                    <div class="progress progress-xs no-rounded progress-striped active">
+                                                        <div id="progress_pictures_upload" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                                            <span class="sr-only"></span>
+                                                        </div><!-- .progress-bar .progress-bar-info -->
+                                                    </div>
+                                                    <div id="uploadzone" class="" style="width:100%;height:0px;"></div>
+                                                    <div id="uploadReplacePic" class="" style="width:100%;height:0px;"></div>
+                                                    <div id="upload_preview"></div>
+                                                    
+                                                <div class="display:none">
+                                                    {% include 'FiveAdminBundle:PictureBox:_picture-box.html.twig' with { class :  'picture-box-dummy hidden' } %}
+                                                </div>                                             
+
+																<div class="portlets" id="gallery_picures" style="display:block;">
+
+                                                       
+                                                        {% include 'FiveAdminBundle:PictureBox:blog_picture-box.html.twig'  %}
+
+                                                </div>                                                    
+                                                    
+                                            </div>                                            
+											</div>
+
+
+
+												
+										</div>
+							</div>			       
+
+
+
+							<div class="row">
+										<div class="col-md-6">
+                             
+ 											  <div class="row">
+	                                    <div class="col-sm-12 five-openclose-header" >
+	                                        <h3 ><span class="fa  icon-camera-2"></span>  Image Description 2 <span class="fa icon-five-openclose" data-original-title="Click to expand/close" data-toggle="tooltip" title=""></span></h3>
+	                                        <hr />
+	                                    </div>
+	                                </div>                            
+	                                      
+  											  <div class="row five-openclose-content">
+                                       <div class="col-sm-12" >
+                                           <ul id="imagedata-main-img2" class="nav nav-tabs nav-simple">
+                                               <li class="active">
+                                                   <a href="#imagedata-en-text2" data-toggle="tab">English</a>
+                                               </li>
+                                               <li class="">
+                                                   <a href="#imagedata-fr-text2" data-toggle="tab">French</a>
+                                               </li>
+                                           </ul>                                                         
+                                           <div class="tab-content">
+                                               <div class="tab-pane fade active in" id="imagedata-en-text2">
+                                                   <div class="input-group-sm">
+                                                       <textarea name="imageText2En" class="form-control input-small pic-desc" placeholder="Description">{{blog.imageText2En | raw}}</textarea>                                                                                                
+                                                   </div>
+                                               </div> <!-- / .tab-pane -->
+                                               <div class="tab-pane fade" id="imagedata-fr-text2">
+                                                   <div class="input-group-sm">
+                                                      <textarea name="imageText2Fr" class="form-control input-small pic-desc" placeholder="Description">{{blog.imageText2Fr | raw}}</textarea>                                                                                            
+                                                   </div>
+                                               </div> <!-- / .tab-pane -->                                                                                        
+                                           </div>
+                                       </div>
+                                   </div>    
+
+										</div>		
+
+										<div class="col-md-6"> 
+                                  		 <div class="row">
+                                             <div class="col-sm-12">
+                                                 <h3 class="five-openclose-header"><i class="fa  icon-coverflow"></i> Image 2 <span class="fa icon-five-openclose" data-original-title="Click to expand/close" data-toggle="tooltip" title=""></span></h3>
+                                                 <hr />                                                                
+                                             </div>
+                                         </div>
+                                         
+                                         <div class="col-md-12">
+											  {% set tag = 'image2' %}
+										     {% set pic =  blog.image2 %}
+                                                   <!--<a class="btn btn-success replace-images" id="{{ tag }}"><span class="fa icon-picture"></span>  Modify Pictures</a>-->
+                                                                                        
+                                                    <div class="progress progress-xs no-rounded progress-striped active">
+                                                        <div id="progress_pictures_upload" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                                            <span class="sr-only"></span>
+                                                        </div><!-- .progress-bar .progress-bar-info -->
+                                                    </div>
+                                                    <div id="uploadzone" class="" style="width:100%;height:0px;"></div>
+                                                    <div id="uploadReplacePic" class="" style="width:100%;height:0px;"></div>
+                                                    <div id="upload_preview"></div>
+                                                    
+                                                <div class="display:none">
+                                                    {% include 'FiveAdminBundle:PictureBox:_picture-box.html.twig' with { class :  'picture-box-dummy hidden' } %}
+                                                </div>                                             
+
+																<div class="portlets" id="gallery_picures" style="display:block;">
+
+                                                       
+                                                        {% include 'FiveAdminBundle:PictureBox:blog_picture-box.html.twig'  %}
+
+                                                </div>                                                    
+                                                    
+                                            </div>        
+                                         
+                                         <!--
+                                         <div class="row five-openclose-content">
+                                             <div class="col-sm-6">
+                                                 <img src="{{ blog.image2 | raw }}" class="img-thumbnail cover_picture" />
+                                             </div>
+                                             <div class="col-sm-6">        
+                                             </div>      
+                                         </div>
+                                         -->
+                                         
+                                                                                               
+                                  </div>   										
+			
+						</div>
+
+#}
+ 			<div class="row">
+                            <div class="col-md-6"  id="author-panel">
+                                <div>
+                                    <div class="row" >    
+                                                    <div class="col-md-12">
+                                                        <h3 class="five-openclose-header">
+                                                            <span class="fa  icon-picture-2"></span>  Author 
+                                                            <span class="fa icon-five-openclose" data-original-title="Click to expand/close" data-toggle="tooltip" title=""></span>
+                                                        </h3>
+                                                        <hr />
+                                                    </div>
+                                                   
+                                    </div>
+
+                                    <div class="row five-openclose-content">
+                                           <div class="col-sm-12" >
+                                                       <div class="input-group-sm">
+
+                                                           <input name="author" type="text" class="form-control input-small pic-title" placeholder="author *" value="{{blog.author()}}" required="required" />
+                                                       </div>
+                                                       <div id="error-author-msg-box" style="visibility: hidden;"></div>
+                                               </div>
+                                    </div>  
+                                </div>
+
+                           </div>
+                                                   
+                            <div class="col-md-6"> 
+                       
+                                {% include 'FiveAdminBundle:Blog:angular-tags.html.twig' %}
+                             
+                           </div>                       
+                                                   
+                       </div> 	
+                                
+                       <div class="row">
+                           <div class="col-md-6"  id="author-panel">
+                                <div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button id="save_btn" class="btn btn-default">
+                                                Save
+                                            </button>
+                                            <button type="button" id="cancle_btn" class="btn btn-default">
+                                                Cancle
+                                            </button>
+                                        </div>
+                                    </div>
+                                 </div>
+                            </div>
+                       </div>
+                                                     
+     
+                    </div>
+                </div>
+            </div>
+       </div>
+       
+                                                 
+                                                   
+                                                   
+  </form>                                                      
+                                                   
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>    
+{% endblock %}
+
+
+
+{% block js %}
+
+
+{% set context = 'blog' %}
+
+    {{ parent() }}
+    <!-- Page Specific JS Libraries -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-select/bootstrap-select.min.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-inputmask/inputmask.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-xeditable/js/bootstrap-editable.min.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-xeditable/demo/jquery.mockjax.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-xeditable/demo/demo-mock.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-select2/select2.min.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/jquery-clndr/moment-2.5.1.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/bootstrap-typeahead/bootstrap3-typeahead.min.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/ckeditor/ckeditor.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/ckeditor/adapters/jquery.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/js/pages/advanced-forms.js' ) }}"></script>
+    <script src="{{ asset( theme_path ~ 'assets/libs/dropzone/dropzone.js' ) }}"></script>
+    <!--script src="{{ asset( theme_path ~ 'assets/libs/jquery-nestable/jquery.nestable.js' ) }}"></script-->
+    <script src="{{ asset( theme_path ~ 'assets/libs/sortable/sortable.min.js' ) }}"></script>
+    <!--script src="{{ asset( theme_path ~ 'assets/js/jquery-sortable.js' ) }}"></script-->
+
+    
+
+    <script>
+
+    var config         = {};
+    var uploadedImages = [];
+
+    var uploadConfig = {
+        url:             "{{ path( 'five_admin_upload_pictures_blog' ) }}",
+        thumbnailWidth:  80,
+        thumbnailHeight: 80,
+        parallelUploads: 20,
+        //previewsContainer: '#upload_preview',
+        //clickable:       'a.add-images',
+        previewTemplate: '<div ste="display:none"></div>',
+        autoQueue:        true,
+        acceptedFiles:   ".jpg,.jpeg",
+        accept: function( file, done )
+        {
+            var re = /(?:\.([^.]+))?$/;
+            var ext = re.exec(file.name)[1];
+            ext = ext.toUpperCase();
+            if ( ext == "JPEG" || ext == "JPG" || ext == "JPE") 
+            {
+                done();
+            }
+            else{ 
+                done("Only Jpeg images are allowed"); 
+            }
+        },        
+        success : function(evt, resp)
+        {
+            //console.log( evt, 'hereeeee!', resp );
+            uploadedImages.push( { picture: resp.picture, element: null } );
+            //dropzoneReplace.reset();
+        },
+        uploadprogress: function( file, progress )
+        {
+            if( progress == 0 )
+            {
+                $( '#progress_pictures_upload' ).show().css( 'width', '0%' ).fadeIn();
+            }
+            
+            $( '#progress_pictures_upload' ).css( 'width', progress + '%' );
+            
+            if( progress >= 98 )
+            {
+                _.delay( function()
+                {
+                    $( '#progress_pictures_upload' ).fadeOut();
+                }, 250 )
+            }
+        }
+
+    };
+
+    var picReplaceConfig = {
+        url:             "{{ path( 'five_admin_upload_pictures_blog' ) }}",
+        thumbnailWidth:  80,
+        thumbnailHeight: 80,
+        parallelUploads: 1,
+        clickable:       true,//'.picture_update',
+        //clickable: 'a.replace-images',
+        previewTemplate: '<div style="display:none"></div>',
+        autoQueue:        true,
+        acceptedFiles:   ".jpg,.jpeg",
+        uploadMultiple:  false,
+        currentClick:    null,
+        //maxFiles:        1,
+        accept: function( file, done )
+        {
+            var re = /(?:\.([^.]+))?$/;
+            var ext = re.exec(file.name)[1];
+            ext = ext.toUpperCase();
+            if ( ext == "JPEG" || ext == "JPG" || ext == "JPE") 
+            {
+                done();
+            }
+            else{ 
+                done("Only Jpeg images are allowed"); 
+            }
+        },  
+        uploadprogress: function( file, progress )
+        {
+            if( progress == 0 )
+            {
+                $( '#progress_pictures_upload' ).show().css( 'width', '0%' ).fadeIn();
+            }
+            
+            $( '#progress_pictures_upload' ).css( 'width', progress + '%' );
+            
+            if( progress >= 98 )
+            {
+                _.delay( function()
+                {
+                    $( '#progress_pictures_upload' ).fadeOut();
+                }, 250 );
+
+            }
+        },
+        success : function( file, resp )
+        {
+				//  disable modify button, need check more dropzone property
+	         var elm = dropzoneReplace.currentClick ;
+				//console.log( resp.src);
+				//console.log( dropzoneReplace );	
+
+				if(!elm)
+				{
+					elm  = $( this.element );
+					var widgetHeader = $( elm ).parents();			
+					var picElm  = $( widgetHeader ).find( '.replace-images:first' );
+					var image_tag_id  = 	picElm.attr('id');							
+					
+				}
+				else
+				{
+					var widgetHeader = $( elm ).parents( '.widget-header:first' );
+					var picElm = dropzoneReplace.currentClick;  	
+					var image_tag_id  = 	picElm.attr('id');	
+
+				}
+				
+				//console.log( 'test: ' +  image_tag_id );					
+				var main_image_item =  $( widgetHeader ).find( '.' + image_tag_id  ) ;
+ 
+            if( picElm )
+            {
+            	 var image_position_name = picElm.attr('id');
+            	         	 
+ 					$( '#'+image_position_name +'_src' ).attr( 'src', resp.src );   
+ 					
+					main_image_item.parent().parent().find( 'a.view:first' ).attr( 'href', resp.src );
+
+ 					      	 
+            	 
+            }            
+        }
+
+    };    
+    
+function getRandomInt( min, max )
+{
+    return Math.floor( Math.random() * ( max - min + 1 ) ) + min;
+}
+
+var cloneRow = function( imgSrc )
+{
+    var rnd     = getRandomInt( 1, 999 ) + getRandomInt( 1, 999 ) + getRandomInt( 1, 999 );
+    var li      = $(".picture-box-dummy:first");
+    var liClone = li.clone();
+
+    liClone.removeClass( 'picture-box-dummy' ).removeClass( 'hidden' ).addClass( 'picture-box' );
+    liClone.find( 'img' ).attr( 'src', imgSrc );
+    liClone.find( 'input[name="src[]"]:first' ).val( imgSrc );
+    liClone.find( 'input[name="titleFr[]"]' ).val( '' );
+    liClone.find( 'input[name="titleEn[]"]' ).val( '' );
+    liClone.find( 'input[name="descFr[]"]' ).val( '' );
+    liClone.find( 'input[name="descEn[]"]' ).val( '' );
+    liClone.find( 'input[name="cover[]"]' ).val( "0" );
+    liClone.find( 'input[name="id[]"]' ).val( "" );
+    liClone.find( 'a.view:first' ).attr( 'href', imgSrc );
+    liClone.find( '#imagedata' ).attr( 'id', 'imagedata-0' + rnd )
+    liClone.find( '#imagedata-fr' ).attr( 'id', 'imagedata-fr-0' + rnd );
+    liClone.find( '#imagedata-en' ).attr( 'id', 'imagedata-en-0' + rnd );
+    liClone.find( 'a[href="#imagedata-en"]' ).attr( 'href', '#imagedata-en-0' + rnd );
+    liClone.find( 'a[href="#imagedata-fr"]' ).attr( 'href', '#imagedata-fr-0' + rnd );
+
+    $('#gallery_picures').prepend( liClone );
+    dropzoneReplace.clickableElements.push( $( liClone ).find( '.picture_update' ).get(0) );
+
+    return liClone;
+}
+
+var output;
+
+var handlePictureBoxEditCancelClick = function( event )
+{
+
+    event.preventDefault();
+    var _this = event.target;
+
+    $( event.target ).parents( '.widget:first' ).find( '.widget-content' ).slideToggle( { 
+        start: function( p )
+        {
+            var close = $( _this ).parents( '.widget:first' ).find( '.edit_cancel:first' );
+            var edit  = $( _this ).parents( '.widget:first' ).find( '.edit:first' );
+
+            if( $( close ).hasClass( 'hidden' )  )
+            {
+                $( close ).removeClass( 'hidden' );
+                $( edit ).addClass( 'hidden' );
+            }
+            else
+            if( $( edit ).hasClass( 'hidden' ) )
+            {
+                $( edit ).removeClass( 'hidden' );
+                $( close ).addClass( 'hidden' );
+            }    
+        } 
+    } );
+}
+
+
+var handleOpenCloseHeaderClick = function( event )
+{
+    event.preventDefault();
+    
+    $( event.target ).toggleClass( 'active' );
+    var content = $( event.target ).parents( '.row:first' ).next( '.five-openclose-content' );
+    $( content ).slideToggle().removeClass( 'hidden' );
+}
+
+var updateOutput = function( e )
+{
+    var list   = e.length ? e : $( e.target ),
+        output = list.data( 'output' );
+        
+        console.log( 'list', list );
+
+    if( window.JSON )
+    {
+        output.val( window.JSON.stringify( list.nestable( 'serialize' ) ) );
+    }
+    else
+    {
+        output.val( 'JSON browser support required for this demo.' );
+    }
+}
+
+var handleOnPinCoverClick = function( event )
+{
+    var picsBox = $( '.picture-box' );
+
+    $.each( picsBox, function( i, e )
+    {
+        try
+        {
+            $( picsBox[ i ] ).find( '.btn-pin:first' ).removeClass( 'active' );
+            $( picsBox[ i ] ).find( '.btn-pin' ).find( 'span:first,i:first' ).removeClass( 'active' );
+        }
+        catch( e )
+        {
+            console.log( "Error: ", e );
+        }
+
+    } );
+
+    if( !$( event.target ).hasClass( 'active' ) )
+    {
+        $( event.target ).addClass( 'active' );
+        $( event.target ).parent().addClass( 'active' );        
+        $( '.cover_picture:first' ).attr( 'src', $( event.target ).parents( '.widget-header:first' ).find( '.img-responsive:first' ).attr( 'src' ) );
+        $( event.target ).parents( '.widget-header:first' ).find( 'input[name="cover[]"]' ).val( "1" );
+    }
+    else
+    {
+        $( event.target ).removeClass( 'active' );
+        $( event.target ).parent().removeClass( 'active' );
+        $( event.target ).parents( '.widget-header:first' ).find( 'input[name="cover[]"]' ).val( "0" );
+    }
+}
+
+var handlePictureBoxDeleteClick = function( event )
+{
+     $( '#image_main_src' ).attr('src' , '');
+{#    var picBox = $( event.target ).parents( '.picture-box:first' );
+
+    if( picBox )
+    {
+        console.log(picBox);
+      $( picBox ).off();
+        $( picBox ).find( '.picture_delete' ).off();
+        $( picBox ).find( '.edit_cancel' ).off();
+        $( picBox ).find( '.edit' ).off();
+        $( picBox ).find( '.view' ).off();
+        $( picBox ).find( '.picture_update' ).off();
+        $( document ).find( '.tooltip' ).remove();
+        $( picBox ).remove();
+        $( this ).remove();
+        decrementPictureBoxCnt();
+    }#}
+}
+
+var dropzoneMain    = new Dropzone( document.querySelector( '#uploadzone' ),uploadConfig );
+var dropzoneReplace = new Dropzone( document.querySelector( '#uploadReplacePic' ), picReplaceConfig );
+
+
+var perparePostData = function()
+{
+	
+    var picBoxes = $( ".picture-box" );
+    var pics     = [];
+    var pos      = picBoxes.length;
+
+//console.log();
+    $.each( picBoxes, function( e, i )
+    {
+        var pic      = {};
+        pic.id       = $( this ).find( 'input[name="id[]"]' ).val();
+        pic.src      = $( this ).find( 'input[name="src[]"]' ).val();
+        pic.srcThumb = $( this ).find( 'input[name="src[]"]' ).val().replace( '/uploads/', '/uploads/thumbs/' );
+        pic.titleFr  = $( this ).find( 'input[name="titleFr[]"]' ).val();
+        pic.titleEn  = $( this ).find( 'input[name="titleEn[]"]' ).val();
+        pic.descFr   = $( this ).find( 'textarea[name="descFr[]"]' ).val();
+        pic.descEn   = $( this ).find( 'textarea[name="descEn[]"]' ).val();
+        pic.cover    = ( $( '.cover_picture:first' ).attr('src') == pic.src ) ? 1 : 0;
+        pic.position = pics.length;
+
+        
+
+        pics.push( pic );
+ 
+    } );
+    
+//================   prepare data edit here ==============================
+
+    var data  = { 'data': {
+        'context' : '{{ context | default( 'realisation' ) }}',
+        'categories': filters, //[ $( '#rooms_filter' ).val(), $( '#styles_filter' ).val() ],
+        'gallery' : {
+            'id'      : "{{ id|default('') }}",
+            'titleFr' : $( '#imagedata-main' ).parent().find( 'input[name="titleFr"]' ).val(),
+            'descFr'  : $( '#imagedata-main' ).parent().find( 'textarea[name="descFr"]' ).val(),
+            'titleEn' : $( '#imagedata-main' ).parent().find( 'input[name="titleEn"]' ).val(),
+            'descEn'  : $( '#imagedata-main' ).parent().find( 'textarea[name="descEn"]' ).val()
+        },
+        'pictures' : pics,
+        'tags' : JSON.parse( $( '#gallery_tags' ).val() )
+    }};
+
+    
+
+
+    return data;
+}
+
+	
+
+
+var handlePictureUpdateBtnClick = function()
+{
+    dropzoneReplace.currentClick = $( this );
+    dropzoneReplace.currentPic   = $( this );
+    $( dropzoneReplace.hiddenFileInput ).click();
+}
+
+    document.querySelector( "form" )
+        .addEventListener( "invalid", function( event ) {
+            //event.preventDefault();
+     
+        if (  $( '#imagedata-main-main' ).parent().find( 'input[name="titleTextEn"]' ).val() == '' ||  $( '#imagedata-main-main' ).parent().find( 'textarea[name="introTextEn"]' ).val() == '' )
+        {
+            //   <div class="tab-pane fade active in" id="imagedata-en-main">
+
+            $( '#tab-en-main' ).attr('class','active'); 
+           $( '#tab-fr-main' ).attr('class',''); 
+           
+           $( '#imagedata-en-main' ).attr('class','tab-pane fade active in');
+           $( '#imagedata-fr-main' ).attr('class','tab-pane fade');
+            //console.log("Eng");
+            //$( '#imagedata-main-main' ).parent().find( 'input[name="titleTextFr"]' ).removeAttr('required');
+            //$( '#imagedata-main-main' ).parent().find( 'textarea[name="introTextFr"]' ).removeAttr('required');
+        }
+        else if (  $( '#imagedata-main-main' ).parent().find( 'input[name="titleTextFr"]' ).val() == '' ||  $( '#imagedata-main-main' ).parent().find( 'textarea[name="introTextFr"]' ).val() == '' )
+        {
+            
+           $( '#tab-en-main' ).attr('class',''); 
+           $( '#tab-fr-main' ).attr('class','active'); 
+           
+           $( '#imagedata-en-main' ).attr('class','tab-pane fade');
+           $( '#imagedata-fr-main' ).attr('class','tab-pane fade active in');
+            //console.log("Fra");
+            //$( '#imagedata-main-main' ).parent().find( 'input[name="titleTextEn"]' ).removeAttr('required');
+            //$( '#imagedata-main-main' ).parent().find( 'textarea[name="introTextEn"]' ).removeAttr('required');
+        }
+        
+        
+        }, true );
+
+$( document ).ready( function()
+{    
+{#    
+ //for debug: safari not support HTML5 
+        $( '#imagedata-main-main' ).parent().find( 'input[name="titleTextEn"]' ).removeAttr('required');
+        $( '#imagedata-main-main' ).parent().find( 'input[name="titleTextFr"]' ).removeAttr('required');
+        $( '#imagedata-main-main' ).parent().find( 'textarea[name="introTextEn"]' ).removeAttr('required');
+        $( '#imagedata-main-main' ).parent().find( 'textarea[name="introTextFr"]' ).removeAttr('required');  
+        $( 'input[name="author"]' ).removeAttr('required');  
+       #} 
+    
+    $( document ).on( 'click', '.picture-box .picture_delete', handlePictureBoxDeleteClick );
+    $( document ).on( 'click', '.picture-box .edit_cancel, .picture-box .edit', handlePictureBoxEditCancelClick );
+
+    $( '.five-openclose-header' ).on( 'click', handleOpenCloseHeaderClick );
+	
+             
+    $( "#blog-form" ).submit(function(e){
+              
+            var data  =  { 'data': {
+            'id': $('input[name=blog_id]').val(),
+            
+            'titleTextEn' : $( '#imagedata-main-main' ).parent().find( 'input[name="titleTextEn"]' ).val(),
+            'titleTextFr' : $( '#imagedata-main-main' ).parent().find( 'input[name="titleTextFr"]' ).val(),
+            
+            'introTextEn' : $( '#imagedata-main-main' ).parent().find( 'textarea[name="introTextEn"]' ).val(),
+            'introTextFr' : $( '#imagedata-main-main' ).parent().find( 'textarea[name="introTextFr"]' ).val(),
+           
+            'BlogEn' :     CKEDITOR.instances["blogEn"].getData(),
+            'BlogFr' :     CKEDITOR.instances["blogFr"].getData(),
+
+            'imageText1En' : '',
+            'imageText1Fr' : '',            
+            
+            'imageText2En' : '',
+            'imageText2Fr' : '',  
+    
+            'permaLinkEn' : $( '#imagedata-main-main' ).parent().find( 'input[name="permaLinkEn"]' ).val(),  
+            'permaLinkFr' : $( '#imagedata-main-main' ).parent().find( 'input[name="permaLinkFr"]' ).val(),  
+            
+            'imageMain' :  $( '#image_main_src' ).attr('src'),   
+                                
+            'image1' : '',
+            'image2' : '',
+            
+            'tags' :  $( 'input[name="blog_tags"]' ).val(),
+            
+            'author' : $( 'input[name="author"]' ).val() 
+    } };
+        //  data validate if HTML 5 required not working
+
+            var error = false;
+            if ( data.data.titleTextEn == "" || data.data.titleTextFr == "" {#|| data.data.introTextEn == "" || data.data.introTextFr == ""#} )
+            {
+
+                    var err_msg = "";
+                    if ( data.data.titleTextEn == "" )
+{#                        err_msg = err_msg + "<div style='color: red;'>* Title (English) should not be empty.</div>"
+                    if ( data.data.introTextEn == "" )#}
+                        err_msg = err_msg + "<div style='color: red;'>* Intro (English) should not be empty.</div>"
+                    if ( data.data.titleTextFr == "" )
+                        err_msg = err_msg + "<div style='color: red;'>* Title (France) should not be empty.</div>"
+{#                    if ( data.data.introTextFr == "" )
+                        err_msg = err_msg + "<div style='color: red;'>* Intro (France) should not be empty.</div>"#}
+                   
+                    err_msg = err_msg + "<hr />";
+                    
+                    $('#detail-panel').focus();
+                    
+                    $('#detail-panel').attr('style', "border-style: solid; border-color: red");
+                    $('#error-msg-box').html(err_msg);
+                    $('#error-msg-box').attr('style', '');
+                    
+                    error = true;
+            }
+            else
+            {
+                
+                $('#detail-panel').attr('style', '');
+                $('#error-msg-box').attr('style', 'visibility: hidden;');
+                $('#error-msg-box').html('');
+            }
+
+            
+            if ( data.data.author == "" )
+            {
+                var err_msg_author = "";
+                        err_msg_author = err_msg_author + "<div style='color: red;'>* Author Name should not be empty.</div>"
+                        
+                err_msg_author = err_msg_author + "<hr />";
+                    error = true;
+                    
+                if (!error)
+                    $('#author-panel').focus();
+                
+                
+                $('#author-panel').attr('style', "border-style: solid; border-color: red");
+                $('#error-author-msg-box').html(err_msg_author);
+                $('#error-author-msg-box').attr('style', '');     
+            }
+            else
+            {
+                                    
+                $('#author-panel').attr('style', '');
+                $('#error-author-msg-box').attr('style', 'visibility: hidden;');
+                $('#error-author-msg-box').html('');
+
+            }
+            
+            if ( error )
+                return false;
+            //
+
+            jQuery.ajax( {
+                type:     'POST',
+                url:      '/admin/blog/save',
+                data:     data,
+                dataType: 'json',
+                cache:    false,             
+                
+                error: function( result, txt )
+                {            
+                    console.log( result );
+                },
+
+                success: function( result )
+                {
+                    //console.log(result);return;
+                    //check for requier field, not need now
+                   
+                    var link = "{{ path( "five_admin_blog_edit", { id: "blog_id_text" } ) }}";
+
+                    link = link.replace("blog_id_text" , result.id );
+                    window.location.href = link + '?alert_type=success';
+                }
+            } ); 
+
+    		return false;
+		});  
+
+    $( '#cancle_btn' ).on( 'click', function()
+    {
+    	 window.location.href = '{{ path( "five_admin_blog_list", { context: context } ) }}?alert_type=cancle';
+    }  );
+
+    $( document ).on( 'click', '.picture-box .picture_update', handlePictureUpdateBtnClick );
+
+    $( document ).on( 'click', '.picture-box .btn-pin', handleOnPinCoverClick );
+
+    $( '#gallery_picures' ).magnificPopup(
+    {
+        delegate:    '.picture-box a.view',
+        type:        'image',
+        removalDelay: 300,
+        mainClass:    'mfp-fade',
+        gallery:
+        {
+            enabled: true
+        }
+    } );    
+} );
+
+
+
+var incrementPictureBoxCnt = function()
+{
+    var cnt = $( '#picture-box-cnt' ).text();
+    cnt     = parseInt( cnt ) + 1;
+
+    console.log( 'pic increment ++', cnt );
+
+    $( '#picture-box-cnt' ).text( cnt );
+}
+
+var decrementPictureBoxCnt = function()
+{
+    var cnt = $( '#picture-box-cnt' ).text();
+    cnt     = parseInt( cnt ) - 1;
+
+    $( '#picture-box-cnt' ).text( cnt );
+}
+
+dropzoneMain.on( "addedfile", function( file )
+{
+  // Hookup the start button
+  //file.previewElement.querySelector(".start").onclick = function() { myDropzone.enqueueFile(file); };
+} );
+
+dropzoneMain.on( "queuecomplete", function( progress )
+{
+    _.forEach( uploadedImages, function( obj, i )
+    {
+        var row = window.cloneRow( '/uploads/' + obj.picture );
+        incrementPictureBoxCnt();
+    } );
+
+    uploadedImages = [];
+    $( ".portlets" ).sortable( "refresh" );
+} );
+  
+
+    </script>
+    <script>
+
+    </script>        
+{% endblock %}

@@ -1,0 +1,231 @@
+parameters:
+    five_admin.user_entity.class: Five\AdminBundle\Entity\User
+    five_admin.user_manager.class: Five\AdminBundle\Manager\UserEntityManager
+    five_admin.path.uploads: "%kernel.root_dir%/../web/uploads"
+    five_admin.path.medias: "%kernel.root_dir%/../web/medias"
+
+
+
+        #- { label: Web Tests, prefix: 'five_admin_webtest', path: 'five_admin_webtest_list', icon: 'fa fa-dashboard' }
+
+    five_admin.genders:
+        m: Males
+        f: Female
+
+#############################################
+
+
+
+services:
+
+    five.form.user:
+        factory_method: create
+        factory_service: form.factory
+        class: Symfony\Component\Form\Form
+        arguments:
+            - '@five.form.type.user'
+        lazy: true
+
+    five.gallery_category.repository:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - Five\CuisinesVerdunBundle\Entity\GalleryCategory
+
+    five.branch.repository:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - Five\CuisinesVerdunBundle\Entity\Branch
+
+    five.form.gallery_image:
+        factory_method: create
+        factory_service: form.factory
+        class: Symfony\Component\Form\Form
+        arguments:
+            - '@five_admin.form.type.gallery_image'
+
+    five.form.gallery:
+        factory_method: create
+        factory_service: form.factory
+        class: Symfony\Component\Form\Form
+        arguments:
+            - '@five_admin.form.type.gallery'
+
+    five.form.branch:
+        factory_method: create
+        factory_service: form.factory
+        class: Symfony\Component\Form\Form
+        arguments:
+            - '@five_admin.form.type.branch'
+#############################           
+    five.form.blog:
+        factory_method: create
+        factory_service: form.factory
+        class: Symfony\Component\Form\Form
+        arguments:
+            - '@five_admin.form.type.blog'
+    five_admin.form.type.blog:
+        class: Blogger\BlogBundle\Form\BlogType
+        arguments:
+            - '@five.blog.repository'
+        tags:
+            - { name: form.type, alias: blog }
+        lazy: true
+        
+    five.blog.repository:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - Blogger\BlogBundle\Entity\Blog        
+######################################
+    five.form.delete:
+        factory_method: createBuilder
+        factory_service: form.factory
+        class: Symfony\Component\Form\FormBuilder
+        arguments:
+            - 'form'
+        lazy: true
+
+    five_admin.form.type.branch:
+        class: Five\CuisinesVerdunBundle\Form\BranchType
+        arguments:
+            - '@five.branch.repository'
+        tags:
+            - { name: form.type, alias: cv_branch }
+        lazy: true
+
+    five_admin.form.type.gallery:
+        class: Five\AdminBundle\Form\Type\GalleryType
+        arguments:
+            - '@five.gallery_category.repository'
+        tags:
+            - { name: form.type, alias: five_gallery }
+        lazy: true
+
+    five_admin.form.type.gallery_image:
+        class: Five\AdminBundle\Form\Type\GalleryImageType
+        arguments:
+            - '@five.gallery_category.repository'
+        tags:
+            - { name: form.type, alias: five_gallery_image }
+        lazy: true
+
+    five_admin.form.type.gallery_picture:
+        class: Five\AdminBundle\Form\Type\GalleryPictureType
+        arguments:
+            - '@five.gallery_category.repository'
+        tags:
+            - { name: form.type, alias: gallery_picture }
+        lazy: true
+
+
+    five_admin.form.type.key_fact:
+        class: Five\AdminBundle\Form\Type\KeyFactType
+        tags:
+            - { name: form.type, alias: key_fact }
+        lazy: true
+
+    five_admin.form.type.country_trans:
+        class: Five\AdminBundle\Form\Type\CountryTranslationType
+        tags:
+            - { name: form.type, alias: country_trans }
+        lazy: true
+
+    five_admin.form.type.gender:
+        class: Five\AdminBundle\Form\Type\GenderType
+        arguments:
+            - "%five_admin.genders%"
+        tags:
+            - { name: form.type, alias: gender }
+        lazy: true
+
+    five.form.type.user:
+        class: Five\AdminBundle\Form\UserType
+        tags:
+            - { name: form.type, alias: user_form }
+        lazy: true
+
+    # five.form.type.gallery_image:
+    #     class: Five\AdminBundle\Form\Type\GalleryImageType
+    #     tags:
+    #         - { name: form.type, alias: five_gallery_image }
+    #     lazy: true
+
+    five_admin.uploadable.mime_type_guesser:
+        class: Five\AdminBundle\Uploadable\MimeTypeGuesserAdapter
+
+    five_admin.listener.uploadable:
+        class: Gedmo\Uploadable\UploadableListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        arguments: [ "@five_admin.uploadable.mime_type_guesser" ]
+        calls:
+            - [ setAnnotationReader, [ '@annotation_reader' ] ]
+            - [ setDefaultFileInfoClass, [ 'Five\AdminBundle\Uploadable\UploadedFileInfo' ] ]
+
+    five_admin.uploadable.manager:
+        class: Five\AdminBundle\Uploadable\UploadableManager        
+        arguments: [ '@five_admin.listener.uploadable', 'Five\AdminBundle\Uploadable\UploadedFileInfo' ]
+
+    five.type.picture:
+        class: Five\AdminBundle\Form\PictureType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: picture_upload }
+
+    five.form_manager:
+        class: Five\AdminBundle\Manager\FormManager
+        arguments: [ "@request_stack","@doctrine","@templating", "@router"]
+        calls:
+            - [ setUploadsPath, [ "%five_admin.path.uploads%" ] ]
+            - [ setMediasPath, [ "%five_admin.path.medias%" ] ]
+            - [ setUploadableManager, [ "@five_admin.uploadable.manager" ] ]
+            - [ setSecurityContext, [ '@security.context' ] ]
+
+
+
+    five_edit.twig.extension:
+        class: Five\AdminBundle\Twig\FiveEditExtension
+        # arguments:
+        #     - "%locale%"
+        #     - "%managed_locales%"
+        #     - "%managed_locales_name%"
+        #     - "@session"
+        calls:
+            - [ setRequestStack,    [ "@request_stack" ] ]
+            - [ setRouter,          [ "@router" ] ]
+            - [ setManagerRegistry, [ "@doctrine" ] ]
+            - [ setSecurityContext, [ '@security.context' ] ]
+            #
+        tags:
+            - { name: twig.extension }
+
+    five.image_type.extension:
+        class: Five\AdminBundle\Form\Extension\ImageTypeExtension
+        tags:
+            - { name: form.type_extension, alias: file }
+
+    #five_admin.user_actions:
+
+        #     - 
+        # calls:
+        #     - [setRequestStack, [ "@" ]]
+
+    five_admin.authentication.handler:
+        class: Five\AdminBundle\Security\AuthenticationHandler
+        calls:
+            - [ setRequestStack,    [ '@request_stack' ] ]
+            - [ setSession,         [ '@session' ] ]
+            - [ setSecurityContext, [ '@security.context' ] ]
+
+    five_admin.user_manager:
+        class:     "%five_admin.user_manager.class%"
+        calls:            
+            - [ setManagerRegistry, [ "@doctrine" ] ]
+            - [ setEntityClass,     [ '%five_admin.user_entity.class%' ] ]
+            #- [ setSecurityContext, [ '@security.context' ] ]
+        public: false

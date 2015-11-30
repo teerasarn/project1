@@ -1,0 +1,28 @@
+page_title: Galerie de nos projets
+keywords: Réalisations
+description: Découvrez toutes nos Réalisations
+h1: Réalisations
+
+body_class: salledebain
+
+filters:
+  title: Trier par 
+  choose: Choisir
+  rooms: Pièce
+  kitchen: Cuisine
+  bathroom: Salle de bain
+  add_more: Voir davantage de réalisations
+  
+partners_section:
+  image: img/partners-icons.png
+  title: Nos fournisseurs
+  subtitle: Des partenaires de confiance
+  text: Cuisines Verdun collabore avec les meilleurs manufacturiers et distributeurs en Amérique du Nord. Les marques que vous retrouvez chez nous sont réputées sur le marché et sont garantes de la qualité de&nbsp;nos&nbsp;produits.
+  
+guarantee_section:
+  title: Notre garantie
+  subtitle: Fiers de vous servir depuis plus de 40 ans,
+  text: nous vous remercions de nous faire confiance une fois de plus. En choisissant Cuisines Verdun pour réaliser votre cuisine de rêve, vous profitez de notre garantie inégalée, la «&nbsp;Garantie&nbsp;VERDUN&nbsp;».
+  details_link_text: Tous les détails
+  details_link: http://www.portesetfenetresverdun.com/Garantie/ArmoiresVanitesCabinets/
+  

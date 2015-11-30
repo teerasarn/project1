@@ -1,0 +1,36 @@
+page_title: Notre entreprise
+keywords: 
+description: 
+h1: 
+
+intro:
+  title: On<br>installe<br>la confiance
+  
+statistiques:
+  title: Cuisines Verdun démontre un véritable savoir-faire
+  text: Vous y découvrirez des cuisines dont les styles et les aménagements variés vous donneront des idées ingénieuses qui suivent les tendances actuelles. Vous pourrez également compter sur les conseils avisés de nos designers-cuisinistes, des professionnels expérimentés au fait des dernières&nbsp;nouveautés.
+  values_title: Nos valeurs
+  values_text: Amélioration continue<br>Compétence<br>Fiabilité<br>Disponibilité<br>Courtoisie<br>Écoute
+  
+service:
+  title: Un service personnalisé<br>clé en main
+  text: Chez nous, vous trouverez tout sous un même toit. En effet, Cuisines Verdun est à la fois, distributeur et installateur. Chez nous, vous profitez de plus de 45 années d'expérience dans le domaine du sur mesure. À partir de votre première visite, notre équipe d’experts prend tout en main, de la conception à la rénovation jusqu’à l’installation finale. Efficaces, consciencieux, dévoués, nous avons le souci du travail bien fait, car projet après projet, la satisfaction de nos clients est notre réelle&nbsp;motivation.
+  
+location:
+  title: Chez nous / Chez vous
+  1:
+    title: Concept/Design
+    image: img/location-1.jpg
+    text: Le designer-cuisiniste est celui qui saura, dans un premier temps, concrétiser sur papier la cuisine dont le client a toujours rêvé. Experts dans le domaine de la rénovation de cuisines et de salles de bain, nos designers-cuisinistes sont à l’affût des dernières tendances et nouveautés et sauront conseiller le client afin de trouver les matériaux convenant aux besoins et aux désirs de chacun, le tout selon le budget établi. Pour eux, chaque problème a une solution. Ainsi, si un imprévu survient, ils n’hésiteront pas à revoir les plans de départ afin de satisfaire le client.
+  2:
+    title: Fabrication
+    image: img/location-2.jpg
+    text: Nos fournisseurs (de cabinets, de plomberie, de céramique, de comptoirs en marbre, pierre, etc.) sont triés sur le volet et sont parmi les meilleurs de l’industrie. Peu importe le style recherché par le client, notre sélection de fournisseurs nous permet de répondre aux besoins de tout client, même le plus exigeant. Nos designer-cuisinistes d’expérience sauront sélectionner les meilleurs fournisseurs pour votre projet.
+  3:
+    title: Installation
+    image: img/location-4.jpg
+    text: Respectueux et minutieux, nos installateurs ont à cœur de faire en sorte que le projet alors jusqu’ici sur papier, devienne enfin réalité. Pose de céramique, d’armoires, de comptoirs, etc., ces derniers s’assureront que le travail effectué est de qualité et en conformité avec les plans établis par le designer-cuisiniste et son client. Au cours des années, nous avons su nous entourer de partenaires de confiance (entrepreneur général, électricien, plombier, carreleur, peintre, etc.) qui nous aideront à réaliser votre projet.
+    
+history:
+  title: Historique de <br>Cuisines Verdun
+  text: "<p>Depuis quelques années, la cuisine occupe une place toute particulière dans une maison. Lieu de rassemblement par excellence, elle est aujourd’hui le point central de toute demeure. Choisir Cuisines Verdun, c’est compter sur 15 ans d’expérience dans le domaine du sur mesure. Avec ses 7 succursales situées dans la grande région métropolitaine, Cuisines Verdun est aujourd’hui une référence dans le domaine.<br><br>Que vous rêviez d’une cuisine au style classique, contemporain, champêtre ou moderne, nos designer-cuisinistes sont là pour vous aider tout au long de votre processus. Ayant à cœur d’offrir à notre clientèle des produits et services évoluant au même rythme que le marché, Cuisines Verdun offre maintenant depuis plusieurs années un service clé en main, facilitant ainsi le processus d’achat du client lorsque vient le temps de refaire sa cuisine ou sa salle de bain. Plomberie, électricité, céramique, etc., on s’occupe de tout&nbsp;!</p>"  

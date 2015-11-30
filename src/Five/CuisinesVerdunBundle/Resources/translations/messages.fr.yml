@@ -1,0 +1,43 @@
+header:
+  menu:
+    services: Services
+    services_link: services_fr
+    kitchen: Cuisine
+    kitchen_link: cuisine_fr
+    bathroom: Salle de bain
+    bathroom_link: salledebain_fr
+    company: Entreprise
+    company_link: entreprise_fr
+    realisations: Réalisations
+    realisations_link: realisations_fr
+    contact: Contact
+    contact_link: contact_fr
+    submission: soumission
+    submission_icon: Demandez une soumission
+    callus: Appelez-moi
+    callus_icon: Pour nous contacter
+    facebook: "<p>Consultez notre page Facebook <br/>pour des trucs & conseils</p>"
+    facebook_link: 'https://www.facebook.com/pages/Cuisines-Verdun/339099646290309?fref=ts'
+
+
+general:
+  know_more: En savoir davantage
+  rights: Tous droits réservés
+  directions: Obtenez le trajet
+  socialtitle: Partagez cette image
+  
+garantie:
+  title: Notre garantie
+  text: Fier de vous servir depuis plus de 40 ans
+  link: Tous les détails en succursale
+  
+logirenov:
+  text: Épargnez<br><span class="mince">jusqu’à</span><br><span class="big-green">2500$</span><br><span class="normal-text">sur votre<br>rénovation</span><br><span class="little-italic">avec </span><span class="big-italic">LogiRénov</span>
+  link: "*détails ici"
+  link-url: "http://www.finances.gouv.qc.ca/documents/bulletins/fr/BULFR_2014-6-f-b.pdf"
+
+financing:
+  title: Financement disponible
+  text: <ul class="green-bulleted"><li>Modes de paiement flexible</li><li>Reportez le paiement de vos achats (Achetez maintenant, payez plus tard)</li><li>Devenez détenteur de la carte Visa Desjardins « Accord-D »</li></ul>
+  link: Tous les détails en succursale
+  

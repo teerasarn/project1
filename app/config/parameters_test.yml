@@ -1,0 +1,15 @@
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     localhost
+    database_port:     ~
+    database_name:     pfverdun_test
+    database_user:     pfverdun_test
+    database_password: "dWr%@Lo7^y+~"
+
+    mailer_transport:  sendmail
+    mailer_host:       ~
+    mailer_user:       ~
+    mailer_password:   ~
+
+    locale:            en
+    secret:            c39178826b4adb8836fca7a5c7b3869b9f11230b

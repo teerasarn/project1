@@ -1,0 +1,194 @@
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+    {% set _locale = app.request.get( '_locale' ) %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
+    <script>window.jQuery || document.write('<script src="{{ asset( assets_path ~ 'js/vendor/jquery-1.11.0.js' ) }}"><\/script>')</script>
+    {#
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.11.8/plugins/CSSPlugin.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.11.8/easing/EasePack.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.11.8/TweenLite.min.js"></script>
+    #}
+    <script src="{{ asset( assets_path ~ 'js/vendor/jquery.placeholder.min.js' ) }}"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?&sensor=true"></script>
+    <!-- Please call pinit.js only once per page -->
+    <script type="text/javascript" async defer src="//assets.pinterest.com/js/pinit.js"></script>
+    <script src="{{ asset( 'bundles/fiveadmin/coco_theme/assets/libs/ckeditor/ckeditor.js' ) }}"></script>
+    <script src="{{ asset( 'bundles/fiveadmin/coco_theme/assets/libs/ckeditor/adapters/jquery.js' ) }}"></script>
+    <script>
+
+
+      var global = {
+        assets_path: "/{{ assets_path }}",
+        message_success_mg: "{{ 'forms.1.message' | trans({}, 'contact') | raw }}",
+        message_success_sc: "{{ 'forms.2.message' | trans({}, 'contact') | raw }}",
+        message_success_sb: "{{ 'forms.3.message' | trans({}, 'contact') | raw }}",
+        message_error: "{{ 'forms.common.error' | trans({}, 'contact') | raw }}",
+        share_title: "{{ 'general.socialtitle' | trans({}, 'messages') | raw }}",
+        isMobile: {% if is_mobile() %}true{% else %}false{% endif %}
+      };
+
+    var mapPhoneShowLabel = "{{ app.request.get( '_locale' ) == 'en' ? 'Click to display' : 'Cliquez pour afficher' }}";
+    var locations = [
+    {% for branch in branches %}
+      {% set texte = 'additional-text.' ~ branch.id %}
+      {
+        title:   "{{ branch.name }}",
+        x:       {{ branch.lat }},
+        y:       {{ branch.lng }},
+        address: "<h1 {{ FiveEditEntity( BranchesEntity[loop.index0], { 'property' : 'name' ~ ( _locale == 'en' ? 'en' : ''), 'type' : 'text' }, [] ) | raw }}>{{ branch.name }}</h1>\n\
+                  <div class=\"address\"><p><span {{ FiveEditEntity( BranchesEntity[loop.index0], { 'property' : 'street' ~ ( _locale == 'en' ? 'en' : ''), 'type' : 'text' }, [] ) | raw }}>{{ branch.street }}</span><br /><span {{ FiveEditEntity( BranchesEntity[loop.index0], { 'property' : 'city' ~ ( _locale == 'en' ? 'en' : ''), 'type' : 'text' }, [] ) | raw }}>{{ branch.city }}</span><br/><span {{ FiveEditEntity( BranchesEntity[loop.index0], { 'property' : 'phone', 'type' : 'text' }, [] ) | raw }}>{{ branch.postalCode }}</p><p style=\"margin-bottom:0;\"><span class=\"icon telephone\"></span><span class=\"phone-number yellow-bg\" data-branch=\"{{ branch.name }}\" data-phone=\"{{ branch.phone }}\" {{ FiveEditEntity( BranchesEntity[loop.index0], { 'property' : 'name', 'type' : 'text' }, [] ) | raw }}>{{ branch.phone }}</span><br/><span class=\"icon fax\"></span><span class=\"yellow-bg\" {{ FiveEditEntity( BranchesEntity[loop.index0], { 'property' : 'fax', 'type' : 'text' }, [] ) | raw }}>{{ branch.fax }}</span><br><span class=\"icon itinerary\"></span><a href=\"https://maps.google.com?daddr={{ branch.street }},{{ branch.city }}\" target=\"_blank\" class=\"yellow-bg\">{{ 'general.directions' | trans({}, 'messages') }}</a></p></div><div class=\"hours\" {{ FiveEditEntity( BranchesEntity[loop.index0], { 'property' : 'hours' ~ ( _locale == 'en' ? 'en' : ''), 'type' : 'text' }, [] ) | raw }}>XXXXX<br><br></div>",
+        hours:   "{{ branch.hours | replace({"\n":' ', "\r":' '}) | raw }}",
+        id:      {{ branch.id }}
+      {% if loop.last %}
+      }
+      {% else %}
+      },
+      {% endif %}
+    {% endfor %}
+    ];
+
+    function forceUpdateEditor()
+    {
+{% if app.security.isGranted( 'ROLE_ADMIN' ) %}
+      $( '[data-five-edit]' ).attr( 'contenteditable','true' ).ckeditor(config);
+{% endif %}
+    }
+
+      function getGlobal(key){  return global[key];    }
+    </script>
+    {% javascripts '@FiveCuisinesVerdunBundle/Resources/public/js/vendor/bootstrap.min.js'
+      '@FiveCuisinesVerdunBundle/Resources/public/js/vendor/jquery.dropkick-min.js'
+      '@FiveCuisinesVerdunBundle/Resources/public/js/vendor/jquery.photobox.js'
+      '@FiveCuisinesVerdunBundle/Resources/public/js/vendor/scrollMonitor.js'
+      '@FiveCuisinesVerdunBundle/Resources/public/js/website.js'
+      filter='?uglifyjs2' %}
+      <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script src="{{ asset( assets_path ~ 'js/' ~ page ~ '.js' ) }}"></script>
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <script>
+      (function(b, o, i, l, e, r) {
+        b.GoogleAnalyticsObject = l;
+        b[l] || (b[l] =
+                function() {
+                  (b[l].q = b[l].q || []).push(arguments)
+                });
+        b[l].l = +new Date;
+        e = o.createElement(i);
+        r = o.getElementsByTagName(i)[0];
+        e.src = '//www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e, r)
+      }(window, document, 'script', 'ga'));
+      ga('create', 'UA-51883850-1', 'cuisinesverdun.com');
+      //ga('create', 'UA-XXXXX-X');
+      ga('require', 'displayfeatures');
+      ga('send', 'pageview');
+    </script>
+
+<script>
+    var promoCurrentPage = "{{ page|default('') }}";
+    var promoOnloadShow  = false;
+
+    function trackPromoShow()
+    {
+        var promoMobile = $( 'html' ).hasClass( 'mobile' ) ? ' mobile' : '';
+        var eventAction = ( promoCurrentPage == 'home' && !promoOnloadShow ? 'onload' : 'click' );
+        
+        if( promoCurrentPage == 'home' && !promoOnloadShow )
+        {
+            promoOnloadShow = true;
+        }
+
+        ga( 'send', {
+            'hitType'       : 'event',          
+            'eventCategory' : 'Promotion',   
+            'eventAction'   : eventAction,      
+            'eventLabel'    : 'promotion show' + promoMobile,
+            'eventValue'    : 'espace-ricardo-april-mai-2015'
+        } );
+    }
+
+    function trackPromoHide()
+    {
+        var promoMobile = $( 'html' ).hasClass( 'mobile' ) ? ' mobile' : '';
+
+        ga( 'send', {
+            'hitType'       : 'event',          
+            'eventCategory' : 'Promotion',   
+            'eventAction'   : 'click',      
+            'eventLabel'    : 'promotion hide' + promoMobile,
+            'eventValue'    : 'espace-ricardo-april-mai-2015'
+        } );
+    }
+
+    function showPromotionModal()
+    {    
+        trackPromoShow();
+
+        if( !$( 'html' ).hasClass( 'mobile' ) )
+        {
+            $( '#promos-ribbon-btn' ).removeClass( 'slideInRight' ).addClass( 'slideOutRight' );    
+        }
+        else
+        {
+            if( $( '.navbar-collapse.collapse' ).hasClass( 'in' ) )
+            {
+                $( '.navbar-collapse.collapse' ).removeClass( 'in' );
+            }
+        }
+        
+        $( '#promotion-modal' )    
+        .show()
+        .css( 'marginTop', - $( '#promotion-modal' ).find( '.modal-content' ).height() * 0.5 + 'px' )
+        .removeClass( 'fadeOutRight' )
+        .addClass( 'fadeInRight' )
+        .one( 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function()
+        {
+            $( 'body' ).append( '<div class="modal-backdrop"></div>' );
+            $( '.modal-backdrop' ).addClass( 'animated fadeIn' );
+            $( '.modal-backdrop' ).on( 'click', hidePromotionModal );
+        } );
+    }
+
+    function hidePromotionModal()
+    {            
+        trackPromoHide();
+
+        $( '.modal-backdrop' ).removeClass( 'fadeIn' ).addClass( 'fadeOut' );
+        
+        $( '#promotion-modal')
+        .removeClass('fadeInRight')
+        .addClass( 'fadeOutRight' )
+        .one( 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function()
+        {
+            $( '#promotion-modal' ).hide();
+            $( '.modal-backdrop' ).remove();
+        } );
+
+        if( !$( 'html' ).hasClass( 'mobile' ) )
+        {
+            $( '#promos-ribbon-btn' )
+            .removeClass( 'slideOutRight' )
+            .addClass( 'slideInRight' );
+        }
+    }
+
+    $( document ).ready( function()
+    {
+        $( '#promos-ribbon-btn' ).on( 'click', showPromotionModal );
+        $( '.promos-ribbon-btn' ).on( 'click', showPromotionModal );
+        $( '#promotion-modal .close' ).on( 'click', hidePromotionModal );
+
+        if( promoCurrentPage == 'home' && !promoOnloadShow )
+        {
+            window.setTimeout( function()
+            {
+                showPromotionModal();
+            }, 2500 );
+        }
+    } );
+
+</script>
+
+{% include 'FiveAdminBundle:InlineEdit:inline_edit.html.twig' %}
+
+

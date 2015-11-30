@@ -1,0 +1,108 @@
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <br /><h3 class="five-openclose-header"><i class="glyphicon glyphicon-tags"></i>&nbsp;&nbsp;Tags <span class="fa icon-five-openclose" data-original-title="Click to expand/close" data-toggle="tooltip" title=""></span></h3>
+                                                                <hr />  
+                                                                                                                              
+                                                            </div>
+                                                        </div>
+                                                        <div class="row five-openclose-content" ng-controller="TagsCtrl">
+                                                            <div class="col-sm-12">
+<style>
+
+tags-input .tags .tag-item .remove-button
+{
+  color: #ffffff!important;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);;
+}
+
+.bootstrap .tags {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.bootstrap .tags.focused {
+  border-color: #66afe9;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba(102,175,233,0.6);
+}
+
+.bootstrap .tags .tag-item {
+  /*background: #428bca;*/
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  background-color: #68C39F;
+  background: #4A525F;
+  border: 1px solid #4A525F;/*#68C39F;*//*#357ebd*/
+  border-radius: 2px;
+  color: #fff;
+  -webkit-box-shadow:0 1px 2px rgba(0,0,0,0.5);
+  box-shadow:0 1px 3px rgba(0,0,0,0.5);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);;
+  padding: 0px 8px;
+  font-size: 15px;
+}
+
+.bootstrap .tags .tag-item.selected {
+  background: #d9534f;
+  border: 1px solid #d43f3a;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.bootstrap .tags .tag-item button {
+  background: transparent;
+  color: #000;
+  opacity: .4;
+}
+
+.bootstrap .autocomplete {
+  border-radius: 4px;
+}
+
+.bootstrap .autocomplete .suggestion-item.selected {
+  color: #262626;
+  background-color: #e9e9e9;
+}
+
+.bootstrap .autocomplete .suggestion-item em {
+  font-weight: normal;
+  background-color: #ffff00;
+}
+
+.bootstrap .autocomplete .suggestion-item.selected em {
+  color: #262626;
+  background-color: #ffff00;
+}
+</style>                                                            
+                                                                <tags-input ng-model="tags" class="bootstrap" placeholder="Add a tag" replace-spaces-with-dashes="true">
+                                                                  <auto-complete source="loadTags($query)"></auto-complete>
+                                                                </tags-input>
+                                                                <input type="hidden" id="gallery_tags" name="gallery_tags" value="{% verbatim %}{{tags}}{% endverbatim %}" />
+<script>
+var app = angular.module( 'FiveGallery', ['ngTagsInput']);
+
+var TagsCtrl = app.controller('TagsCtrl', function($scope, $http) {
+  $scope.tags = [
+    { text: 'Tag1' },
+    { text: 'Tag2' },
+    { text: 'Tag3' }
+  ];
+
+  $scope.getTags = function()
+  {
+    return $scope.tags;
+  }
+   
+  $scope.loadTags = function(query) {
+    //return {{gallery.getTags()|json_encode|raw}}
+    return $http.get('/tags.json');
+  };
+});
+</script>                                                                
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                
+                                                            </div>                                                            
+                                                        </div>

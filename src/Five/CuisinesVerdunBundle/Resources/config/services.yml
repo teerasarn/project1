@@ -1,0 +1,27 @@
+parameters:
+#    five_cuisines_verdun.example.class: Five\CuisinesVerdunBundle\Example
+
+services:
+#    five_cuisines_verdun.example:
+#        class: %five_cuisines_verdun.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+    five.userservice:
+        class: Five\CuisinesVerdunBundle\Service\UserService
+        arguments: [ @security.context, @doctrine, @session, @service_container ]
+
+    five.branchservice:
+        class: Five\CuisinesVerdunBundle\Service\BranchService
+        arguments: [ @security.context, @doctrine, @session, @service_container ]
+
+    request.listener:
+        class: Five\CuisinesVerdunBundle\Listener\RequestListener
+        arguments: [ @service_container ]
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+    postload.listener:
+        class: Five\CuisinesVerdunBundle\Listener\EntityLocaleInjector
+        arguments: [ @service_container ]
+        tags:
+            - { name: doctrine.event_listener, event: postLoad }

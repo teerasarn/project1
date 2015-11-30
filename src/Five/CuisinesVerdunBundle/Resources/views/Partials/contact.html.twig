@@ -1,0 +1,230 @@
+<section id="contact-header" class="block">
+  <div class="container">
+    <h2>{{ 'showrooms.title' | trans({}, 'contact') }}</h2>
+    <div class="row">
+      <div class="col-lg-offset-2 col-lg-8">
+        <div class="row row-list-succursales">
+          <div class="col-sm-4">
+            <p class="head-text">{{ 'regions.1' | trans({}, 'contact') }}</p>
+            <ul class="liste-succursales">
+              {% for branch in branches %}
+              {% if branch.division == 2 %}
+              <li><a href="#" data-loc-id="{{ branch.id }}">{{ branch.name }}</a></li>
+              {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="col-sm-4">
+            <p class="head-text">{{ 'regions.3' | trans({}, 'contact') }}</p>
+            <ul class="liste-succursales">
+              {% for branch in branches %}
+              {% if branch.division == 1 %}
+              <li><a href="#" data-loc-id="{{ branch.id }}">{{ branch.name }}</a></li>
+              {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="col-sm-4">
+            <p class="head-text">{{ 'regions.2' | trans({}, 'contact') }}</p>
+            <ul class="liste-succursales">
+              {% for branch in branches %}
+              {% if branch.division == 3 %}
+              <li><a href="#" data-loc-id="{{ branch.id }}">{{ branch.name }}</a></li>
+              {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="contact-forms">
+  <a name="carte"></a>
+  <div id="carte-wrapper">
+
+  </div>
+
+  <div class="container">
+    <div class="row" id="message-forms">
+      <div class="col-lg-offset-2 col-lg-8">
+        <div class="row form-choices">
+          <div class="col-sm-4">
+            <button type="button" class="btn btn-block btn-default" data-form-link="form-message-general">{{ 'forms.1.formtype' | trans({}, 'contact') }}</button>
+          </div>
+          <div class="col-sm-4">
+            <button type="button" class="btn btn-block btn-default" data-form-link="form-soumission-cuisine">{{ 'forms.2.formtype' | trans({}, 'contact') }}</button>
+          </div>
+          <div class="col-sm-4">
+            <button type="button" class="btn btn-block btn-default" data-form-link="form-soumission-bain">{{ 'forms.3.formtype' | trans({}, 'contact') }}</button>
+          </div>
+        </div>
+        <div class="row contact-form" id="form-message-general">
+          <h2 class="bottomed-lined">{{ 'forms.1.title' | trans({}, 'contact') }}</h2>
+          <form id="general-message">
+            <div class="col-md-12 bottomed-lined vertical-space-15">
+              <div class="row">
+                <div class="col-sm-5"><p>{{ 'forms.common.dispo' | trans({}, 'contact') }}</p></div>
+                <div class="col-sm-7">
+                  <input type="checkbox" name="f-mg-day" id="f-mg-day">
+                  <label for="f-mg-day"><span></span>{{ 'forms.common.day' | trans({}, 'contact') }}</label>
+                  <input type="checkbox" name="f-mg-night" id="f-mg-night">
+                  <label for="f-mg-night"><span></span>{{ 'forms.common.evening' | trans({}, 'contact') }}</label>
+                  <input type="checkbox" name="f-mg-weekend" id="f-mg-weekend">
+                  <label for="f-mg-weekend"><span></span>{{ 'forms.common.weekend' | trans({}, 'contact') }}</label>
+                </div>
+              </div>
+            </div>
+            <div class="row form-row form-first-row">
+              <div class="col-sm-6">
+                <input type="text" id="f-mg-lastname" name="f-mg-lastname" value="" placeholder="{{ 'forms.common.lastname' | trans({}, 'contact') }}">
+              </div>
+              <div class="col-sm-6">
+                <input type="text" id="f-mg-firstname" name="f-mg-firstname" value="" placeholder="{{ 'forms.common.firstname' | trans({}, 'contact') }}">
+              </div>
+            </div>
+            <div class="row form-row">
+              <div class="col-sm-6">
+                <input type="text" id="f-mg-telephone" name="f-mg-telephone" value="" placeholder="{{ 'forms.common.phone' | trans({}, 'contact') }}">
+              </div>
+              <div class="col-sm-6">
+                <input type="text" id="f-mg-cp" name="f-mg-cp" value="" placeholder="{{ 'forms.common.cp' | trans({}, 'contact') }}">
+              </div>
+            </div>
+            <div class="row form-row">
+              <div class="col-sm-6">
+                <input type="text" id="f-mg-email" name="f-mg-email" value="" placeholder="{{ 'forms.common.email' | trans({}, 'contact') }}">
+              </div>
+              <div class="col-sm-6 select-container">
+                <select name="f-mg-succursale" id="f-mg-succursale" class="turnintodropdown">
+                  <option value="-1" selected="selected">{{ 'forms.common.branch' | trans({}, 'contact') }}</option>
+                  {% for branch in branches %}
+                    <option value="{{ branch["id"] }}">{{ branch["name"] }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="row form-row">
+              <div class="col-md-12">
+                <textarea id="f-mg-message" name="f-mg-message" placeholder="{{ 'forms.1.textarea' | trans({}, 'contact') }}"></textarea>
+              </div>
+            </div>
+            <div class="row form-row">
+              <div class="col-md-12">
+                <button type="button" id="f-mg-submit" class="btn btn-success btn-submit">{{ 'forms.common.submit' | trans({}, 'contact') }}</button>
+              </div>
+            </div>
+          </form>
+        </div> <!-- fin formulaire message générale -->
+
+      <div class="row contact-form" id="form-soumission-cuisine">
+        <h2 class="bottomed-lined">{{ 'forms.2.title' | trans({}, 'contact') }}</h2>
+        <form id="soumission-cuisine">
+          <div class="row form-row form-first-row">
+            <div class="col-md-12">
+              <h4>{{ 'forms.2.subtitle' | trans({}, 'contact') }}</h4>
+              <h5>{{ 'forms.2.whowecall' | trans({}, 'contact') }}</h5>
+            </div>
+          </div>
+          <div class="row form-row">
+            <div class="col-sm-6">
+              <input type="text" id="f-ap-name" name="f-ap-name" value="" placeholder="{{ 'forms.2.name' | trans({}, 'contact') }}">
+            </div>
+            <div class="col-sm-6">
+              <input type="text" id="f-ap-telephone" name="f-ap-telephone" value="" placeholder="{{ 'forms.common.phone' | trans({}, 'contact') }}">
+            </div>
+          </div>
+          <div class="row form-row">
+            <div class="col-sm-6">
+              <input type="text" id="f-ap-cp" name="f-ap-cp" value="" placeholder="{{ 'forms.common.cp' | trans({}, 'contact') }}">
+            </div>
+            <div class="col-sm-6 select-container">
+              <select name="f-ap-succursale" id="f-ap-succursale" class="turnintodropdown">
+                <option value="-1" selected="selected">{{ 'forms.common.branch' | trans({}, 'contact') }}</option>
+                {% for branch in branches %}
+                  <option value="{{ branch["id"] }}">{{ branch["name"] }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <!--
+          <div class="col-md-12 bottomed-lined vertical-space-15">
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <input type="checkbox" name="f-sc-armoires" id="f-sc-armoires">
+                  <label for="f-sc-armoires"><span></span>{{ 'forms.2.product_types.1' | trans({}, 'contact') }}</label>
+                </div>
+                <div class="form-group">
+                  <input type="checkbox" name="f-sc-comptoir" id="f-sc-comptoir">
+                  <label for="f-sc-comptoir"><span></span>{{ 'forms.2.product_types.2' | trans({}, 'contact') }}</label>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <input type="checkbox" name="f-sc-dosseret" id="f-sc-dosseret">
+                  <label for="f-sc-dosseret"><span></span>{{ 'forms.2.product_types.3' | trans({}, 'contact') }}</label>
+                </div>
+                <div class="form-group">
+                  <input type="checkbox" name="f-sc-plancher" id="f-sc-plancher">
+                  <label for="f-sc-plancher"><span></span>{{ 'forms.2.product_types.4' | trans({}, 'contact') }}</label>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <input type="checkbox" name="f-sc-installation" id="f-sc-installation">
+                  <label for="f-sc-installation"><span></span>{{ 'forms.2.product_types.5' | trans({}, 'contact') }}</label>
+                </div>
+                <div class="form-group">
+                  <input type="checkbox" name="f-sc-renovation" id="f-sc-renovation">
+                  <label for="f-sc-renovation"><span></span>{{ 'forms.2.product_types.6' | trans({}, 'contact') }}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          -->
+          <div class="row form-row">
+            <div class="col-md-12">
+              <textarea id="f-ap-message" name="f-ap-message" placeholder="{{ 'forms.2.whatproject' | trans({}, 'contact') }}"></textarea>
+            </div>
+          </div>
+          <div class="col-md-12 vertical-space-15">
+            <div class="row">
+              <div class="col-sm-5"><p>{{ 'forms.common.dispo' | trans({}, 'contact') }}</p></div>
+              <div class="col-sm-7">
+                <input type="checkbox" name="f-ap-day" id="f-ap-day">
+                <label for="f-ap-day"><span></span>{{ 'forms.common.day' | trans({}, 'contact') }}</label>
+                <input type="checkbox" name="f-ap-night" id="f-ap-night">
+                <label for="f-ap-night"><span></span>{{ 'forms.common.evening' | trans({}, 'contact') }}</label>
+                <input type="checkbox" name="f-ap-weekend" id="f-ap-weekend">
+                <label for="f-ap-weekend"><span></span>{{ 'forms.common.weekend' | trans({}, 'contact') }}</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12"><p>{{ 'forms.2.callnotice' | trans({}, 'contact') }}</p></div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <button type="button" id="f-sc-submit" class="btn btn-success btn-submit">{{ 'forms.common.submit' | trans({}, 'contact') }}</button>
+          </div>
+        </form>
+      </div> <!-- fin du formulaire de soumission cuisine -->
+
+        <div class="row contact-form" id="form-soumission-bain">
+          <div class="row form-row form-first-row">
+            <div class="col-sm-12"><h2 class="bottomed-lined">{{ 'forms.3.title' | trans({}, 'contact') }}</h2></div>
+          </div>
+          <div class="row form-row">
+            <div class="col-sm-12">
+              <p class="planif-notice">{{ 'forms.3.phrase' | trans({}, 'contact') }}</p>
+              <a href="/bundles/fivecuisinesverdun/pdf/{{ 'forms.3.pdf' | trans({}, 'contact') }}" target="_blank" class="btn yellow-bg">{{ 'forms.3.linktitle' | trans({}, 'contact') }}</a>
+            </div>
+          </div>
+        </div> <!-- fin du formulaire de soumission salle de bain -->
+      </div>
+    </div>
+  </div>
+
+</section> <!-- fin de section contact -->
