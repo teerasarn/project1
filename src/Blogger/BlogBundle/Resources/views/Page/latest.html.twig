@@ -40,7 +40,7 @@
                 </li>
                 
                 {% else %}
-                <p>There are no blog entries for symblog</p>
+                 <p>{{ 'blog.blog_no_blog' | trans({}, 'blog') | raw }}</p>
                 {% endfor %}
             </ul>
         </div>
