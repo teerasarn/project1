@@ -70,6 +70,13 @@ body{
 }
 
 
+.blog_content .container .intro_text_main{
+    position:relative;
+    padding-bottom:0px;
+    overflow:hidden;
+    margin-bottom:0px;
+}
+
 .blog_content .container .row:not(.block_title){
     position:relative;
     padding-bottom:55px;
@@ -86,13 +93,9 @@ body{
     left:50%;
     margin-left:-167.5px;
 }
-.blog_content .container .row.intro_text{
-    padding-bottom:0;
-}
 .blog_content .container .row.second_content{
     margin-bottom:0;
     text-align:right;
-    padding-bottom:0;
 }
 .blog_content .container .row.second_content:after{
     content:none;
@@ -121,8 +124,7 @@ body{
     margin-bottom:0;
 }
 .blog_content .container .row.social:after,
-.blog_content .container .row.recent:after,
-.blog_content .container .row.intro_text:after{
+.blog_content .container .row.recent:after{
     content:none;
     left:15px;
     right:15px;

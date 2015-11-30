@@ -92,14 +92,13 @@ class Blog  implements EntityLocaleInjectorInterface
      */
     protected $image_text_2_en;
 
-     /**
+    /**
      * @ORM\Column(type="string")
      */
     protected $intro_text_fr;
 
-	  /**
+    /**
      * @ORM\Column(type="string")
-     * @Assert\NotBlank()
      */
     protected $intro_text_en;
 

@@ -172,6 +172,16 @@ class BlogController extends Controller
                 $Blog->setTitleEn( $data[ 'titleTextEn' ] );
                 $Blog->setTitleFr( $data[ 'titleTextFr' ] );
                 
+                if (  $data[ 'introTextEn' ] == null )
+                {
+                       $data[ 'introTextEn' ] = "";                  
+                }
+                
+                if (  $data[ 'introTextFr' ] == null )
+                {
+                       $data[ 'introTextFr' ] = "";                  
+                }
+                
                 $Blog->setIntroTextEn( $data[ 'introTextEn' ] );
                 $Blog->setIntroTextFr( $data[ 'introTextFr' ] );
                 
@@ -184,6 +194,7 @@ class BlogController extends Controller
                 {
                        $data[ 'BlogFr' ] = "";                  
                 }
+                
                 $Blog->setBlogEn( $data[ 'BlogEn' ] );
                 $Blog->setBlogFr( $data[ 'BlogFr' ] );
                 
@@ -247,27 +258,15 @@ class BlogController extends Controller
                          * for debugging.
                          */
                         $errorsString = (string) $errors;
-                         //$params  = $this->container->getParameter( $options );        
-                        //return new Response($errorsString);
-                        /*
-                                  return $this->render('FiveAdminBundle:Action:edit_blog.html.twig', array(
-                          'errors' => $errors,		
-         'form'               => $this->get( $params[ 'form' ] )->createView(),
-         'form_action'        => $params[ 'form_action' ],
-         'blog'            => $Blog,
-        // 'id'                 => $id,
-         'options' =>  $options	       
-         )); 
-                        */
-                                         $error_array = array();
-                                         foreach ($errors as $error )
-                                         {
+                        $error_array = array();
+                        foreach ($errors as $error )
+                        {
 
-                                                 $error_array[$error->getPropertyPath()] = $error->getMessage();
-                                         }						 
+                                $error_array[$error->getPropertyPath()] = $error->getMessage();
+                        }						 
 
-                                         $data["error"] = $error_array;
-                          return new JsonResponse( $data );  
+                        $data["error"] = $error_array;
+                        return new JsonResponse( $data );  
                     }
 
                 $this->get( 'doctrine' )->getManager()->persist( $Blog );    

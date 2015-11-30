@@ -10,7 +10,6 @@
 {% block content %}
 {% set pictures = blog.image %}
 
-
    <script data-require="angular.js@1.2.x" src="http://code.angularjs.org/1.2.28/angular.js" data-semver="1.2.28"></script>
    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.0.1/ng-tags-input.min.css" />
    <script src="http://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.0.1/ng-tags-input.min.js"></script>
@@ -140,7 +139,7 @@ border-bottom-right-radius: 0;
                                                    <div class="input-group-sm">
                                                        Permalink <input name="permaLinkEn" type="text" class="form-control input-small pic-title" placeholder="Permalink" value="{{blog.getPermaLinkVal('en')}}"  />
                                                        Title <input name="titleTextEn" type="text" class="form-control input-small pic-title" placeholder="Title (English) *" value="{{blog.getTitleEn()}}" required="required" />
-                                                       Intro <textarea name="introTextEn" class="form-control input-small pic-desc" placeholder="Intro (English) *" required="required">{{blog.getIntroTextEn() | raw}}</textarea>
+                                                       Intro <textarea name="introTextEn" class="form-control input-small pic-desc" placeholder="Intro (English)" {#required="required"#}>{{blog.getIntroTextEn() | raw}}</textarea>
 {#                                                       Blog Article <textarea name="blogEn" class="form-control input-small pic-desc" placeholder="Description" required="required">{{blog.getBlogEn() | raw}}</textarea>                                                                                                
 #}                                                   </div>
                                                </div> <!-- / .tab-pane -->
@@ -148,7 +147,7 @@ border-bottom-right-radius: 0;
                                                    <div class="input-group-sm">
                                                        Permalink <input name="permaLinkFr" type="text" class="form-control input-small pic-title" placeholder="Permalink" value="{{blog.getPermaLinkVal('fr')}}"  />
                                                        Title <input name="titleTextFr" type="text" class="form-control input-small pic-title" placeholder="Title (France) *" value="{{blog.getTitleFr()}}" required="required" />
-                                                       Intro <textarea name="introTextFr" class="form-control input-small pic-desc" placeholder="Intro (France) *" required="required">{{blog.getIntroTextFr() | raw}}</textarea>
+                                                       Intro <textarea name="introTextFr" class="form-control input-small pic-desc" placeholder="Intro (France)" {#required="required"#}>{{blog.getIntroTextFr() | raw}}</textarea>
 {#                                                       Blog Article <textarea name="blogFr" class="form-control input-small pic-desc" placeholder="Description" required="required">{{blog.getBlogFr() | raw}}</textarea>                                                                                            
 #}                                                   </div>
                                                </div> <!-- / .tab-pane -->                                                                                        
@@ -237,15 +236,16 @@ border-bottom-right-radius: 0;
                                                                     </script>
                                                                     <script type="text/javascript" src="/bundles/ivoryckeditor/ckeditor.js"></script>
                                                                     <script type="text/javascript">
-                                                                        
-                                                                    
+                                                                                                                                      
                                                                         
                                                                         if (CKEDITOR.instances["blogEn"]) { delete CKEDITOR.instances["blogEn"]; }
                                                                         
                                                                         CKEDITOR.replace("blogEn", 
                                                                         {
+                                                                           "contentsCss" : ['/ckeditor/blog.css' , '{{ asset( theme_path ~ 'assets/libs/bootstrap/css/bootstrap.min.css' ) }}' ],
+                                                                           "bodyClass" : 'blog_content',
                                                                            "allowedContent" : true,
-                                                                           "templates_files" : [ '/verduntemplates.js' ],
+                                                                           "templates_files" : [ '/ckeditor/verduntemplates.js' ],
                                                                            "language" : 'en', 
                                                                            "filebrowserBrowseUrl":"\/elfinder" , 
                                                                            "removeButtons": 'Save',
@@ -287,8 +287,10 @@ border-bottom-right-radius: 0;
                                                                         if (CKEDITOR.instances["blogFr"]) { delete CKEDITOR.instances["blogFr"]; }
                                                                         CKEDITOR.replace("blogFr", 
                                                                         {
+                                                                            "contentsCss" : ['/ckeditor/blog.css' , '{{ asset( theme_path ~ 'assets/libs/bootstrap/css/bootstrap.min.css' ) }}' ],
+                                                                            "bodyClass" : 'blog_content',
                                                                             "allowedContent" : true,
-                                                                            "templates_files" : [ '/verduntemplates.js' ],
+                                                                            "templates_files" : [ '/ckeditor/verduntemplates.js' ],
                                                                             "language" : 'fr',
                                                                             "filebrowserBrowseUrl":"\/elfinder",
                                                                             "removeButtons": 'Save',
@@ -1026,18 +1028,18 @@ $( document ).ready( function()
         //  data validate if HTML 5 required not working
 
             var error = false;
-            if ( data.data.titleTextEn == "" || data.data.titleTextFr == "" || data.data.introTextEn == "" || data.data.introTextFr == "" )
+            if ( data.data.titleTextEn == "" || data.data.titleTextFr == "" {#|| data.data.introTextEn == "" || data.data.introTextFr == ""#} )
             {
 
                     var err_msg = "";
                     if ( data.data.titleTextEn == "" )
-                        err_msg = err_msg + "<div style='color: red;'>* Title (English) should not be empty.</div>"
-                    if ( data.data.introTextEn == "" )
+{#                        err_msg = err_msg + "<div style='color: red;'>* Title (English) should not be empty.</div>"
+                    if ( data.data.introTextEn == "" )#}
                         err_msg = err_msg + "<div style='color: red;'>* Intro (English) should not be empty.</div>"
                     if ( data.data.titleTextFr == "" )
                         err_msg = err_msg + "<div style='color: red;'>* Title (France) should not be empty.</div>"
-                    if ( data.data.introTextFr == "" )
-                        err_msg = err_msg + "<div style='color: red;'>* Intro (France) should not be empty.</div>"
+{#                    if ( data.data.introTextFr == "" )
+                        err_msg = err_msg + "<div style='color: red;'>* Intro (France) should not be empty.</div>"#}
                    
                     err_msg = err_msg + "<hr />";
                     
@@ -1103,19 +1105,7 @@ $( document ).ready( function()
                 {
                     //console.log(result);return;
                     //check for requier field, not need now
-                
-{#                    if( typeof(result.error) == 'object' )
-                    {
-                        //return false;
-                        //console.log( result.error ); 
-                        //for (var key in result.error) 
-                        //{
-                        //	console.log( "d: " + key +" : " + result.error[key] + " " );	
-                                //$( 'input[name="' + key + '_error"]' ) );
-                        //}
-                        //return;               		
-                    }#}
-                                                 
+                   
                     var link = "{{ path( "five_admin_blog_edit", { id: "blog_id_text" } ) }}";
 
                     link = link.replace("blog_id_text" , result.id );

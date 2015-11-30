@@ -6,5 +6,6 @@ blog:
   blog_article:
     latest_blog: Articles récents
   blog_readmore: En savoir plus
+  blog_no_blog: There are no blog entries.
 page_title: Blogue
     

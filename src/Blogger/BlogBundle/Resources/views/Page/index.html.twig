@@ -16,6 +16,9 @@
 {% set current_col = 0 %}
 
     <div class="container">
+        
+        {% if blogs %}   
+        
         <ul class="blog-list" id="blog-list">
             {% for blog in blogs %}
             <li> 
@@ -61,7 +64,16 @@
                 
             </li>
             {% endfor %}
+            
         </ul>
+        
+       {% else %}  
+
+                <p>{{ 'blog.blog_no_blog' | trans({}, 'blog') | raw }}</p>
+
+       {% endif %}  
+            
+       {% if blogs %}      
         <div class="pagination">
             
             <!-- <a href="{{ path( 'header.menu.blog_link' | trans , { 'blog_page': 1 }  ) }}">  </a>   -->
@@ -87,6 +99,7 @@
                 <a href="https://plus.google.com" target="_blank" class="gplus"></a>                       
             </div>        
         </div>
+        {% endif %}
     </div>
 		 
     

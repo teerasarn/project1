@@ -317,31 +317,32 @@ class UserController extends Controller
 //        ));
 //    }
     
-    public function blogAricleHomeAction(Request $request, $_locale , $permalink  = '' )
-    {
-        
-        $thisMonthBlog = $this->getDoctrine()->getRepository('BloggerBlogBundle:Blog')->getMonthlyBlogCount();
-         $blog_count = 3;
-
-        if ( $thisMonthBlog >= $blog_count  )
-        {
-            return $this->redirectToRoute('blog_'.$_locale);
-        }
-        else 
-        {
-            return $this->redirectToRoute('blog_article_'.$_locale , array('$permalink' => $permalink ) , 301 );
-        }
-        
-        
-        /*
-        return $this->render('FiveCuisinesVerdunBundle:Default:blogArticle.html.twig', array(
-            'page' => 'blog_article',
-            'branches' => $this->getDoctrine()->getRepository('FiveCuisinesVerdunBundle:Branch')->fetchBranches($_locale),
-            'BranchesEntity' => $this->getDoctrine()->getRepository('FiveCuisinesVerdunBundle:Branch')->findAll(),
-            'is_mobile' => $this->container->get('session')->get("isMobile") ? "true" : "false",
-            'blog_id' =>   $blog_id 
-        ));
-        */
-    }
+//    Remove blog check feature    
+//    public function blogAricleHomeAction(Request $request, $_locale , $permalink  = '' )
+//    {
+//        
+//        $thisMonthBlog = $this->getDoctrine()->getRepository('BloggerBlogBundle:Blog')->getMonthlyBlogCount();
+//        $blog_count = 3;
+//
+//        if ( $thisMonthBlog >= $blog_count  )
+//        {
+//            return $this->redirectToRoute('blog_'.$_locale);
+//        }
+//        else 
+//        {
+//            return $this->redirectToRoute('blog_article_'.$_locale , array('$permalink' => $permalink ) , 301 );
+//        }
+//        
+//        
+//        /*
+//        return $this->render('FiveCuisinesVerdunBundle:Default:blogArticle.html.twig', array(
+//            'page' => 'blog_article',
+//            'branches' => $this->getDoctrine()->getRepository('FiveCuisinesVerdunBundle:Branch')->fetchBranches($_locale),
+//            'BranchesEntity' => $this->getDoctrine()->getRepository('FiveCuisinesVerdunBundle:Branch')->findAll(),
+//            'is_mobile' => $this->container->get('session')->get("isMobile") ? "true" : "false",
+//            'blog_id' =>   $blog_id 
+//        ));
+//        */
+//    }
 
 }
