@@ -52,6 +52,13 @@ body{
     left:50%;
     margin-left:-167.5px;
 }
+
+
+.blog_content .row.no_line:after{
+    content:none;
+}
+
+
 .blog_content .row.second_content{
     margin-bottom:0;
     text-align:right;

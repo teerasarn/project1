@@ -59,6 +59,12 @@ body{
     margin-top:25px;
     margin-bottom:0;
 }
+
+.blog_content .intro_text p a{
+    color: #333333;  
+    text-decoration: underline;
+}
+
 .blog_content h1{
     font-size:50px;
     color:#333333;
@@ -93,6 +99,11 @@ body{
     left:50%;
     margin-left:-167.5px;
 }
+
+.blog_content .container .row.no_line:after{
+    content:none;
+}
+
 .blog_content .container .row.second_content{
     margin-bottom:0;
     text-align:right;
@@ -417,6 +428,7 @@ body{
         margin-bottom:0;
         padding-bottom:0;
     }
+
     .social .col-md-6{
         padding-left:0;
         padding-right:0;

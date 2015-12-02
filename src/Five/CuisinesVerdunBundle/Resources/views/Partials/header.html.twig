@@ -17,6 +17,7 @@
             </li>
             <li>
               <a href="#message-forms" class="yellow-bg phone">{{ 'header.menu.callus' | trans }}</a>
+
             </li>
           </ul>
           <ul class="nav navbar-nav">
@@ -42,7 +43,7 @@
             {% endif %}
 
              <!-- blog -->
-	         <li{{ page=='blog' or page=='blog_article' ? ' class="active"' : '' }}>
+	    <li{{ page=='blog' or page=='blog_article' ? ' class="active"' : '' }}>
               <a href="{{ path( 'header.menu.blog_link' | trans ) }}">{{ 'header.menu.blog' | trans }}</a>
             </li>
              <!-- blog -->           
